@@ -116,13 +116,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\hash-library-master\crc32.cpp" />
-    <ClCompile Include="Source\hash-library-master\digest.cpp" />
     <ClCompile Include="Source\hash-library-master\keccak.cpp" />
     <ClCompile Include="Source\hash-library-master\md5.cpp" />
     <ClCompile Include="Source\hash-library-master\sha1.cpp" />
     <ClCompile Include="Source\hash-library-master\sha256.cpp" />
     <ClCompile Include="Source\hash-library-master\sha3.cpp" />
-    <ClCompile Include="Source\hash-library-master\tests\tests.cpp" />
     <ClCompile Include="Source\main.cpp" />
   </ItemGroup>
   <ItemGroup>

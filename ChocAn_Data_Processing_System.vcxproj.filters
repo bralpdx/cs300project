@@ -24,9 +24,6 @@
     <ClCompile Include="Source\hash-library-master\crc32.cpp">
       <Filter>Hash-Lib</Filter>
     </ClCompile>
-    <ClCompile Include="Source\hash-library-master\digest.cpp">
-      <Filter>Hash-Lib</Filter>
-    </ClCompile>
     <ClCompile Include="Source\hash-library-master\keccak.cpp">
       <Filter>Hash-Lib</Filter>
     </ClCompile>
@@ -40,9 +37,6 @@
       <Filter>Hash-Lib</Filter>
     </ClCompile>
     <ClCompile Include="Source\hash-library-master\sha256.cpp">
-      <Filter>Hash-Lib</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\hash-library-master\tests\tests.cpp">
       <Filter>Hash-Lib</Filter>
     </ClCompile>
   </ItemGroup>
