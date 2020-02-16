@@ -77,4 +77,12 @@
       <Filter>Hash-Lib</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="svc-codes.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="access-codes.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

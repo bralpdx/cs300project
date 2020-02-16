@@ -138,6 +138,10 @@
     <None Include="Source\hash-library-master\LICENSE" />
     <None Include="Source\hash-library-master\readme.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="access-codes.txt" />
+    <Text Include="svc-codes.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
