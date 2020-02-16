@@ -78,10 +78,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="svc-codes.txt">
+    <Text Include="Source\access-codes.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="access-codes.txt">
+    <Text Include="Source\svc-codes.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
