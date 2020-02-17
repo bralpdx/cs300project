@@ -122,6 +122,7 @@
     <ClCompile Include="Source\hash-library-master\sha256.cpp" />
     <ClCompile Include="Source\hash-library-master\sha3.cpp" />
     <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\hash-library-master\crc32.h" />
@@ -133,6 +134,7 @@
     <ClInclude Include="Source\hash-library-master\sha256.h" />
     <ClInclude Include="Source\hash-library-master\sha3.h" />
     <ClInclude Include="Source\param.h" />
+    <ClInclude Include="Source\utilities.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\hash-library-master\LICENSE" />
