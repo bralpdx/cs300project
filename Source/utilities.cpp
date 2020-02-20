@@ -1,12 +1,14 @@
 #include <iostream>
-#include <string>
+// #include <string>
 #include "utilities.h"
 #include "param.h"
+#include "hash-library-master/sha256.h"
 
 
 // Prompts the user to enter their ID number
 int sign_in_prompt() {
 	std::string id = "";
+
 	std::cout << "Enter ID: ";
 
 	// Checks for valid input
@@ -18,6 +20,23 @@ int sign_in_prompt() {
 	}
 	if (id.size() != ID_SIZE)
 		return RETURN_FAILURE;
+
+	// Will search file for hashedID match
+	search_id(id);
+
+	system("pause");
+	return RETURN_SUCCESS;
+}
+
+// Hashes and searches file for ID number match
+int search_id(std::string id) {
+	SHA256 hash;
+	std::string hashedID = "";
+	std::string dec_hash = "";
+
+	hashedID = hash(id);
+	std::cout << "You entered (before hash): " << id << std::endl;
+	std::cout << "After hash: " << hashedID << std::endl;
 
 	return RETURN_SUCCESS;
 }

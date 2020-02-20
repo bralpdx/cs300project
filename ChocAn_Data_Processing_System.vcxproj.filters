@@ -39,7 +39,13 @@
     <ClCompile Include="Source\hash-library-master\sha256.cpp">
       <Filter>Hash-Lib</Filter>
     </ClCompile>
-    <ClCompile Include="utilities.cpp">
+    <ClCompile Include="Source\utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bst.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\user_service_obj.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,7 +77,13 @@
     <ClInclude Include="Source\hash-library-master\sha256.h">
       <Filter>Hash-Lib</Filter>
     </ClInclude>
-    <ClInclude Include="utilities.h">
+    <ClInclude Include="Source\utilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bst.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\user_service_obj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
