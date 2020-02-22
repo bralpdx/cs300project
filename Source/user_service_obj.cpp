@@ -29,7 +29,7 @@ ID*& ID::go_right() {
 //////////////////////////////////
 
 Person::Person() {
-
+	head = NULL;
 }
 
 Person::~Person() {
@@ -56,4 +56,19 @@ Member::Member() {
 }
 Member::~Member() {
 
+}
+
+//////////////////////////////////
+//         Record Class         //
+//////////////////////////////////
+
+Record::Record() {
+}
+
+Record::~Record() {
+
+}
+
+Record*& Record::go_next() {
+	return next;
 }
