@@ -1,4 +1,6 @@
 // File contains prototypes pertaining to the Binary Search Tree
+
+#include "user_service_obj.h"
 #pragma once
 
 class Provider_BST{
@@ -7,7 +9,7 @@ public:
 	~Provider_BST();
 
 protected:
-	Provider_BST * root;
+	ID * root;
 };
 
 class Member_BST{
@@ -16,7 +18,7 @@ public:
 	~Member_BST();
 
 protected:
-	Member_BST * root;
+	ID * root;
 };
 
 class Service_BST{
@@ -25,5 +27,5 @@ public:
 	~Service_BST();
 
 protected:
-	Service_BST * root;	
+	ID * root;	
 };

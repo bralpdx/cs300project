@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <iostream>
+#include <fstream>
 #include <string>
 
 // Abstract Base Class (ID numbers)
@@ -10,6 +12,8 @@ class ID{
 public:
 	ID();
 	~ID();
+	ID *& go_left();
+	ID *& go_right();
 protected:
 	ID *left;
 	ID *right;
@@ -23,6 +27,7 @@ public:
 	~Person();
 protected:
 	// Needs pointer to head of record list
+	Record * head;
 };
 
 // Provider class derived from Person
@@ -46,7 +51,9 @@ class Record{
 public:
 	Record();
 	~Record();
+	Record *& go_next();
 protected:
+	std::string file_address;
 	Record * next;
 };
 

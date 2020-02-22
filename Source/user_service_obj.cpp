@@ -15,12 +15,19 @@ ID::~ID() {
 	data = "";
 }
 
+ID *& ID::go_left() {
+	return left;
+}
+
+ID *& ID::go_right() {
+	return right;
+}
 //////////////////////////////////
 //         Person Class         //
 //////////////////////////////////
 
 Person::Person() {
-
+	head = NULL;
 }
 
 Person::~Person() {
@@ -57,6 +64,10 @@ Record::Record() {
 
 Record::~Record() {
 	next = NULL;
+}
+
+Record*& Record::go_next() {
+	return next;
 }
 
 //////////////////////////////////
