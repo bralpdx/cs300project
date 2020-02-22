@@ -15,6 +15,15 @@ ID::~ID() {
 	data = "";
 }
 
+ID *& ID::go_left() {
+	return left;
+}
+
+ID*& ID::go_right() {
+	return right;
+}
+
+
 //////////////////////////////////
 //         Person Class         //
 //////////////////////////////////

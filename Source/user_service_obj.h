@@ -10,7 +10,9 @@ class ID{
 public:
 	ID();
 	~ID();
-protected:
+	ID *& go_left();
+	ID *& go_right();
+private:
 	ID *left;
 	ID *right;
 	std::string data; // Contains the objects ID number
