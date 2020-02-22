@@ -48,3 +48,33 @@ Member::Member() {
 Member::~Member() {
 
 }
+//////////////////////////////////
+//         Record Class         //
+//////////////////////////////////
+Record::Record() {
+	next = NULL;
+}
+
+Record::~Record() {
+	next = NULL;
+}
+
+//////////////////////////////////
+//     Provider_record Class    //
+//////////////////////////////////
+Provider_record::Provider_record() {
+
+}
+Provider_record::~Provider_record() {
+
+}
+
+//////////////////////////////////
+//     Service_record Class    //
+//////////////////////////////////
+Service_record::Service_record() {
+
+}
+Service_record::~Service_record() {
+
+}
