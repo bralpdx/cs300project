@@ -21,7 +21,7 @@ Member_BST::Member_BST() {
 	root = NULL;
 }
 
-Member_BST::Member_BST() {
+Member_BST::~Member_BST() {
 
 	//Need to Deallocate Tree
 	if(root)
@@ -35,7 +35,7 @@ Service_BST::Service_BST() {
 	root = NULL;
 }
 
-Service_BST::Service_BST() {
+Service_BST::~Service_BST() {
 
 	//Need to Deallocate Tree
 	if(root)
