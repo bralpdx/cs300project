@@ -67,12 +67,14 @@ Member::~Member() {
 
 Service::Service() {
 	svcName = "";
-	svcFee = 0;
+	svcFee_dollars = 0;
+	svcFee_cents = 0;
 }
 
 Service::~Service() {
 	svcName = "";
-	svcFee = 0;
+	svcFee_dollars = 0;
+	svcFee_cents = 0;
 }
 //////////////////////////////////
 //         Record Class         //
@@ -97,7 +99,8 @@ Provider_record::Provider_record() {
 	memberName = "";
 	memberNum = "";
 	svcCode = "";
-	feeOwed = 0;
+	feeOwed_dollars = 0;
+	feeOwed_cents = 0;
 	currDate = "";
 	currTime = "";
 	svcDate = "";
@@ -107,7 +110,8 @@ Provider_record::~Provider_record() {
 	memberName = "";
 	memberNum = "";
 	svcCode = "";
-	feeOwed = 0;
+	feeOwed_dollars = 0;
+	feeOwed_cents = 0;
 	currDate = "";
 	currTime = "";
 	svcDate = "";

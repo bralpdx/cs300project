@@ -27,7 +27,8 @@ protected:
 	std::string memberName;
 	std::string memberNum;
 	std::string svcCode;
-	float feeOwed;
+	int feeOwed_dollars;    //Using two ints is more exact than float
+	int feeOwed_cents;
 	std::string currDate;	//MM-DD-YYYY
 	std::string currTime;	//HH:MM:SS
 	std::string svcDate;	//MM-DD-YYYY
@@ -65,14 +66,16 @@ protected:
 	std::string data; // Contains the objects ID number
 };
 
-//Service class derived from ID
+// Service class derived from ID
+// Service stored as: id,fee,name,provider-type
 class Service : public ID {
 public:
 	Service();
 	~Service();
 protected:
 	std::string svcName;
-	float svcFee;
+	int svcFee_dollars;
+	int svcFee_cents;
 };
 
 // Person class derived from ID
