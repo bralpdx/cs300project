@@ -28,6 +28,11 @@ ID *& ID::go_right() {
 
 Person::Person() {
 	head = NULL;
+	name = "";
+	address = "";
+	city = "";
+	state = "";
+	zip = 0;
 }
 
 Person::~Person() {
@@ -55,6 +60,20 @@ Member::Member() {
 Member::~Member() {
 
 }
+
+//////////////////////////////////
+//         Service Class        //
+//////////////////////////////////
+
+Service::Service() {
+	svcName = "";
+	svcFee = 0;
+}
+
+Service::~Service() {
+	svcName = "";
+	svcFee = 0;
+}
 //////////////////////////////////
 //         Record Class         //
 //////////////////////////////////
@@ -75,17 +94,50 @@ Record*& Record::go_next() {
 //////////////////////////////////
 Provider_record::Provider_record() {
 
+	memberName = "";
+	memberNum = "";
+	svcCode = "";
+	feeOwed = 0;
+	currDate = "";
+	currTime = "";
+	svcDate = "";
 }
 Provider_record::~Provider_record() {
 
+	memberName = "";
+	memberNum = "";
+	svcCode = "";
+	feeOwed = 0;
+	currDate = "";
+	currTime = "";
+	svcDate = "";
+
 }
 
 //////////////////////////////////
-//     Service_record Class    //
+//     Member_record Class    //
 //////////////////////////////////
-Service_record::Service_record() {
+Member_record::Member_record() {
 
+	name = "";
+	number = "";
+	address = "";
+	city = "";
+	state = "";
+	zip = 0;
+	currDate = "";
+	currTime = "";
+	svcDate = "";
 }
-Service_record::~Service_record() {
+Member_record::~Member_record() {
+	name = "";
+	number = "";
+	address = "";
+	city = "";
+	state = "";
+	zip = 0;
+	currDate = "";
+	currTime = "";
+	svcDate = "";
 
 }
