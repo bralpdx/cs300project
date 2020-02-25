@@ -3,10 +3,6 @@
 
 #pragma once
 
-#include <iostream>
-#include <fstream>
-#include <string>
-
 // Abstract Base Class (ID numbers)
 class ID{
 public:
@@ -50,6 +46,8 @@ public:
 	Record();
 	~Record();
 	Record *& go_next();
+	int add_record();
+	int remove_record();
 private:
 	std::string file_address;
 	Record* next;
