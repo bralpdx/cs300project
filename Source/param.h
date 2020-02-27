@@ -6,4 +6,5 @@
 
 
 #define MAX_CHAR  256    //Maximum number of characters allowed
-#define ID_SIZE   6      //Size of all ID numbers
+#define ID_SIZE   9      //Size of all ID numbers
+#define SVC_ID_SIZE   6  //Size of all ID numbers

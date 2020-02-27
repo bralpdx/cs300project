@@ -1,8 +1,7 @@
 #include <iostream>
-// #include <string>
 #include "utilities.h"
 #include "param.h"
-#include "hash-library-master/sha256.h"
+#include "hash-library-master\sha256.h"
 #include <fstream>
 
 
