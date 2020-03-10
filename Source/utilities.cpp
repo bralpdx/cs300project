@@ -22,17 +22,17 @@ int sign_in_prompt() {
 		return RETURN_FAILURE;
 
 	// Will search file for hashedID match
-	search_id(id);
+	//pre_hash_id(id);
 
 	system("pause");
 	return RETURN_SUCCESS;
 }
 
 // Hashes and searches file for ID number match
-int search_id(std::string id) {
+int pre_hash_id() {
 	SHA256 hash;
 	std::ifstream fileIn;
-	std::string hashedID = "";
+	//std::string hashedID = "";
 	fileIn.open("Source/access-codes.txt");
 
 	if (!fileIn) {
@@ -40,9 +40,9 @@ int search_id(std::string id) {
 		return RETURN_FAILURE;
 	}
 
-	hashedID = hash(id);
-	std::cout << "You entered (before hash): " << id << std::endl;
-	std::cout << "After hash: " << hashedID << std::endl;
+	//hashedID = hash(id);
+	//std::cout << "You entered (before hash): " << id << std::endl;
+	//std::cout << "After hash: " << hashedID << std::endl;
 
 	hash_file(fileIn);
 	fileIn.close();

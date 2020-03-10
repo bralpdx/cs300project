@@ -3,7 +3,7 @@
 #include <string>
 
 int sign_in_prompt();                  // Prompts user to enter their ID number
-int search_id(std::string str);        // Searches user_info.txt file for ID match
+int pre_hash_id();        // Searches user_info.txt file for ID match
 int hash_file(std::ifstream &inFile);  // Creates user_info.txt w/ hashed info
 
 // *NOTE TO SELF
