@@ -39,12 +39,28 @@ Person::~Person() {
 
 }
 
-Person::int add_record(Record to_add) {
-
-	if (!head) head = to_add;
-
+Person::int add_record(Record &to_add) {
+	if (!head) {
+		head = to_add;
+		return 1;
+	}
+	else {
+		to_add.set_next(head);
+		head = to_add;
+		return 2;
+	}
 }
 
+Person::int remove_record(std::string to_remove) {
+	return remove_record(std::string to_remove, head);
+}
+
+Person::int remove_record(std::string to_remove, node*& head) {
+	int success = 0;
+	if (!head) return success;
+
+
+}
 
 //////////////////////////////////
 //        Provider Class        //
@@ -97,6 +113,10 @@ Record::~Record() {
 
 Record*& Record::go_next() {
 	return next;
+}
+
+Record::void set_next(Record*& ptr) {
+	next = ptr;
 }
 
 Record::int add(std::string address) {

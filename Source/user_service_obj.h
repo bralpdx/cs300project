@@ -13,9 +13,11 @@ public:
 	Record();
 	~Record();
 	Record *& go_next();
+	void get_file_address(std::string*& copy);
+	void set_next(Record*& ptr);
 	int add(std::string address);
 	int remove(std::string address);
-protected:
+	private:
 	std::string file_address;
 	Record * next;
 };
@@ -85,9 +87,10 @@ class Person : public ID {
 public:
 	Person();
 	~Person();
-	int add_record(Record to_add);
+	int add_record(Record &to_add);
 	int remove_record(std::string to_remove);
-protected:
+private:
+	int remove_record(std::string to_remove, Record*& head);
 	// Needs pointer to head of record list
 	Record * head;
 	std::string name;		//25 characters
