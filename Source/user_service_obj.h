@@ -13,6 +13,8 @@ public:
 	Record();
 	~Record();
 	Record *& go_next();
+	int add(std::string address);
+	int remove(std::string address);
 protected:
 	std::string file_address;
 	Record * next;
@@ -63,7 +65,7 @@ public:
 protected:
 	ID *left;
 	ID *right;
-	std::string data; // Contains the objects ID number
+	std::string hash_value; // Contains the objects ID number
 };
 
 // Service class derived from ID
@@ -83,6 +85,8 @@ class Person : public ID {
 public:
 	Person();
 	~Person();
+	int add_record(Record to_add);
+	int remove_record(std::string to_remove);
 protected:
 	// Needs pointer to head of record list
 	Record * head;

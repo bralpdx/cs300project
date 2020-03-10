@@ -6,13 +6,13 @@
 ID::ID() {
 	left = NULL;
 	right = NULL;
-	data = "";
+	hash_value = "";
 }
 
 ID::~ID() {
 	left = NULL;
 	right = NULL;
-	data = "";
+	hash_value = "";
 }
 
 ID *& ID::go_left() {
@@ -38,6 +38,13 @@ Person::Person() {
 Person::~Person() {
 
 }
+
+Person::int add_record(Record to_add) {
+
+	if (!head) head = to_add;
+
+}
+
 
 //////////////////////////////////
 //        Provider Class        //
@@ -80,6 +87,7 @@ Service::~Service() {
 //         Record Class         //
 //////////////////////////////////
 Record::Record() {
+
 	next = NULL;
 }
 
@@ -89,6 +97,20 @@ Record::~Record() {
 
 Record*& Record::go_next() {
 	return next;
+}
+
+Record::int add(std::string address) {
+	if (!file_address.compare("")) return -1;
+	file_address = address;
+	return 0;
+}
+
+Record::int remove(std::string address) {
+	if (!file_address.compare(address)) {
+		file_address = "";
+		return 0;
+	}
+	return -1;
 }
 
 //////////////////////////////////
