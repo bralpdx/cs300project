@@ -8,7 +8,7 @@ BST::BST() {
 	root = NULL;
 }
 
-BST::BST(std::string file, int flag) {
+BST::BST(const char * file, int flag) {
 	root = NULL;
 
 	ifstream file_in;
