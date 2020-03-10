@@ -28,7 +28,7 @@ int sign_in_prompt() {
 	return RETURN_SUCCESS;
 }
 
-// Hashes and searches file for ID number match
+// Opens pre-hashed file, and passes it to be hashed.
 int pre_hash_id() {
 	SHA256 hash;
 	std::ifstream fileIn;
