@@ -1,4 +1,5 @@
 #include "bst.h"
+#include <fstream>
 
 //////////////////////////////////
 //      BST Class				//
@@ -10,16 +11,25 @@ BST::BST() {
 BST::BST(std::string file, int flag) {
 	root = NULL;
 
+	ifstream file_in;
+	file_in.open(file);
+
+	//File didn't open
+	if (!file_in) flag = 50;
+
+	//File is a Provider file
 	if (flag == 1) {
 
 
 	}
 
+	//File is a Member file
 	if (flag == 2) {
 
 
 	}
 
+	//File is a Service file
 	if (flag == 3) {
 
 
@@ -27,16 +37,16 @@ BST::BST(std::string file, int flag) {
 }
 
 BST::~BST() {
-
-	//Need to Deallocate Tree
-	if(root)
-		root = NULL;
+	destroy(root);
+	root = NULL;
 }
 
 void BST::destroy(ID*& root) {
 	if (!root) return;
 	destroy(root->go_left());
 	destroy(root->go_right());
-	if (root->is_leaf()) delete root;
+	if (root->is_leaf()){
+		delete root;
+		root = NULL;
 	return;
 }
