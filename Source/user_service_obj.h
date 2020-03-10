@@ -85,7 +85,7 @@ class Person : public ID {
 public:
 	Person();
 	~Person();
-	int add_record(Record to_add);
+	int add_record(Record * to_add);
 	int remove_record(std::string to_remove);
 protected:
 	// Needs pointer to head of record list

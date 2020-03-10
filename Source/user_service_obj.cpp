@@ -39,7 +39,7 @@ Person::~Person() {
 
 }
 
-Person::int add_record(Record to_add) {
+int Person::add_record(Record * to_add) {
 
 	if (!head) head = to_add;
 
@@ -99,13 +99,13 @@ Record*& Record::go_next() {
 	return next;
 }
 
-Record::int add(std::string address) {
+int Record::add(std::string address) {
 	if (!file_address.compare("")) return -1;
 	file_address = address;
 	return 0;
 }
 
-Record::int remove(std::string address) {
+int Record::remove(std::string address) {
 	if (!file_address.compare(address)) {
 		file_address = "";
 		return 0;

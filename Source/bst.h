@@ -5,8 +5,8 @@
 
 class BST{
 public:
-	Provider_BST();
-	~Provider_BST();
+	BST();
+	~BST();
 
 private:
 	ID * root;
