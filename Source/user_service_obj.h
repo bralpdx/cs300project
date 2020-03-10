@@ -64,6 +64,7 @@ public:
 	~ID();
 	ID *& go_left();
 	ID *& go_right();
+	bool is_leaf();
 protected:
 	ID *left;
 	ID *right;

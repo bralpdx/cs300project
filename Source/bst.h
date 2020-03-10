@@ -6,8 +6,9 @@
 class BST{
 public:
 	BST();
+	BST(std::string file, int flag);
 	~BST();
-
 private:
+	void destroy(ID*& root);
 	ID * root;
 };

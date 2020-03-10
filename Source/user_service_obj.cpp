@@ -22,6 +22,11 @@ ID *& ID::go_left() {
 ID *& ID::go_right() {
 	return right;
 }
+
+bool ID::is_leaf() {
+	if ((!left) && (!right)) return true;
+	else return false;
+}
 //////////////////////////////////
 //         Person Class         //
 //////////////////////////////////
