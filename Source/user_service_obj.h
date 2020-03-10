@@ -13,7 +13,7 @@ public:
 	Record();
 	~Record();
 	Record *& go_next();
-	void get_file_address(std::string*& copy);
+	int get_file_address(std::string*& copy);
 	void set_next(Record*& ptr);
 	int add(std::string address);
 	int remove(std::string address);
@@ -91,14 +91,13 @@ public:
 	int remove_record(std::string to_remove);
 private:
 	int remove_record(std::string to_remove, Record*& head);
-	// Needs pointer to head of record list
+	void destroy(Record*& head);
 	Record * head;
 	std::string name;		//25 characters
 	std::string address;	//25 characters
 	std::string city;		//14 characters
 	std::string state;		//2 characters
 	int zip;				//5 characters
-
 };
 
 // Provider class derived from Person

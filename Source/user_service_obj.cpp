@@ -36,10 +36,16 @@ Person::Person() {
 }
 
 Person::~Person() {
-
+	destroy(head);
+	name = "";
+	address = "";
+	city = "";
+	state = "";
+	zip = 0;
+}
 }
 
-Person::int add_record(Record &to_add) {
+int Person::add_record(Record &to_add) {
 	if (!head) {
 		head = to_add;
 		return 1;
@@ -51,16 +57,35 @@ Person::int add_record(Record &to_add) {
 	}
 }
 
-Person::int remove_record(std::string to_remove) {
+int Person::remove_record(std::string to_remove) {
 	return remove_record(std::string to_remove, head);
 }
 
-Person::int remove_record(std::string to_remove, node*& head) {
+int Person::remove_record(std::string to_remove, Record *& head) {
 	int success = 0;
 	if (!head) return success;
-
-
+	std::string grab;
+	if (head.get_file_address(grab) < 0) {
+		//panic!!!!
+	}
+	if (!to_remove.compare(grab)) {
+		Record* temp = head;
+		head = head.go_next();
+		delete temp;
+		success++;
+	}
+	success = remove_record(to_remove, head.go_next());
+	return success;
 }
+
+
+void Person::destroy(Record*& head) {
+	if (!head) return;
+	destroy(head->go_next());
+	delete head;
+	return;
+}
+
 
 //////////////////////////////////
 //        Provider Class        //
@@ -103,7 +128,6 @@ Service::~Service() {
 //         Record Class         //
 //////////////////////////////////
 Record::Record() {
-
 	next = NULL;
 }
 
@@ -115,17 +139,27 @@ Record*& Record::go_next() {
 	return next;
 }
 
-Record::void set_next(Record*& ptr) {
+
+int Record::get_file_address(std::string *& copy){
+	if (!file_address.compare("")) return -1;
+	else {
+		copy = file_address;
+		return 0;
+	}
+}
+
+
+void Record::set_next(Record*& ptr) {
 	next = ptr;
 }
 
-Record::int add(std::string address) {
+int Record::add(std::string address) {
 	if (!file_address.compare("")) return -1;
 	file_address = address;
 	return 0;
 }
 
-Record::int remove(std::string address) {
+int Record::remove(std::string address) {
 	if (!file_address.compare(address)) {
 		file_address = "";
 		return 0;
