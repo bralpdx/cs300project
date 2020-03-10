@@ -6,8 +6,25 @@
 
 
 // Prompts the user to enter their ID number
+// Will accept BST as arg, and call bst search function w/id
 int sign_in_prompt() {
 	std::string id = "";
+	std::string hashedID = "";
+	int select = 0;
+	SHA256 hash;
+
+	std::cout << "Select login type\n";
+	std::cout << "-----------------\n";
+	std::cout << "[1] Provider\n";
+	std::cout << "[2] Member\n";
+	std::cout << "[3] Manager\n";
+	std::cout << "Enter: ";
+	while (!(std::cin >> select) || select <= 0 || select > 3) {
+		std::cout << "Invalid input.\n";
+		std::cout << "Enter: ";
+		std::cin.clear();
+		std::cin.ignore(MAX_CHAR, '\n');
+	}
 
 	std::cout << "Enter ID: ";
 
@@ -21,8 +38,20 @@ int sign_in_prompt() {
 	if (id.size() != ID_SIZE)
 		return RETURN_FAILURE;
 
-	// Will search file for hashedID match
-	//pre_hash_id(id);
+	// Will search tree for hashedID match
+	hashedID = hash(id);
+	// call tree
+	if (select == 1) {
+		// Provider tree
+	}
+	else if (select == 2) {
+		// Member tree
+	}
+	else if (select == 3) {
+		// Manager
+	}
+	else
+		return RETURN_FAILURE;
 
 	system("pause");
 	return RETURN_SUCCESS;
@@ -30,19 +59,14 @@ int sign_in_prompt() {
 
 // Opens pre-hashed file, and passes it to be hashed.
 int pre_hash_id() {
-	SHA256 hash;
 	std::ifstream fileIn;
-	//std::string hashedID = "";
+
 	fileIn.open("Source/access-codes.txt");
 
 	if (!fileIn) {
 		std::cout << "Error: File not found.\n";
 		return RETURN_FAILURE;
 	}
-
-	//hashedID = hash(id);
-	//std::cout << "You entered (before hash): " << id << std::endl;
-	//std::cout << "After hash: " << hashedID << std::endl;
 
 	hash_file(fileIn);
 	fileIn.close();
@@ -80,8 +104,6 @@ int hash_file(std::ifstream &inFile) {
 		oFile << street << "," << city << ",";
 		oFile << state << "," << zip << ",";
 		oFile << type << std::endl;
-
-		//inFile.ignore(MAX_CHAR, '\n');
 	}
 
 	oFile.close();
