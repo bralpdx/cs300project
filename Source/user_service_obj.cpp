@@ -50,14 +50,14 @@ Person::~Person() {
 }
 
 
-int Person::add_record(Record *&to_add) {
+int Person::add_record(Record& to_add) {
 	if (!head) {
-		head = to_add;
+		head = &to_add;
 		return 1;
 	}
 	else {
-		to_add -> set_next(head);
-		head = to_add;
+		to_add.set_next(head);
+		head = &to_add;
 		return 2;
 	}
 }
@@ -170,59 +170,4 @@ int Record::remove(std::string address) {
 		return 0;
 	}
 	return -1;
-}
-
-//////////////////////////////////
-//     Provider_record Class    //
-//////////////////////////////////
-Provider_record::Provider_record() {
-
-	memberName = "";
-	memberNum = "";
-	svcCode = "";
-	feeOwed_dollars = 0;
-	feeOwed_cents = 0;
-	currDate = "";
-	currTime = "";
-	svcDate = "";
-}
-Provider_record::~Provider_record() {
-
-	memberName = "";
-	memberNum = "";
-	svcCode = "";
-	feeOwed_dollars = 0;
-	feeOwed_cents = 0;
-	currDate = "";
-	currTime = "";
-	svcDate = "";
-
-}
-
-//////////////////////////////////
-//     Member_record Class    //
-//////////////////////////////////
-Member_record::Member_record() {
-
-	name = "";
-	number = "";
-	address = "";
-	city = "";
-	state = "";
-	zip = 0;
-	currDate = "";
-	currTime = "";
-	svcDate = "";
-}
-Member_record::~Member_record() {
-	name = "";
-	number = "";
-	address = "";
-	city = "";
-	state = "";
-	zip = 0;
-	currDate = "";
-	currTime = "";
-	svcDate = "";
-
 }

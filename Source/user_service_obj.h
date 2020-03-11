@@ -22,39 +22,6 @@ public:
 	Record * next;
 };
 
-//Provider record derived from Record
-class Provider_record : public Record {
-public: 
-	Provider_record();
-	~Provider_record();
-protected:
-	std::string memberName;
-	std::string memberNum;
-	std::string svcCode;
-	int feeOwed_dollars;    //Using two ints is more exact than float
-	int feeOwed_cents;
-	std::string currDate;	//MM-DD-YYYY
-	std::string currTime;	//HH:MM:SS
-	std::string svcDate;	//MM-DD-YYYY
-};
-
-//Member record derived from Records
-class Member_record : public Record {
-public: 
-	Member_record();
-	~Member_record();
-protected:
-	std::string name;
-	std::string number;
-	std::string address;
-	std::string city;
-	std::string state;
-	int zip;
-	std::string currDate;	//MM-DD-YYYY
-	std::string currTime;	//HH:MM:SS
-	std::string svcDate;	//MM-DD-YYYY
-};
-
 // Abstract Base Class (ID numbers)
 class ID{
 public:
@@ -86,7 +53,7 @@ class Person : public ID {
 public:
 	Person();
 	~Person();
-	int add_record(Record *&to_add);
+	int add_record(Record &to_add);
 	int remove_record(std::string to_remove);
 private:
 	int remove_record(std::string to_remove, Record*& head);
