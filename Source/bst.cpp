@@ -11,7 +11,7 @@ BST::BST() {
 BST::BST(const char * file, int flag) {
 	root = NULL;
 
-	fstream file_in;
+	ifstream file_in;
 	file_in.open(file);
 
 	//File didn't open
