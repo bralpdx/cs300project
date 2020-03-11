@@ -66,7 +66,6 @@ int Person::remove_record(std::string to_remove) {
 	return remove_record(to_remove, head);
 }
 
-<<<<<<< HEAD
 int Person::remove_record(std::string to_remove, Record *& head) {
 	int success = 0;
 	if (!head) return success;
@@ -83,9 +82,6 @@ int Person::remove_record(std::string to_remove, Record *& head) {
 	success = remove_record(to_remove, head->go_next());
 	return success;
 }
-=======
-int Person::add_record(Record * to_add) {
->>>>>>> 7e408c12fc47d088d03d5dc17d2e86d2bc2b49d2
 
 
 void Person::destroy(Record*& head) {
@@ -148,7 +144,6 @@ Record*& Record::go_next() {
 	return next;
 }
 
-<<<<<<< HEAD
 
 int Record::get_file_address(std::string & copy){
 	if (!file_address.compare("")) return -1;
@@ -163,8 +158,6 @@ void Record::set_next(Record*& ptr) {
 	next = ptr;
 }
 
-=======
->>>>>>> 7e408c12fc47d088d03d5dc17d2e86d2bc2b49d2
 int Record::add(std::string address) {
 	if (!file_address.compare("")) return -1;
 	file_address = address;
