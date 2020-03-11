@@ -53,8 +53,6 @@ protected:
 	std::string currDate;	//MM-DD-YYYY
 	std::string currTime;	//HH:MM:SS
 	std::string svcDate;	//MM-DD-YYYY
-
-
 };
 
 // Abstract Base Class (ID numbers)
@@ -114,7 +112,6 @@ class Member : public Person {
 public:
 	Member();
 	~Member();
-protected:
+private:
+
 };
-
-

@@ -19,20 +19,23 @@ BST::BST(const char * file, int flag) {
 
 	//File is a Provider file
 	if (flag == 1) {
+		do {
 
-
+		} while (!file_in.eof());
 	}
 
 	//File is a Member file
 	if (flag == 2) {
+		do {
 
-
+		} while (!file_in.eof());
 	}
 
 	//File is a Service file
 	if (flag == 3) {
+		do {
 
-
+		} while (!file_in.eof());
 	}
 }
 
