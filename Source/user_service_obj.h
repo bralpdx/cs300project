@@ -13,9 +13,11 @@ public:
 	Record();
 	~Record();
 	Record *& go_next();
+	int get_file_address(std::string*& copy);
+	void set_next(Record*& ptr);
 	int add(std::string address);
 	int remove(std::string address);
-protected:
+	private:
 	std::string file_address;
 	Record * next;
 };
@@ -51,8 +53,6 @@ protected:
 	std::string currDate;	//MM-DD-YYYY
 	std::string currTime;	//HH:MM:SS
 	std::string svcDate;	//MM-DD-YYYY
-
-
 };
 
 // Abstract Base Class (ID numbers)
@@ -62,6 +62,7 @@ public:
 	~ID();
 	ID *& go_left();
 	ID *& go_right();
+	bool is_leaf();
 protected:
 	ID *left;
 	ID *right;
@@ -85,17 +86,17 @@ class Person : public ID {
 public:
 	Person();
 	~Person();
-	int add_record(Record to_add);
+	int add_record(Record &to_add);
 	int remove_record(std::string to_remove);
-protected:
-	// Needs pointer to head of record list
+private:
+	int remove_record(std::string to_remove, Record*& head);
+	void destroy(Record*& head);
 	Record * head;
 	std::string name;		//25 characters
 	std::string address;	//25 characters
 	std::string city;		//14 characters
 	std::string state;		//2 characters
 	int zip;				//5 characters
-
 };
 
 // Provider class derived from Person
@@ -111,7 +112,6 @@ class Member : public Person {
 public:
 	Member();
 	~Member();
-protected:
+private:
+
 };
-
-

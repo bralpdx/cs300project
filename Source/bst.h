@@ -5,9 +5,10 @@
 
 class BST{
 public:
-	Provider_BST();
-	~Provider_BST();
-
+	BST();
+	BST(const char * file, int flag);
+	~BST();
 private:
+	void destroy(ID*& root);
 	ID * root;
 };

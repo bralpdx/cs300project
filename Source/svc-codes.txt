@@ -1,12 +1,12 @@
-d00001,0.0,Consultation,dietitian
-d00002,89.99,Counseling,dietitian
-d00003,199.99,Meal Planning,dietitian
-d00004,99.95,Cooking Lesson,dietitian
-i00001,0.0,Consultation,internist
-i00002,75.0,Check Up,internist
-i00003,899.99,Lab Work,internist
-i00004,39.99,Vaccination,internist
-e00001,0.0,Consultation,excercise specialist
-e00002,375.50,Workout plan,excercise specialist
-e00003,100.0,Aerobics session,excercise specialist
-e000004,99.99,Fitness Evaluation,excercise specialist
+d00001,0.0,Consultation,dietitian,
+d00002,89.99,Counseling,dietitian,
+d00003,199.99,Meal Planning,dietitian,
+d00004,99.95,Cooking Lesson,dietitian,
+i00001,0.0,Consultation,internist,
+i00002,75.0,Check Up,internist,
+i00003,899.99,Lab Work,internist,
+i00004,39.99,Vaccination,internist,
+e00001,0.0,Consultation,excercise specialist,
+e00002,375.50,Workout plan,excercise specialist,
+e00003,100.0,Aerobics session,excercise specialist,
+e000004,99.99,Fitness Evaluation,excercise specialist,
