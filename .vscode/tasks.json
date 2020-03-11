@@ -9,9 +9,9 @@
       "command": "/usr/bin/g++",
       "args": [
         "-g",
-        "${file}",
+        "${fileDirname}/*.cpp",
         "-o",
-        "${fileDirname}/${fileBasenameNoExtension}"
+        "${fileDirname}/hash-library-master/*.cpp"
       ],
       "options": {
         "cwd": "/usr/bin"
