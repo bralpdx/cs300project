@@ -86,7 +86,11 @@ class Person : public ID {
 public:
 	Person();
 	~Person();
+<<<<<<< HEAD
 	int add_record(Record *&to_add);
+=======
+	int add_record(Record * to_add);
+>>>>>>> 7e408c12fc47d088d03d5dc17d2e86d2bc2b49d2
 	int remove_record(std::string to_remove);
 private:
 	int remove_record(std::string to_remove, Record*& head);
