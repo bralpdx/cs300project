@@ -10,7 +10,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "enter program name, for example ${workspaceFolder}/Linux-Debug/a.out",
+            "program": "${workspaceFolder}/Linux-Debug/a.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
