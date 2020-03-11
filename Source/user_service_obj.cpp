@@ -50,36 +50,36 @@ Person::~Person() {
 }
 
 
-int Person::add_record(Record &to_add) {
+int Person::add_record(Record *&to_add) {
 	if (!head) {
 		head = to_add;
 		return 1;
 	}
 	else {
-		to_add.set_next(head);
+		to_add -> set_next(head);
 		head = to_add;
 		return 2;
 	}
 }
 
 int Person::remove_record(std::string to_remove) {
-	return remove_record(std::string to_remove, head);
+	return remove_record(to_remove, head);
 }
 
 int Person::remove_record(std::string to_remove, Record *& head) {
 	int success = 0;
 	if (!head) return success;
 	std::string grab;
-	if (head.get_file_address(grab) < 0) {
+	if (head->get_file_address(grab) < 0) {
 		//panic!!!!
 	}
 	if (!to_remove.compare(grab)) {
 		Record* temp = head;
-		head = head.go_next();
+		head = head->go_next();
 		delete temp;
 		success++;
 	}
-	success = remove_record(to_remove, head.go_next());
+	success = remove_record(to_remove, head->go_next());
 	return success;
 }
 
@@ -145,7 +145,7 @@ Record*& Record::go_next() {
 }
 
 
-int Record::get_file_address(std::string *& copy){
+int Record::get_file_address(std::string & copy){
 	if (!file_address.compare("")) return -1;
 	else {
 		copy = file_address;

@@ -13,7 +13,7 @@ public:
 	Record();
 	~Record();
 	Record *& go_next();
-	int get_file_address(std::string*& copy);
+	int get_file_address(std::string& copy);
 	void set_next(Record*& ptr);
 	int add(std::string address);
 	int remove(std::string address);
@@ -86,7 +86,7 @@ class Person : public ID {
 public:
 	Person();
 	~Person();
-	int add_record(Record &to_add);
+	int add_record(Record *&to_add);
 	int remove_record(std::string to_remove);
 private:
 	int remove_record(std::string to_remove, Record*& head);
