@@ -48,7 +48,7 @@ Person::~Person() {
 	state = "";
 	zip = 0;
 }
-}
+
 
 int Person::add_record(Record &to_add) {
 	if (!head) {

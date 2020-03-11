@@ -11,7 +11,7 @@ BST::BST() {
 BST::BST(const char * file, int flag) {
 	root = NULL;
 
-	ifstream file_in;
+	fstream file_in;
 	file_in.open(file);
 
 	//File didn't open
@@ -51,5 +51,6 @@ void BST::destroy(ID*& root) {
 	if (root->is_leaf()){
 		delete root;
 		root = NULL;
+	}
 	return;
 }
