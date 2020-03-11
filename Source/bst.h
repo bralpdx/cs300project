@@ -8,6 +8,7 @@ public:
 	BST();
 	BST(const char * file, int flag);
 	~BST();
+	int add(ID *)
 private:
 	void destroy(ID*& root);
 	ID * root;
