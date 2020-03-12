@@ -1,4 +1,5 @@
 #include "user_service_obj.h"
+#include <string>
 
 //////////////////////////////////
 //        ID Base Class         //
@@ -31,7 +32,7 @@ bool ID::is_leaf() {
 //         Person Class         //
 //////////////////////////////////
 
-Person::Person() {
+Person::Person(): ID() {
 	head = NULL;
 	name = "";
 	address = "";
@@ -49,14 +50,13 @@ Person::~Person() {
 	zip = 0;
 }
 
-
-int Person::add_record(Record *&to_add) {
+int Person::add_record(Record *& to_add) {
 	if (!head) {
 		head = to_add;
 		return 1;
 	}
 	else {
-		to_add -> set_next(head);
+		to_add->set_next(head);
 		head = to_add;
 		return 2;
 	}
@@ -70,8 +70,10 @@ int Person::remove_record(std::string to_remove, Record *& head) {
 	int success = 0;
 	if (!head) return success;
 	std::string grab;
-	if (head->get_file_address(grab) < 0) {
+	head->get_file_address(grab);
+	if (!grab.compare("")) {
 		//panic!!!!
+		return -1;
 	}
 	if (!to_remove.compare(grab)) {
 		Record* temp = head;
@@ -96,10 +98,15 @@ void Person::destroy(Record*& head) {
 //        Provider Class        //
 //////////////////////////////////
 
-Provider::Provider() {
+Provider::Provider(): Person() {
 
 }
 Provider::~Provider() {
+
+}
+
+int Provider::report() {
+
 
 }
 
@@ -107,10 +114,14 @@ Provider::~Provider() {
 //         Member Class         //
 //////////////////////////////////
 
-Member::Member() {
+Member::Member(): Person() {
 
 }
 Member::~Member() {
+
+}
+
+int Member::report() {
 
 }
 
@@ -118,7 +129,7 @@ Member::~Member() {
 //         Service Class        //
 //////////////////////////////////
 
-Service::Service() {
+Service::Service(): ID() {
 	svcName = "";
 	svcFee_dollars = 0;
 	svcFee_cents = 0;
@@ -129,6 +140,7 @@ Service::~Service() {
 	svcFee_dollars = 0;
 	svcFee_cents = 0;
 }
+
 //////////////////////////////////
 //         Record Class         //
 //////////////////////////////////
@@ -170,59 +182,4 @@ int Record::remove(std::string address) {
 		return 0;
 	}
 	return -1;
-}
-
-//////////////////////////////////
-//     Provider_record Class    //
-//////////////////////////////////
-Provider_record::Provider_record() {
-
-	memberName = "";
-	memberNum = "";
-	svcCode = "";
-	feeOwed_dollars = 0;
-	feeOwed_cents = 0;
-	currDate = "";
-	currTime = "";
-	svcDate = "";
-}
-Provider_record::~Provider_record() {
-
-	memberName = "";
-	memberNum = "";
-	svcCode = "";
-	feeOwed_dollars = 0;
-	feeOwed_cents = 0;
-	currDate = "";
-	currTime = "";
-	svcDate = "";
-
-}
-
-//////////////////////////////////
-//     Member_record Class    //
-//////////////////////////////////
-Member_record::Member_record() {
-
-	name = "";
-	number = "";
-	address = "";
-	city = "";
-	state = "";
-	zip = 0;
-	currDate = "";
-	currTime = "";
-	svcDate = "";
-}
-Member_record::~Member_record() {
-	name = "";
-	number = "";
-	address = "";
-	city = "";
-	state = "";
-	zip = 0;
-	currDate = "";
-	currTime = "";
-	svcDate = "";
-
 }

@@ -1,6 +1,7 @@
 // File contains prototypes pertaining to the Binary Search Tree
 
 #include "user_service_obj.h"
+#include <fstream>
 #pragma once
 
 class BST{
