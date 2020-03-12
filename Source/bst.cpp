@@ -44,7 +44,7 @@ BST::~BST() {
 	root = NULL;
 }
 
-void BST::destroy(ID*& root) {
+void BST::destroy(ID *& root) {
 	if (!root) return;
 	destroy(root->go_left());
 	destroy(root->go_right());
