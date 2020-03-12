@@ -86,3 +86,17 @@ public:
 private:
 
 };
+
+class Account {
+public:
+	Account();
+	Account(int dol, int cen);
+	Account(const Account& obj);
+	~Account();
+	void add(int dol, int cen);
+	void subtract(int dol, int cen);
+	bool good_standing();
+private:
+	int dollar;
+	int cent;
+};

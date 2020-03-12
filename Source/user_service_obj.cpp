@@ -183,3 +183,47 @@ int Record::remove(std::string address) {
 	}
 	return -1;
 }
+
+Account::Account() {
+	dollar = 0;
+	cent = 0;
+}
+
+Account::Account(int dol, int cen) {
+	dollar = dol;
+	cent = cen;
+}
+
+Account::Account(const Account& obj;) {
+	dollar = obj.dollar;
+	cent = obj.cent;
+}
+Account::~Account() {
+	dollar = 0;
+	cent = 0;
+}
+
+
+void Account::add(int dol, int cen) {
+	dollar += dol;
+	if ((cent + cen) < 100) cent += cen;
+	else {
+		dollar++;
+		cent = (cent + cen - 100);
+	}
+}
+
+
+int Account::subtract(int dol, int cen) {
+	dollar -= dol;
+	if ((cent - cen) >= 0) cent -= cen;
+	else {
+		dollar--;
+		cent = (cent - cen + 100);
+	}
+}
+
+bool Account::good_standing() {
+	if ((dollar > 0) || ((dollar == 0) && (cent >= 0))) return true;
+	else return false;
+}
