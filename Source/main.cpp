@@ -25,7 +25,7 @@ int main() {
 		
 		//Provider Terminal
 		if (option == 'a') {
-			do{
+			do {
 				std::cout << "=======================\n";
 				std::cout << "== Welcome to ChocAn ==\n";
 				std::cout << "=======================\n\n";
@@ -51,7 +51,7 @@ int main() {
 
 				}
 
-			while (option != 'x');
+			} while (option != 'x');
 		}
 
 		//Manager Terminal
@@ -77,7 +77,7 @@ int main() {
 
 				}
 
-			while (option != 'x');
+			} while (option != 'x');
 		}
 
 		//Operator Terminal
@@ -133,7 +133,7 @@ int main() {
 
 				}
 
-			while (option != 'x');
+			} while (option != 'x');
 		}
 
 		//dispay read in data from text file
