@@ -21,7 +21,7 @@ int main() {
 		std::cout << "d) Display Read in Data\n";
 
 		std::cin >> option;
-		tolower(option);
+		option = tolower(option);
 		
 		//Provider Terminal
 		if (option == 'a') {
@@ -37,7 +37,7 @@ int main() {
 				std::cout << "x) Logout\n";
 
 				std::cin >> option;
-				tolower(option);
+				option = tolower(option);
 
 				//Validate member
 				if (option == 'a') {
@@ -66,7 +66,7 @@ int main() {
 				std::cout << "x) Logout\n";
 
 				std::cin >> option;
-				tolower(option);
+				option = tolower(option);
 
 				//Member Report
 				if (option == 'a') {
@@ -96,7 +96,7 @@ int main() {
 				std::cout << "x) logout\n";
 
 				std::cin >> option;
-				tolower(option);
+				option = tolower(option);
 
 				//Add Member
 				if (option == 'a') {
@@ -153,7 +153,7 @@ int main() {
 
 		std::cout << "Access another terminal? (y/n) \n";
 		std::cin >> again;
-		tolower(again);
+		again = tolower(again);
 	} while (again == 'y');
 
 
