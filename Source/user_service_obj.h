@@ -12,6 +12,7 @@
 class Record{
 public:
 	Record();
+	Record(const Record & obj);
 	~Record();
 	Record *& go_next();
 	int get_file_address(std::string & copy);
@@ -27,6 +28,7 @@ private:
 class ID{
 public:
 	ID();
+	ID(const ID & obj);
 	virtual ~ID();
 	ID *& go_left();
 	ID *& go_right();
@@ -42,6 +44,7 @@ protected:
 class Service : public ID {
 public:
 	Service();
+	Service(const Service & obj);
 	~Service();
 protected:
 	std::string svcName;
@@ -53,6 +56,7 @@ protected:
 class Person : public ID {
 public:
 	Person();
+	Person(const Person & obj);
 	~Person();
 	int add_record(Record *& to_add);
 	int remove_record(std::string to_remove);
@@ -72,6 +76,7 @@ private:
 class Provider : public Person {
 public:
 	Provider();
+	Provider(const Provider& obj);
 	~Provider();
 	int report();
 protected:
@@ -81,6 +86,7 @@ protected:
 class Member : public Person {
 public:
 	Member();
+	Member(const Member& obj);
 	~Member();
 	int report();
 private:

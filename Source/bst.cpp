@@ -47,8 +47,9 @@ void BST::destroy(ID*& root) {
 	if (!root) return;
 	destroy(root->go_left());
 	destroy(root->go_right());
-	if (root->is_leaf()){
+	if (root->is_leaf()) {
 		delete root;
 		root = NULL;
-	return;
+		return;
+	}
 }
