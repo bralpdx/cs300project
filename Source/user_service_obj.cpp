@@ -130,8 +130,8 @@ Service::Service(std::string code, std::string dollar, std::string cent, std::st
 	svcCode = code;
 	svcName = name;
 	prov_type = prov;
-	svcFee_dollars = stoi(dollar);
-	svcFee_cents = stoi(cent);
+	svcFee_dollars = stoi(dollar, nullptr, 10);
+	svcFee_cents = stoi(cent, nullptr, 10);
 }
 Service::~Service() {
 	svcCode = "";
