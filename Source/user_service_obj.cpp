@@ -229,9 +229,9 @@ bool Account::good_standing() {
 
 Account& Account::operator = (const Account& a) {
 	if (this == &a) return *this;
-	a.dollar = dollar;
-	a.cent = cent;
-	return a;
+	this->dollar = dollar;
+	this->cent = cent;
+	return *this;
 }
 Account& Account::operator += (const Account& a) {
 	this->dollar += a.dollar;
