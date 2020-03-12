@@ -50,6 +50,8 @@ Person::~Person() {
 	zip = 0;
 }
 
+int Person::report(){}
+
 int Person::add_record(Record *& to_add) {
 	if (!head) {
 		head = to_add;
