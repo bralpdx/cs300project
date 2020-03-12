@@ -1,3 +1,6 @@
-File that will contain ID numbers for terminal access
-ID,name,street,city,state,zip,type
-134602,Jonathan Bral,11111 NW Main St.,Portland,OR,97201,Provider
+222222222,Jonathan Bral,11111 NW Main St.,Portland,OR,97201,Provider
+111111111,John Smith,12345 NW Main St.,Portland,OR,97201,Provider
+121212121,Bill Chill,18282 NW Main St.,Portland,OR,97201,Provider
+131313131,Gilbert Grundy,22222 NW Main St.,Portland,OR,97201,Manager
+444444444,Andrew Bonham,33333 NW Main St.,Portland,OR,97201,Member
+123321123,Rick Cruz,44444 NW Main St.,Portland,OR,97201,Member
