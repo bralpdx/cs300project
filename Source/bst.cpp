@@ -1,5 +1,4 @@
 #include "bst.h"
-#include <fstream>
 
 //////////////////////////////////
 //      BST Class				//
@@ -11,7 +10,7 @@ BST::BST() {
 BST::BST(const char * file, int flag) {
 	root = NULL;
 
-	ifstream file_in;
+	std::fstream file_in;
 	file_in.open(file);
 
 	//File didn't open

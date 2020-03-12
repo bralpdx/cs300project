@@ -13,11 +13,11 @@ public:
 	Record();
 	~Record();
 	Record *& go_next();
-	int get_file_address(std::string*& copy);
+	int get_file_address(std::string & copy);
 	void set_next(Record*& ptr);
 	int add(std::string address);
 	int remove(std::string address);
-	private:
+private:
 	std::string file_address;
 	Record * next;
 };
@@ -53,8 +53,9 @@ class Person : public ID {
 public:
 	Person();
 	~Person();
-	int add_record(Record &to_add);
+	int add_record(Record *& to_add);
 	int remove_record(std::string to_remove);
+	virtual int report();
 private:
 	int remove_record(std::string to_remove, Record*& head);
 	void destroy(Record*& head);
@@ -71,6 +72,7 @@ class Provider : public Person {
 public:
 	Provider();
 	~Provider();
+	int report();
 protected:
 };
 
@@ -79,6 +81,7 @@ class Member : public Person {
 public:
 	Member();
 	~Member();
+	int report();
 private:
 
 };
