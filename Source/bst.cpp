@@ -34,9 +34,14 @@ BST::BST(const char * file, int flag) {
 	//File is a Service file
 	if (flag == 3) {
 		do {
+			/*
+
+			Didn't meen to work on this in main, 
+			will carry on in my branch
+
 			std::string temp;
 			file_in.get(temp, 100, ',');
-			file_in.ignore(100, ',');
+			file_in.ignore(100, ',');*/
 		} while (!file_in.eof());
 	}
 }

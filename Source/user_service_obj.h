@@ -24,6 +24,31 @@ private:
 	Record * next;
 };
 
+class Account {
+public:
+	Account();
+	Account(int dol, int cen);
+	Account(const Account& obj);
+	~Account();
+	void add(int dol, int cen);
+	void subtract(int dol, int cen);
+	bool good_standing();
+	Account& operator = (const Account&);
+	Account& operator += (const Account&);
+	Account& operator -= (const Account&);
+	Account operator + (const Account&)const; 
+	Account operator - (const Account&)const;
+	bool operator == (const Account&)const;
+	bool operator != (const Account&)const;
+	bool operator < (const Account&)const;
+	bool operator > (const Account&)const;
+	bool operator <= (const Account&)const;
+	bool operator >= (const Account&)const;
+private:
+	int dollar;
+	int cent;
+};
+
 // Abstract Base Class (ID numbers)
 class ID{
 public:
@@ -92,27 +117,3 @@ private:
 	Account member_account;
 };
 
-class Account {
-public:
-	Account();
-	Account(int dol, int cen);
-	Account(const Account& obj);
-	~Account();
-	void add(int dol, int cen);
-	void subtract(int dol, int cen);
-	bool good_standing();
-	Account& operator = (const Account&);
-	Account& operator += (const Account&);
-	Account& operator -= (const Account&);
-	Account operator + (const Account&)const; 
-	Account operator - (const Account&)const;
-	bool operator == (const Account&)const;
-	bool operator != (const Account&)const;
-	bool operator < (const Account&)const;
-	bool operator > (const Account&)const;
-	bool operator <= (const Account&)const;
-	bool operator >= (const Account&)const;
-private:
-	int dollar;
-	int cent;
-};
