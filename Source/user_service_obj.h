@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <ctime>
 
 //Abstract Base Class
 class Record{
