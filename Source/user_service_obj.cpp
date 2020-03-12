@@ -131,13 +131,10 @@ int Member::report() {
 
 Service::Service(): ID() {
 	svcName = "";
-	svcFee_dollars = 0;
-	svcFee_cents = 0;
 }
 
 Service::~Service() {
 	svcName = "";
-	Account service_fee;
 }
 
 //////////////////////////////////
