@@ -39,14 +39,17 @@ int main() {
 				std::cin >> option;
 				tolower(option);
 
+				//Validate member
 				if (option == 'a') {
 
 				}
 
+				//Bill member
 				if (option == 'b') {
 
 				}
 
+				//display Services
 				if (option == 'c') {
 
 				}
@@ -65,15 +68,13 @@ int main() {
 				std::cin >> option;
 				tolower(option);
 
+				//Member Report
 				if (option == 'a') {
 
 				}
 
+				//Provider Report
 				if (option == 'b') {
-
-				}
-
-				if (option == 'c') {
 
 				}
 
@@ -97,38 +98,47 @@ int main() {
 				std::cin >> option;
 				tolower(option);
 
+				//Add Member
 				if (option == 'a') {
 
 				}
 
+				//Remove Member
 				if (option == 'b') {
 
 				}
 
+				//Edit Member
 				if (option == 'c') {
 
 				}
 
+				//Add Provider
 				if (option == 'd') {
 
 				}
 
+				//Remove Provider
 				if (option == 'e') {
 
 				}
 
+				//Edit Provider
 				if (option == 'f') {
 
 				}
 
+				//Add Service
 				if (option == 'g') {
 
 				}
 
+				//Remove Service
 				if (option == 'h') {
 
 				}
 
+				//Edit Service
 				if (option == 'i') {
 
 				}
