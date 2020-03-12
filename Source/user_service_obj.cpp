@@ -119,13 +119,24 @@ Member::~Member() {
 //////////////////////////////////
 
 Service::Service() {
+	svcCode = "";
 	svcName = "";
+	prov_type = "";
 	svcFee_dollars = 0;
 	svcFee_cents = 0;
 }
 
+Service::Service(std::string code, std::string dollar, std::string cent, std::string name, std::string prov) {
+	svcCode = code;
+	svcName = name;
+	prov_type = prov;
+	svcFee_dollars = stoi(dollar);
+	svcFee_cents = stoi(cent);
+}
 Service::~Service() {
+	svcCode = "";
 	svcName = "";
+	prov_type = "";
 	svcFee_dollars = 0;
 	svcFee_cents = 0;
 }

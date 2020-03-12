@@ -41,9 +41,12 @@ protected:
 class Service : public ID {
 public:
 	Service();
+	Service(std::string svc_code, std::string dollars, std::string cents, std::string name, std::string type);
 	~Service();
 protected:
+	std::string svcCode;
 	std::string svcName;
+	std::string prov_type; // type of provider it belongs to
 	int svcFee_dollars;
 	int svcFee_cents;
 };

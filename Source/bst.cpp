@@ -1,4 +1,5 @@
 #include "bst.h"
+#include <string>
 #include <fstream>
 
 //////////////////////////////////
@@ -9,6 +10,7 @@ BST::BST() {
 }
 
 BST::BST(const char * file, int flag) {
+	
 	root = NULL;
 
 	std::ifstream file_in;
@@ -19,24 +21,65 @@ BST::BST(const char * file, int flag) {
 
 	//File is a Provider file
 	if (flag == 1) {
-		do {
+		std::string hashedId;
+		std::string name;
+		std::string street;
+		std::string city;
+		std::string state;
+		std::string zip;
+		std::string type;
 
-		} while (!file_in.eof());
+		while (getline(file_in, hashedId, ',')) {
+			getline(file_in, name, ',');
+			getline(file_in, street, ',');
+			getline(file_in, city, ',');
+			getline(file_in, state, ',');
+			getline(file_in, zip, ',');
+			getline(file_in, type);
+
+			if (type.compare("Provider") == 0) {
+				// create provider object
+				// pass in variable data
+				// add to provider bst
+			}
+			else if (type.compare("Member") == 0) {
+				// create member object
+				// pass in variable data
+				// add to member bst
+			}
+		}
 	}
 
+	/*
 	//File is a Member file
 	if (flag == 2) {
 		do {
 
 		} while (!file_in.eof());
 	}
+	*/
 
 	//File is a Service file
 	if (flag == 3) {
-		do {
+		std::string svc_code;
+		std::string dollars;
+		std::string cents;
+		std::string name;
+		std::string type;
 
-		} while (!file_in.eof());
+		while (getline(file_in, svc_code, ',')) {
+			getline(file_in, dollars, '.');
+			getline(file_in, cents, ',');
+			getline(file_in, name, ',');
+			getline(file_in, type);
+
+			// create service object
+			// pass in variable data
+			// add to service bst
+		}
 	}
+
+	file_in.close();
 }
 
 BST::~BST() {
