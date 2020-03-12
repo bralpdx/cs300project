@@ -1,5 +1,6 @@
 #include "param.h"
 #include "utilities.h"
+#include "bst.h"
 #include <iostream>
 
 int main() {
