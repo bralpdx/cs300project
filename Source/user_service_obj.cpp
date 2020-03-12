@@ -105,6 +105,11 @@ Provider::~Provider() {
 
 }
 
+int Provider::report() {
+
+
+}
+
 //////////////////////////////////
 //         Member Class         //
 //////////////////////////////////
@@ -136,9 +141,6 @@ Service::~Service() {
 	svcFee_cents = 0;
 }
 
-int Service::report() {
-
-}
 //////////////////////////////////
 //         Record Class         //
 //////////////////////////////////
