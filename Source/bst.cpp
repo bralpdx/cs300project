@@ -1,4 +1,5 @@
 #include "bst.h"
+#include <fstream>
 
 //////////////////////////////////
 //      BST Class				//
@@ -10,7 +11,7 @@ BST::BST() {
 BST::BST(const char * file, int flag) {
 	root = NULL;
 
-	std::fstream file_in;
+	std::ifstream file_in;
 	file_in.open(file);
 
 	//File didn't open
@@ -33,7 +34,9 @@ BST::BST(const char * file, int flag) {
 	//File is a Service file
 	if (flag == 3) {
 		do {
-
+			std::string temp;
+			file_in.get(temp, 100, ',');
+			file_in.ignore(100, ',');
 		} while (!file_in.eof());
 	}
 }
@@ -43,13 +46,13 @@ BST::~BST() {
 	root = NULL;
 }
 
-void BST::destroy(ID*& root) {
+void BST::destroy(ID *& root) {
 	if (!root) return;
 	destroy(root->go_left());
 	destroy(root->go_right());
-	if (root->is_leaf()) {
+	if (root->is_leaf()){
 		delete root;
 		root = NULL;
-		return;
 	}
+	return;
 }

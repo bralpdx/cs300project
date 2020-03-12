@@ -48,8 +48,7 @@ public:
 	~Service();
 protected:
 	std::string svcName;
-	int svcFee_dollars;
-	int svcFee_cents;
+	Account service_fee;
 };
 
 // Person class derived from ID
@@ -90,5 +89,30 @@ public:
 	~Member();
 	int report();
 private:
+	Account member_account;
+};
 
+class Account {
+public:
+	Account();
+	Account(int dol, int cen);
+	Account(const Account& obj);
+	~Account();
+	void add(int dol, int cen);
+	void subtract(int dol, int cen);
+	bool good_standing();
+	Account& operator = (const Account&);
+	Account& operator += (const Account&);
+	Account& operator -= (const Account&);
+	Account operator + (const Account&)const; 
+	Account operator - (const Account&)const;
+	bool operator == (const Account&)const;
+	bool operator != (const Account&)const;
+	bool operator < (const Account&)const;
+	bool operator > (const Account&)const;
+	bool operator <= (const Account&)const;
+	bool operator >= (const Account&)const;
+private:
+	int dollar;
+	int cent;
 };

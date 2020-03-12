@@ -131,14 +131,10 @@ int Member::report() {
 
 Service::Service(): ID() {
 	svcName = "";
-	svcFee_dollars = 0;
-	svcFee_cents = 0;
 }
 
 Service::~Service() {
 	svcName = "";
-	svcFee_dollars = 0;
-	svcFee_cents = 0;
 }
 
 //////////////////////////////////
@@ -182,4 +178,115 @@ int Record::remove(std::string address) {
 		return 0;
 	}
 	return -1;
+}
+
+
+//////////////////////////////////
+//         Account Class        //
+//////////////////////////////////
+
+
+Account::Account() {
+	dollar = 0;
+	cent = 0;
+}
+
+Account::Account(int dol, int cen) {
+	dollar = dol;
+	cent = cen;
+}
+
+Account::Account(const Account& obj) {
+	dollar = obj.dollar;
+	cent = obj.cent;
+}
+Account::~Account() {
+	dollar = 0;
+	cent = 0;
+}
+
+
+void Account::add(int dol, int cen) {
+	dollar += dol;
+	if ((cent + cen) < 100) cent += cen;
+	else {
+		dollar++;
+		cent = (cent + cen - 100);
+	}
+}
+
+
+void Account::subtract(int dol, int cen) {
+	dollar -= dol;
+	if ((cent - cen) >= 0) cent -= cen;
+	else {
+		dollar--;
+		cent = (cent - cen + 100);
+	}
+}
+
+bool Account::good_standing() {
+	if ((dollar > 0) || ((dollar == 0) && (cent >= 0))) return true;
+	else return false;
+}
+
+Account& Account::operator = (const Account& a) {
+	if (this == &a) return *this;
+	this->dollar = dollar;
+	this->cent = cent;
+	return *this;
+}
+Account& Account::operator += (const Account& a) {
+	this->dollar += a.dollar;
+	this->cent += a.cent;
+	return *this;
+}
+
+Account& Account::operator -= (const Account& a) {
+	this->dollar -= a.dollar;
+	this->cent -= a.cent;
+	return *this;
+}
+
+Account Account::operator + (const Account& a) const {
+	Account sum;
+	sum.dollar = dollar + a.dollar;
+	sum.cent = cent + a.cent;
+	return sum;
+}
+
+Account Account::operator - (const Account& a) const {
+	Account diff;
+	diff.dollar = dollar - a.dollar;
+	diff.cent = cent - a.cent;
+	return diff;
+}
+
+bool Account::operator == (const Account& a)const {
+	if ((dollar == a.dollar) && (cent == a.cent)) return true;
+	else return false;
+}
+bool Account::operator != (const Account& a)const {
+	if ((dollar == a.dollar) && (cent == a.cent)) return false;
+	else return true;
+}
+bool Account::operator < (const Account& a)const {
+	if (dollar < a.dollar) return true;
+	else if ((dollar == a.dollar) && (cent < a.cent)) return true;
+	else return false;
+}
+bool Account::operator > (const Account& a)const {
+	if (dollar > a.dollar) return true;
+	else if ((dollar == a.dollar) && (cent > a.cent)) return true;
+	else return false;
+}
+bool Account::operator <= (const Account& a)const {
+	if (dollar < a.dollar) return true;
+	else if ((dollar == a.dollar) && (cent <= a.cent)) return true;
+	else return false;
+}
+bool Account::operator >= (const Account& a)const {
+	if (dollar > a.dollar) return true;
+	else if ((dollar == a.dollar) && (cent >= a.cent)) return true;
+	else return false;
 }
