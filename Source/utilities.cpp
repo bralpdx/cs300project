@@ -110,3 +110,27 @@ int hash_file(std::ifstream &inFile) {
 
 	return RETURN_SUCCESS;
 }
+
+// Function to read in the time from the operator terminal
+// Bound checks for length and formatting (:)
+int get_time(std::string& time){
+    std::cout << "Enter the current time (HH:MM:SS): ";
+    std::cin >> time;
+
+    if(time.at(2) == ':' && time.at(5) == ':' && time.length() == 8)
+        return 1;
+    else
+        return 0;
+}
+
+// Function to read in the date from the operator terminal
+// Bound checks for  length and formatting (-)
+int get_date(std::string& date){
+    std::cout << "Date (DD-MM-YYYY): ";
+    std::cin >> date;
+
+    if(date.at(2) == '-' && date.at(5) == '-' && date.length() == 10)
+        return 1;
+    else
+        return 0;
+}
