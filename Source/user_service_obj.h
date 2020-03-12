@@ -96,6 +96,17 @@ public:
 	void add(int dol, int cen);
 	void subtract(int dol, int cen);
 	bool good_standing();
+	Account& operator = (const Account&);
+	Account& operator += (const Account&);
+	Account& operator -= (const Account&);
+	Account operator + (const Account&)const; 
+	Account operator - (const Account&)const;
+	bool operator == (const Account&)const;
+	bool operator != (const Account&)const;
+	bool operator < (const Account&)const;
+	bool operator > (const Account&)const;
+	bool operator <= (const Account&)const;
+	bool operator >= (const Account&)const;
 private:
 	int dollar;
 	int cent;
