@@ -45,8 +45,7 @@ public:
 	~Service();
 protected:
 	std::string svcName;
-	int svcFee_dollars;
-	int svcFee_cents;
+	Account service_fee;
 };
 
 // Person class derived from ID
@@ -84,7 +83,7 @@ public:
 	~Member();
 	int report();
 private:
-
+	Account member_account;
 };
 
 class Account {

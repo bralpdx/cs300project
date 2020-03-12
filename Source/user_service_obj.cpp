@@ -183,6 +183,12 @@ int Record::remove(std::string address) {
 	return -1;
 }
 
+
+//////////////////////////////////
+//         Account Class        //
+//////////////////////////////////
+
+
 Account::Account() {
 	dollar = 0;
 	cent = 0;
