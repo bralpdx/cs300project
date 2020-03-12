@@ -3,6 +3,8 @@
 #include <iostream>
 
 int main() {
+	pre_hash_id(); // See utilities.h for desc
+
 	std::cout << "=======================\n"; 
 	std::cout << "== Welcome to ChocAn ==\n";
 	std::cout << "=======================\n";
