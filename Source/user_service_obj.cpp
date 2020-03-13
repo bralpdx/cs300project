@@ -1,9 +1,11 @@
 #include "user_service_obj.h"
+#include <string>
 
 //////////////////////////////////
 //        ID Base Class         //
 //////////////////////////////////
 ID::ID() {
+
   left = NULL;
   right = NULL;
   hash_value = "";
@@ -14,6 +16,7 @@ ID::~ID() {
   right = NULL;
   hash_value = "";
 }
+
 
 ID *& ID::go_left() {
   return left;
@@ -35,68 +38,73 @@ std::string ID::get_hash() {
 void ID::Display(){}
 void ID::Edit(Provider&){}
 void ID::Edit(Member&){}
+
+
 //////////////////////////////////
 //         Person Class         //
 //////////////////////////////////
 
-Person::Person() {
-  head = NULL;            
-  name = "";
-  address = "";
-  city = "";
-  state = "";
-  zip = 0;
+Person::Person(): ID() {
+	head = NULL;
+	name = "";
+	address = "";
+	city = "";
+	state = "";
+	zip = 0;
 }
 
 Person::~Person() {
-  destroy(head);
-  name = "";
-  address = "";
-  city = "";
-  state = "";
-  zip = 0;
+	destroy(head);
+	name = "";
+	address = "";
+	city = "";
+	state = "";
+	zip = 0;
 }
 
+int Person::report(){}
 
-int Person::add_record(Record *&to_add) {
-  if (!head) {
-    head = to_add;
-    return 1;
-  }
-  else {
-    to_add -> set_next(head);
-    head = to_add;
-    return 2;
-  }
+int Person::add_record(Record *& to_add) {
+	if (!head) {
+		head = to_add;
+		return 1;
+	}
+	else {
+		to_add->set_next(head);
+		head = to_add;
+		return 2;
+	}
 }
 
 int Person::remove_record(std::string to_remove) {
-  return remove_record(to_remove, head);
+	return remove_record(to_remove, head);
 }
 
 int Person::remove_record(std::string to_remove, Record *& head) {
-  int success = 0;
-  if (!head) return success;
-  std::string grab;
-  if (head->get_file_address(grab) < 0) {
-    //panic!!!!
-  }
-  if (!to_remove.compare(grab)) {
-    Record* temp = head;
-    head = head->go_next();
-    delete temp;
-    success++;
-  }
-  success = remove_record(to_remove, head->go_next());
-  return success;
+	int success = 0;
+	if (!head) return success;
+	std::string grab;
+	head->get_file_address(grab);
+	if (!grab.compare("")) {
+		//panic!!!!
+		return -1;
+	}
+	if (!to_remove.compare(grab)) {
+		Record* temp = head;
+		head = head->go_next();
+		delete temp;
+		success++;
+	}
+	success = remove_record(to_remove, head->go_next());
+	return success;
 }
 
 
 void Person::destroy(Record*& head) {
-  if (!head) return;
-  destroy(head->go_next());
-  delete head;
-  return;
+	if (!head) return;
+	destroy(head->go_next());
+	delete head;
+	return;
 }
 
 
@@ -104,7 +112,7 @@ void Person::destroy(Record*& head) {
 //        Provider Class        //
 //////////////////////////////////
 
-Provider::Provider() {
+Provider::Provider(): Person() {
 
 }
 Provider::~Provider() {
@@ -197,12 +205,15 @@ void Provider::Edit(Provider& to_copy){
   zip = to_copy.zip;
 }
 
+int Provider::report() {
 
+
+}
 //////////////////////////////////
 //         Member Class         //
 //////////////////////////////////
 
-Member::Member() {
+Member::Member(): Person() {
 
 }
 Member::~Member() {
@@ -294,23 +305,14 @@ void Member::Edit(Member& to_copy){
   hash_value = to_copy.ID::get_hash();
 }
 
+int Member::report() {
 
+}
 
 //////////////////////////////////
 //         Service Class        //
 //////////////////////////////////
 
-Service::Service() {
-  svcName = "";
-  svcFee_dollars = 0;
-  svcFee_cents = 0;
-}
-
-Service::~Service() {
-  svcName = "";
-  svcFee_dollars = 0;
-  svcFee_cents = 0;
-}
 
 Service::Service(Service & to_copy){
   left = NULL;
@@ -320,6 +322,15 @@ Service::Service(Service & to_copy){
   svcFee_dollars = to_copy.svcFee_dollars;
   svcFee_cents = to_copy.svcFee_cents;
 }
+
+Service::Service(): ID() {
+	svcName = "";
+}
+
+Service::~Service() {
+	svcName = "";
+}
+
 //////////////////////////////////
 //         Record Class         //
 //////////////////////////////////
@@ -344,7 +355,6 @@ int Record::get_file_address(std::string & copy){
   }
 }
 
-
 void Record::set_next(Record*& ptr) {
   next = ptr;
 }
@@ -363,57 +373,114 @@ int Record::remove(std::string address) {
   return -1;
 }
 
+
 //////////////////////////////////
-//     Provider_record Class    //
+//         Account Class        //
 //////////////////////////////////
-Provider_record::Provider_record() {
 
-  memberName = "";
-  memberNum = "";
-  svcCode = "";
-  feeOwed_dollars = 0;
-  feeOwed_cents = 0;
-  currDate = "";
-  currTime = "";
-  svcDate = "";
-}
-Provider_record::~Provider_record() {
 
-  memberName = "";
-  memberNum = "";
-  svcCode = "";
-  feeOwed_dollars = 0;
-  feeOwed_cents = 0;
-  currDate = "";
-  currTime = "";
-  svcDate = "";
 
+Account::Account() {
+	dollar = 0;
+	cent = 0;
 }
 
-//////////////////////////////////
-//     Member_record Class    //
-//////////////////////////////////
-Member_record::Member_record() {
-
-  name = "";
-  number = "";
-  address = "";
-  city = "";
-  state = "";
-  zip = 0;
-  currDate = "";
-  currTime = "";
-  svcDate = "";
+Account::Account(int dol, int cen) {
+	dollar = dol;
+	cent = cen;
 }
-Member_record::~Member_record() {
-  name = "";
-  number = "";
-  address = "";
-  city = "";
-  state = "";
-  zip = 0;
-  currDate = "";
-  currTime = "";
-  svcDate = "";
 
+Account::Account(const Account& obj) {
+	dollar = obj.dollar;
+	cent = obj.cent;
+}
+Account::~Account() {
+	dollar = 0;
+	cent = 0;
+}
+
+
+void Account::add(int dol, int cen) {
+	dollar += dol;
+	if ((cent + cen) < 100) cent += cen;
+	else {
+		dollar++;
+		cent = (cent + cen - 100);
+	}
+}
+
+
+void Account::subtract(int dol, int cen) {
+	dollar -= dol;
+	if ((cent - cen) >= 0) cent -= cen;
+	else {
+		dollar--;
+		cent = (cent - cen + 100);
+	}
+}
+
+bool Account::good_standing() {
+	if ((dollar > 0) || ((dollar == 0) && (cent >= 0))) return true;
+	else return false;
+}
+
+Account& Account::operator = (const Account& a) {
+	if (this == &a) return *this;
+	this->dollar = dollar;
+	this->cent = cent;
+	return *this;
+}
+Account& Account::operator += (const Account& a) {
+	this->dollar += a.dollar;
+	this->cent += a.cent;
+	return *this;
+}
+
+Account& Account::operator -= (const Account& a) {
+	this->dollar -= a.dollar;
+	this->cent -= a.cent;
+	return *this;
+}
+
+Account Account::operator + (const Account& a) const {
+	Account sum;
+	sum.dollar = dollar + a.dollar;
+	sum.cent = cent + a.cent;
+	return sum;
+}
+
+Account Account::operator - (const Account& a) const {
+	Account diff;
+	diff.dollar = dollar - a.dollar;
+	diff.cent = cent - a.cent;
+	return diff;
+}
+
+bool Account::operator == (const Account& a)const {
+	if ((dollar == a.dollar) && (cent == a.cent)) return true;
+	else return false;
+}
+bool Account::operator != (const Account& a)const {
+	if ((dollar == a.dollar) && (cent == a.cent)) return false;
+	else return true;
+}
+bool Account::operator < (const Account& a)const {
+	if (dollar < a.dollar) return true;
+	else if ((dollar == a.dollar) && (cent < a.cent)) return true;
+	else return false;
+}
+bool Account::operator > (const Account& a)const {
+	if (dollar > a.dollar) return true;
+	else if ((dollar == a.dollar) && (cent > a.cent)) return true;
+	else return false;
+}
+bool Account::operator <= (const Account& a)const {
+	if (dollar < a.dollar) return true;
+	else if ((dollar == a.dollar) && (cent <= a.cent)) return true;
+	else return false;
+}
+bool Account::operator >= (const Account& a)const {
+	if (dollar > a.dollar) return true;
+	else if ((dollar == a.dollar) && (cent >= a.cent)) return true;
+	else return false;
 }

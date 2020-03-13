@@ -1,6 +1,7 @@
 // File contains prototypes pertaining to the Binary Search Tree
 
 #include "user_service_obj.h"
+#include <fstream>
 #pragma once
 
 class BST{
@@ -38,5 +39,6 @@ private:
   bool RemoveFromBST(ID *& root, Provider & to_remove);
   bool RemoveFromBST(ID *& root, Member & to_remove);
 
+	void destroy(ID*& root);
 	ID * root;
 };

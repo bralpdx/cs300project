@@ -6,53 +6,47 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <cstring>
+#include <ctime>
+
 //Abstract Base Class
 class Record{
 public:
 	Record();
 	~Record();
 	Record *& go_next();
-	int get_file_address(std::string& copy);
+	int get_file_address(std::string & copy);
 	void set_next(Record*& ptr);
 	int add(std::string address);
 	int remove(std::string address);
-	private:
+private:
 	std::string file_address;
 	Record * next;
 };
 
-//Provider record derived from Record
-class Provider_record : public Record {
-public: 
-	Provider_record();
-	~Provider_record();
-protected:
-	std::string memberName;
-	std::string memberNum;
-	std::string svcCode;
-	int feeOwed_dollars;    //Using two ints is more exact than float
-	int feeOwed_cents;
-	std::string currDate;	//MM-DD-YYYY
-	std::string currTime;	//HH:MM:SS
-	std::string svcDate;	//MM-DD-YYYY
-};
 
-//Member record derived from Records
-class Member_record : public Record {
-public: 
-	Member_record();
-	~Member_record();
-protected:
-	std::string name;
-	std::string number;
-	std::string address;
-	std::string city;
-	std::string state;
-	int zip;
-	std::string currDate;	//MM-DD-YYYY
-	std::string currTime;	//HH:MM:SS
-	std::string svcDate;	//MM-DD-YYYY
+class Account {
+public:
+	Account();
+	Account(int dol, int cen);
+	Account(const Account& obj);
+	~Account();
+	void add(int dol, int cen);
+	void subtract(int dol, int cen);
+	bool good_standing();
+	Account& operator = (const Account&);
+	Account& operator += (const Account&);
+	Account& operator -= (const Account&);
+	Account operator + (const Account&)const; 
+	Account operator - (const Account&)const;
+	bool operator == (const Account&)const;
+	bool operator != (const Account&)const;
+	bool operator < (const Account&)const;
+	bool operator > (const Account&)const;
+	bool operator <= (const Account&)const;
+	bool operator >= (const Account&)const;
+private:
+	int dollar;
+	int cent;
 };
 
 // Abstract Base Class (ID numbers)
@@ -67,6 +61,7 @@ public:
   virtual void Display();
   virtual void Edit(class Provider&);
   virtual void Edit(class Member&);
+
 protected:
 	ID *left;
 	ID *right;
@@ -82,8 +77,7 @@ public:
   Service(Service & to_copy);
 protected:
 	std::string svcName;
-	int svcFee_dollars;
-	int svcFee_cents;
+	Account service_fee;
 };
 
 // Person class derived from ID
@@ -91,9 +85,10 @@ class Person : public ID {
 public:
 	Person();
 	~Person();
-	int add_record(Record *&to_add);
+	int add_record(Record *& to_add);
 	int remove_record(std::string to_remove);
-protected:
+	virtual int report();
+private:
 	int remove_record(std::string to_remove, Record*& head);
 	void destroy(Record*& head);
 	Record * head;
@@ -113,6 +108,7 @@ public:
   Provider(Provider & to_copy);
   void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value);
   void Display();
+	int report();
 protected:
   void Edit(Provider&);
 
@@ -127,8 +123,11 @@ public:
   Member(Member & to_copy);
   void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value); 
   void Display();
-
+  int report();
 
 protected:
   void Edit(Member&);
+
+private:
+	Account member_account;
 };

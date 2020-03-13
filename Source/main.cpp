@@ -2,80 +2,169 @@
 #include "utilities.h"
 #include "bst.h"
 #include <iostream>
-using namespace std;
+
+
 int main() {
-	//pre_hash_id(); // See utilities.h for desc
-  BST member_tree;
-  BST provider_tree;
-  string name = "andrew bonham";
-  string address = "200 s the place dr";
-  string city = "oregon city";
-  string state = "oregon";
-  int zip = 9999;
-  string hash = "123456";
-  Provider to_add;
-  to_add.Insert(name, address, city, state, zip, hash);
-  //to_add.Display();
-  if(provider_tree.AddToBST(to_add))
-    cout << "\n\nSuccessfully added!\n";
-  name = "joe blow";
-  address = "portland buttvew";
-  city = "portland";
-  state = "oregon";
-  zip = 55555;
-  hash = "987654";
-  to_add.Insert(name, address, city, state, zip, hash);
-  //to_add.Display();
-  if(provider_tree.AddToBST(to_add))
-    cout << "\n\nSuccessfully added!\n";
-  Member AddMember;
-  name = "nogoe";
-  address = "fdaklfjdka";
-  city = "fjekla;jfea";
-  state = "SAFJKLDFS";
-  zip = 12345;
-  hash = "119999";
-  to_add.Insert(name, address, city, state, zip, hash);
+	pre_hash_id(); // See utilities.h for desc
+	BST service_bst("svc_codes.txt", 3);
+	BST provider_bst("user_info.txt", 1);
+	BST member_bst("", 2);
 
-  AddMember.Insert(name, address, city, state, zip, hash);
-  if(provider_tree.AddToBST(to_add))
-    cout << "\n\nSuccessfully added!\n";
+	char again;
+	char option;
 
-  if(provider_tree.AddToBST(AddMember))
-    cout << "\n\nSuccessfully added!\n";
-  cout << "\n\nThere are " << provider_tree.CountRight() << " nodes on the right side!\n";
-  provider_tree.Display();
+	std::cout << "What terminal would you like to access?\n\n";
+
+	do {
+		std::cout << "a) Provider Terminal\n";
+		std::cout << "b) Manager Terminal\n";
+		std::cout << "c) Operator Terminal\n";
+		std::cout << "d) Display Read in Data\n";
+
+		std::cin >> option;
+		option = tolower(option);
+		
+		//Provider Terminal
+		if (option == 'a') {
+			do {
+				std::cout << "=======================\n";
+				std::cout << "== Welcome to ChocAn ==\n";
+				std::cout << "=======================\n\n";
 
 
+				std::cout << "a) Validate Member\n";
+				std::cout << "b) Bill Member\n";
+				std::cout << "c) Display Services\n";
+				std::cout << "x) Logout\n";
 
+				std::cin >> option;
+				option = tolower(option);
 
-  cout << "\n\nNow to attempt to edit a node\n";
-  name = "nogoe Joe";
-  address = "Big Butt Drive";
-  city = "The hot Spot";
-  state = "Oregon";
-  zip = 97045;
-  to_add.Display();
-  to_add.Insert(name, address, city, state, zip, hash);
+				//Validate member
+				if (option == 'a') {
 
-  to_add.Display();
-  if(provider_tree.EditBST(to_add))
-    cout << "\n\nSuccessfully Edited!\n";
-  provider_tree.Display();
+				}
+
+				//Bill member
+				if (option == 'b') {
+
+				}
+
+				//display Services
+				if (option == 'c') {
+
+				}
+
+			} while (option != 'x');
+		}
+
+		//Manager Terminal
+		if (option == 'b') {
+			do {
+
+				std::cout << "a) Member Report\n";
+				std::cout << "b) Provider Report\n";
+				std::cout << "x) Logout\n";
+
+				std::cin >> option;
+				option = tolower(option);
+
+				//Member Report
+				if (option == 'a') {
+
+				}
+
+				//Provider Report
+				if (option == 'b') {
+
+				}
+
+			} while (option != 'x');
+		}
+
+		//Operator Terminal
+		if (option == 'c') {
+			do {
+				std::cout << "a) Add Member\n";
+				std::cout << "b) Remove Member\n";
+				std::cout << "c) Edit Member\n";
+				std::cout << "d) Add Provider\n";
+				std::cout << "e) Remove Provider\n";
+				std::cout << "f) Edit Provider\n";
+				std::cout << "g) Add Service\n";
+				std::cout << "h) Remove Service\n";
+				std::cout << "i) Edit Service\n";
+				std::cout << "x) logout\n";
+
+				std::cin >> option;
+				option = tolower(option);
+
+				//Add Member
+				if (option == 'a') {
+
+				}
+
+				//Remove Member
+				if (option == 'b') {
+
+				}
+
+				//Edit Member
+				if (option == 'c') {
+
+				}
+
+				//Add Provider
+				if (option == 'd') {
+
+				}
+
+				//Remove Provider
+				if (option == 'e') {
+
+				}
+
+				//Edit Provider
+				if (option == 'f') {
+
+				}
+
+				//Add Service
+				if (option == 'g') {
+
+				}
+
+				//Remove Service
+				if (option == 'h') {
+
+				}
+
+				//Edit Service
+				if (option == 'i') {
+
+				}
+
+			} while (option != 'x');
+		}
+
+		//dispay read in data from text file
+		if (option == 'd') {
+
+		}
+
+		std::cout << "Access another terminal? (y/n) \n";
+		std::cin >> again;
+		again = tolower(again);
+	} while (again == 'y');
+
 
 
 /*
-	std::cout << "=======================\n"; 
-	std::cout << "== Welcome to ChocAn ==\n";
-	std::cout << "=======================\n";
-	
-	BST service_bst("svc_codes.txt",3);
-	BST provider_bst("user_info.txt",1);
-	BST member_bst("",2);
-
 	if(sign_in_prompt() == RETURN_FAILURE)
 		std::cout << "ERROR SIGNING IN.\n";
 
-	std::cin.get();*/
+	std::cin.get();
 	return RETURN_SUCCESS;
+	*/
+	return 0;
 }
