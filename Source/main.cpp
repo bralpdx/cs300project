@@ -27,6 +27,8 @@ int main() {
 		std::cin >> option;
 		option = tolower(option);
 		*/
+
+		//Enter ID number
 		terminal_rc = sign_in_prompt();
 
 		//Provider Terminal
@@ -47,8 +49,10 @@ int main() {
 
 				//Validate member
 				if (option == 'a') {
-
+					if(sign_in_prompt(member_bst) < 0)
+						std::cout << "Member ID Invalid\n";
 				}
+
 
 				//Bill member
 				if (option == 'b') {
@@ -161,7 +165,7 @@ int main() {
 		std::cout << "Access another terminal? (y/n) \n";
 		std::cin >> again;
 		again = tolower(again);
-	} while (again == 'y');
+	} while (again == 'y' || terminal_rc == RETURN_FAILURE);
 
 
 

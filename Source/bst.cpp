@@ -402,6 +402,81 @@ bool BST::RemoveFromBST(ID *& root, Member &  to_remove){
   }
 }
 
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//          VerifyFromBST Function
+//
+//INPUT: String id by value and int type by value
+//
+//OUTPUT: Returns int -- 1 if found and validated/ 0 if found and 
+//        member suspended/ -1 if invalid number
+//
+//DESC: Public wrapper function. Verifies that an ID is present 
+//      in the appropriate tree of data. Then calls the below recursive 
+//      private function.
+//
+int BST::VerifyFromBST(std::string id, int type){
+  if(root == NULL){
+    return -1;
+  }
+  else{
+    ID * temp;
+    // Provider
+    if(type == 1)
+      temp = dynamic_cast<Provider*>(this->root);
+
+    // Member
+    if(type == 2)
+      temp = dynamic_cast<Member*>(this->root);
+
+    if(temp){
+      return VerifyFromBST(this->root, id, type);
+    }
+    return -1;
+  }
+}
+
+
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//          VerifyFromBST Function
+//
+//INPUT: String id by value and int type by value
+//
+//OUTPUT: Returns int -- 1 if found and validated/ 0 if found and 
+//        member suspended/ -1 if invalid number
+//
+//DESC: Private recursive function called in the above function. 
+//      Verifies that an ID is present in the appropriate tree of data
+//      by searching for a matching hash_value by comparing the root's
+//      data and string id. Recursively searches. When found, int type 
+//      is used to distinguish between a Provider and a Member. Members
+//      will have their standing checked by calling a Member method that
+//      returns a bool.
+//      
+//
+int BST::VerifyFromBST(ID & root, std::string id, int type){
+  //stopping condition
+  if(!root)
+      return -1;
+
+  if(root->ID::hash_value == id){
+    if(type == 1)
+      return 1;
+
+    if(type == 2) {
+      if(root->member_account.good_standing())
+        return 1;
+      else
+        return 0;
+    }
+  }
+  else{
+    if(root->ID::hash_value > id) 
+      return VerifyFromBST(root->go_left(), id, type);
+    else
+      return VerifyFromBST(root->go_right(), id, type);
+  }
+}
+
 
 
 /* ========================================================================== */
