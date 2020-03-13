@@ -61,7 +61,7 @@ int ID::compare(std::string to_compare) {
 	else if (size1 > size2) return 100000;
 	else if (size1 < size2) return -100000;
 	else {
-		multiplier = multiplier / (size1 * 16);
+		multiplier = multiplier / ((6-size1) * 16);
 		for (int i = 0; i < size1; i++) {
 			if ((this->hash_value[i] > 47) && (this->hash_value[i] < 58)) {
 				result1 += multiplier * (hash_value[i] - 48);
