@@ -7,6 +7,7 @@
 #include <fstream>
 #include <string>
 #include <ctime>
+#include <sys/stat.h>
 
 //Abstract Base Class
 class Record{
@@ -89,6 +90,7 @@ private:
 	int remove_record(std::string to_remove, Record*& head);
 	void destroy(Record*& head);
 	Record * head;
+protected:
 	std::string name;		//25 characters
 	std::string address;	//25 characters
 	std::string city;		//14 characters

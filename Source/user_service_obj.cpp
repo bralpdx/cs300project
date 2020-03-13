@@ -1,5 +1,11 @@
+#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_DEPRECATE
 #include "user_service_obj.h"
 #include <string>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <Windows.h>
+
 
 //////////////////////////////////
 //        ID Base Class         //
@@ -50,7 +56,10 @@ Person::~Person() {
 	zip = 0;
 }
 
-int Person::report(){}
+int Person::report() {
+
+}
+
 
 int Person::add_record(Record *& to_add) {
 	if (!head) {
@@ -108,7 +117,23 @@ Provider::~Provider() {
 }
 
 int Provider::report() {
+	/* NONSENSE Pure and simple
 
+	int check;
+	time_t now = time(0);
+	std::string dt = ctime(&now);
+	char dir[12];
+	for (int i = 0; i < 11; i++) {
+		if (i < 3) dir[i] = dt[i + 4];
+		else if ((i > 3) && (i < 6)) dir[i] = dt[i + 8];
+		else if (i > 6) dir[i] = dt[i + 20];
+		else dir[i] = '-';
+	}
+	dir[11] = '\0';
+	check = CreateDirectoryA(dir, NULL);
+
+	Person::report();
+	*/
 
 }
 
@@ -124,6 +149,30 @@ Member::~Member() {
 }
 
 int Member::report() {
+	Dword buffsize = GetCurrentDirectoryA(0, NULL);
+	int check;
+	time_t now = time(0);
+	std::string dt = ctime(&now);
+	std::string date;
+	std::string filename;
+	std::string text = ".txt";
+
+	date.append(dt, 4, 3);
+	date.append("-");
+	date.append(dt, 8, 2);
+	date.append("-");
+	date.append(dt, 20, 4);
+
+	check = CreateDirectoryA(date, NULL);
+
+	check = GetCurrentDirectoryA(buffsize, filename);
+
+	filename.append(this->name);
+	filename.append(date);
+	filename.append(text);
+
+	check = CreateFile(filename, (GENERIC_READ | GENERIC_WRITE), (FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE), TRUNCATE_EXISTING);
+
 
 }
 
