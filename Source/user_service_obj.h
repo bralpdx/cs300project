@@ -84,15 +84,14 @@ public:
 	Service();
 	Service(const Service & obj);
 	~Service();
-  Service(Service & to_copy);
-  void Display();
-
+	Service(Service & to_copy);
+	void Display();
 	void SvcRead();
 	int get_service(std::string& to_copy);
 	int get_num();
 	int print_alpha();
 protected:
-  void CopyData(Service&);
+	void CopyData(Service&);
 	std::string svcName;
 	std::string svcProvider;
 	int service_num;

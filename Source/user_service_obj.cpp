@@ -877,6 +877,7 @@ int Service::quick_sort(Service *& array, int lo, int hi) {
 	int count = 0;
 	std::string key;
 	Service key_data;
+	array[lo].CopyData(key_data);
 	//hold on to copy key data								key_data = array[lo]
 	array[lo].get_service(key);
 
@@ -892,11 +893,18 @@ int Service::quick_sort(Service *& array, int lo, int hi) {
 			//function copy data from array[i] into swap:	swap = array[i]
 			//same func copy array[j] into array[i]:		array[i] = array[j]
 			//same func copy swap into array[j]				array[j] = array[i]
+			array[i].CopyData(swap);
+			array[j].CopyData(array[i]);
+			array[i].CopyData(array[j]);
+
 		}
 	}
 	//place the key
 	//function to copy data from array[j] into array[lo]	array[lo] = array[j]
 	//function to copy data from key into array[j]			array[j] = key_data	
+	array[j].CopyData(array[lo]);
+	key_data.CopyData(array[j]);
+
 
 	count = quick_sort(array, lo, j - 1) + quick_sort(array, j + 1, hi) + 1;
 	return count;
