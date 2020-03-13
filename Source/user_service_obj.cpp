@@ -46,18 +46,20 @@ int ID::compare(std::string to_compare) {
 
 	if ((size1 > 5) && (size2 > 5)) {
 		for (int i = 0; i < 6; i++) {
-			if ((this->hash_value[i] > 47) && (this->hash_value[i] < 58)) {
-				result1 += multiplier * (hash_value[i] - 48);
+			char a = hash_value[i];
+			char b = to_compare[i];
+			if ((a > 47) && (a < 58)) {
+				result1 += multiplier * (a - 48);
 			}
-			else if ((this->hash_value[i] > 96) && (this->hash_value[i] < 103)) {
-				result1 += multiplier * (hash_value[i] - 86);
+			else if ((a > 96) && (a < 103)) {
+				result1 += multiplier * (a - 86);
 			}
 
-			if ((to_compare[i] > 47) && (to_compare[i] < 58)) {
-				result2 += multiplier * (to_compare[i] - 48);
+			if ((b > 47) && (b < 58)) {
+				result2 += multiplier * (b - 48);
 			}
-			else if ((to_compare[i] > 96) && (to_compare[i] < 103)) {
-				result2 += multiplier * (to_compare[i] - 86);
+			else if ((b > 96) && (b < 103)) {
+				result2 += multiplier * (b - 86);
 			}
 			multiplier = multiplier / 16;
 		}
@@ -68,18 +70,20 @@ int ID::compare(std::string to_compare) {
 	else {
 		multiplier = multiplier / ((6-size1) * 16);
 		for (int i = 0; i < size1; i++) {
-			if ((this->hash_value[i] > 47) && (this->hash_value[i] < 58)) {
-				result1 += multiplier * (hash_value[i] - 48);
+			char a = hash_value[i];
+			char b = to_compare[i];
+			if ((a > 47) && (a < 58)) {
+				result1 += multiplier * (a - 48);
 			}
-			else if ((this->hash_value[i] > 96) && (this->hash_value[i] < 103)) {
-				result1 += multiplier * (hash_value[i] - 86);
+			else if ((a > 96) && (a < 103)) {
+				result1 += multiplier * (a - 86);
 			}
 
-			if ((to_compare[i] > 47) && (to_compare[i] < 58)) {
-				result2 += multiplier * (to_compare[i] - 48);
+			if ((b > 47) && (b < 58)) {
+				result2 += multiplier * (b - 48);
 			}
-			else if ((to_compare[i] > 96) && (to_compare[i] < 103)) {
-				result2 += multiplier * (to_compare[i] - 86);
+			else if ((b > 96) && (b < 103)) {
+				result2 += multiplier * (b - 86);
 			}
 			multiplier = multiplier / 16;
 		}
@@ -224,12 +228,13 @@ int Person::get_filenames(Record* head, char** array, int i) {
 	int success = 0;
 	if (!head) return success;
 	std::string temp;
+	int size = temp.length();
 	head->get_file_address(temp);
-	array[i] = new char[temp.length() + 1];
-	for (int j = 0; j < temp.length(); ++j) {
+	array[i] = new char[size + 1];
+	for (int j = 0; j < size; ++j) {
 		array[i][j] = temp[j];
 	}
-	array[i][temp.length()] = '\0';
+	array[i][size] = '\0';
 	success = get_filenames(head->go_next(), array, ++i) + 1;
 	return success;
 }
@@ -873,14 +878,14 @@ int Service::quick_sort(Service *& array, int lo, int hi) {
 	std::string key;
 	Service key_data;
 	//hold on to copy key data								key_data = array[lo]
-	array[lo]->get_service(key);
+	array[lo].get_service(key);
 
 	int j = hi;
 	int i = lo + 1;
 	while (i <= j) {
 		std::string temp;
-		array[i]->get_service(temp);
-		if (key.compare(temp)> 0)) i++; //advance the left finger
+		array[i].get_service(temp);
+		if (key.compare(temp)> 0) i++; //advance the left finger
 		else if (key.compare(temp) <=0) j--; // advance the right finger
 		else { //swap data
 			Service swap;

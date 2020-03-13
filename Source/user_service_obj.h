@@ -63,20 +63,14 @@ public:
 	ID *& go_right();
 	int compare(std::string to_compare);
 	bool is_leaf();
-
-  std::string get_hash();
-  virtual void Display();
-  virtual void Edit(class Provider&);
-  virtual void Edit(class Member&);
-  virtual void CopyData(class Provider&);
-  virtual void CopyData(class Member&);
-  virtual void CopyData(class Service&);
-
 	std::string get_hash();
-
+	virtual void Display();
+	virtual void Edit(class Provider&);
+	virtual void Edit(class Member&);
+	virtual void CopyData(class Provider&);
+	virtual void CopyData(class Member&);
+	virtual void CopyData(class Service&);
 	virtual bool good_standing();
-
-
 protected:
 	ID *left;
 	ID *right;
@@ -142,22 +136,16 @@ public:
 	Provider();
 	Provider(const Provider& obj);
 	~Provider();
-
-  Provider(ID *& to_copy);
-  Provider(Provider & to_copy);
-  void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value);
-  void Display();
+	Provider(ID *& to_copy);
+	Provider(Provider & to_copy);
+	void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value);
+	void Display();
 	int report(); 
-protected:
-  void Edit(Provider&);
-  void CopyData(Provider&);
-
-	int report();
 	void Read();
-	void Edit(Provider&);
 protected:
+	void Edit(Provider&);
+	void CopyData(Provider&);
 	int provider_number;
-
 };
 
 // Member class derived from Person
