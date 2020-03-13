@@ -18,15 +18,6 @@ int main() {
 	std::cout << "What terminal would you like to access?\n\n";
 
 	do {
-		/*
-		std::cout << "a) Provider Terminal\n";
-		std::cout << "b) Manager Terminal\n";
-		std::cout << "c) Operator Terminal\n";
-		std::cout << "d) Display Read in Data\n";
-		
-		std::cin >> option;
-		option = tolower(option);
-		*/
 		terminal_rc = sign_in_prompt();
 
 		//Provider Terminal
@@ -163,14 +154,5 @@ int main() {
 		again = tolower(again);
 	} while (again == 'y');
 
-
-
-/*
-	if(sign_in_prompt() == RETURN_FAILURE)
-		std::cout << "ERROR SIGNING IN.\n";
-
-	std::cin.get();
-	return RETURN_SUCCESS;
-	*/
 	return 0;
 }
