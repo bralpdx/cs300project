@@ -196,24 +196,75 @@ Provider::~Provider() {
 }
 
 int Provider::report() {
-	/* NONSENSE Pure and simple
-
+	using namespace std;
+	int num;
 	int check;
+	streamsize size = 100;
+	ofstream file_in;
 	time_t now = time(0);
-	std::string dt = ctime(&now);
-	char dir[12];
-	for (int i = 0; i < 11; i++) {
-		if (i < 3) dir[i] = dt[i + 4];
-		else if ((i > 3) && (i < 6)) dir[i] = dt[i + 8];
-		else if (i > 6) dir[i] = dt[i + 20];
-		else dir[i] = '-';
+	string dt = ctime(&now);
+	string date;
+	string filename;
+	string text = ".txt";
+
+	date.append(dt, 4, 3);
+	date.append("-");
+	date.append(dt, 8, 2);
+	date.append("-");
+	date.append(dt, 20, 4);
+
+	filename.append(this->name);
+	filename.append(date);
+	filename.append(text);
+
+	file_in.open(filename);
+
+	if (!file_in) return -1;
+
+	file_in << this->name;
+	file_in << "\n";
+	file_in << this->provider_number;
+	file_in << "\n";
+	file_in << this->address;
+	file_in << "\n";
+	file_in << this->city;
+	file_in << "\n";
+	file_in << this->state;
+	file_in << "\n";
+	file_in << this->zip;
+	file_in << "\n";
+
+	num = num_records();
+	char** array = new char* [num];
+	check = get_filenames(array);
+	char text[100];
+	char* text2 = new char[100];
+	char* text3 = new char[1000];
+	char delim = '&';
+	/*const int SIZE = 100;
+	char s[SIZE];*/
+
+
+	for (int i = 0; i < check; ++i) {
+		ifstream file_out;
+		file_out.open(array[i]);
+		if (!file_out) return -1 - i;
+		file_out.get(text3, 1000, '#');
+		file_out.ignore(size, '#');
+		do {
+			//file_out.get(&s[0], SIZE, '&'); if doesn't work try this
+			file_out.get(text2, size, delim);
+			file_out.ignore(size, '&');
+			file_out.get();
+			file_in << text2;
+			file_in << "\n";
+		} while (!file_out.eof());
+		file_out.close();
 	}
-	dir[11] = '\0';
-	check = CreateDirectoryA(dir, NULL);
 
-	Person::report();
-	*/
+	file_in.close();
 
+	return check;
 }
 
 //////////////////////////////////
@@ -280,9 +331,8 @@ int Member::report() {
 		do {
 			file_out.get(text2, size, delim);
 			file_out.ignore(size, '&');
-			file_out.get(text2, size, delim);
-			file_out.ignore(size, '&');
 			file_out.get();
+			if (strcmp(text2, "STOP")) break;
 			file_in << text2;
 			file_in << "\n";
 		} while (!file_out.eof());

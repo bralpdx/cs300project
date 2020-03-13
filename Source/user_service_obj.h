@@ -111,6 +111,7 @@ public:
 	~Provider();
 	int report();
 protected:
+	int provider_number;
 };
 
 // Member class derived from Person
@@ -122,5 +123,5 @@ public:
 	int report();
 private:
 	Account member_account;
-	int member_number			//9-digit
+	int member_number;			//9-digit
 };
