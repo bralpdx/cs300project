@@ -19,17 +19,23 @@ public:
 
   bool RemoveFromBST(Provider & to_remove);
   bool RemoveFromBST(Member & to_remove);
+  
+  bool CopyFromBST(std::string & to_find, Provider & copy_to);
+  bool CopyFromBST(std::string & to_find, Member & copy_to);
+  bool CopyFromBST(std::string & to_find, Service & copy_to);
 
+
+  int CountTree();
   int VerifyFromBST(std::string id, int type);
-
   void Display(); // displays everything
-  int CountRight();
+  bool Search(ID & to_search); // search for a specific hash value in the tree
 
 private:
 
-  int CountRight(ID* root); // counts all data on the right
+  int CountTree(ID* root); // counts all data on the right 
   void Display(ID * root); // recursive display all
 	void destroy(ID*& root); // called in the destructor; destroys all
+  bool Search(ID * root, ID & to_search);
 
   bool AddToBST(ID *& root, Provider & to_add); // recursive private function; for add
   bool AddToBST(ID *& root, Member & to_add); // recursive private function; for add
@@ -41,8 +47,15 @@ private:
   bool RemoveFromBST(ID *& root, Provider & to_remove);
   bool RemoveFromBST(ID *& root, Member & to_remove);
 
+
+  bool CopyFromBST(ID * root, std::string & to_find, Provider & copy_to);
+  bool CopyFromBST(ID * root, std::string & to_find, Member & copy_to);
+  bool CopyFromBST(ID * root, std::string & to_find, Service & copy_to);
+
+  bool FindInOrderSuccessor(ID *& root, ID *& to_get); // called in the removal function.
+
+
   int VerifyFromBST(ID * root, std::string id, int type);
 
-	//void destroy(ID*& root);
 	ID * root;
 };
