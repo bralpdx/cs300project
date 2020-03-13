@@ -197,6 +197,12 @@ int Person::remove_record(std::string to_remove, Record *& head) {
 	return success;
 }
 
+int Person::get_name(std::string & to_copy) {
+	if (!name.compare("")) return 0;
+	to_copy = name;
+	return 1;
+}
+
 int Person::num_records() {
 	return num_records(head);
 }
@@ -406,10 +412,10 @@ void Provider::Edit(Provider& to_copy){
   state = to_copy.state;
   zip = to_copy.zip;
 }
-
+/*
 int Provider::report() {
 	return 0;
-}
+}*/
 //////////////////////////////////
 //         Member Class         //
 //////////////////////////////////
@@ -517,7 +523,7 @@ void Member::Read(){
 	Person::Read();
 }
 
-int Member::Write_report(std::string filename) {
+int Member::Write_report(std::string filename, Provider & obj1, Service & obj2) {
 	std::ofstream file_in;
 	time_t now = time(0);
 	struct tm* timeinfo;
@@ -548,9 +554,46 @@ int Member::Write_report(std::string filename) {
 	}
 	time[8] = '\0';
 
+	std::string provider_name;
+	std::string service_name;
+	obj1.get_name(provider_name);
+	obj2.get_service(service_name);
+	int dol, cen;
+	int serv_num = obj2.get_num();
+	member_account(dol, cen);
+
 	file_in.open(filename);
 	if (!file_in) return -1;
 
+	file_in << '&';
+	file_in << today;
+	file_in << '&';
+	file_in << provider_name;
+	file_in << '&';
+	file_in << service_name;
+	file_in << '&STOP&#\n';
+	file_in << '&';
+	file_in << today; //should be the date service recieved
+	file_in << '&';
+	file_in << today;
+	file_in << ' ';
+	file_in << time;
+	file_in << '&';
+	file_in << this->name;
+	file_in << '&';
+	file_in << this->member_number;
+	file_in << '&';
+	file_in << serv_num;
+	file_in << '&';
+	file_in << dol;
+	file_in << '&';
+	file_in << cen;
+	file_in << '&';
+
+	
+	file_in.close();
+
+	return 1;
 }
 
 /* = = = = = = = = = = = = = = = = = = = = = = */
@@ -614,9 +657,11 @@ void Member::Edit(Member& to_copy){
   hash_value = to_copy.ID::get_hash();
 }
 
+/*
 int Member::report() {
 	return 0;
 }
+*/
 
 bool Member::good_standing(){
 	return member_account.good_standing();
@@ -714,6 +759,17 @@ void Service::SvcRead(){
 
 	service_fee.svcFee();
 
+}
+
+
+int Service::get_service(std::string& to_copy) {
+	if (!svcName.compare("")) return 0;
+	to_copy = svcName;
+	return 1;
+}
+
+int Service::get_num() {
+	return service_num;
 }
 
 //////////////////////////////////
@@ -830,6 +886,12 @@ void Account::svcFee(){
 
 	std::cin.clear();
 	std::cin.ignore(MAX_CHAR, '\n');
+}
+
+void Account::get_balance(int& dol, int& cen) {
+	dol = dollar;
+	cen = cents;
+	return;
 }
 
 Account& Account::operator = (const Account& a) {
