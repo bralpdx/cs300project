@@ -24,7 +24,7 @@ public:
   bool CopyFromBST(std::string & to_find, Member & copy_to);
   bool CopyFromBST(std::string & to_find, Service & copy_to);
 
-
+  int print_alpha();
   int CountTree();
   int VerifyFromBST(std::string id, int type);
   void Display(); // displays everything

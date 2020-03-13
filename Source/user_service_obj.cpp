@@ -866,12 +866,6 @@ int Service::get_num() {
 }
 
 
-int Service::print_alpha() {
-	//Service array[]
-	return 0;
-}
-
-
 int Service::quick_sort(Service *& array, int lo, int hi) {
 	if (hi <= lo) return 0;
 	int count = 0;

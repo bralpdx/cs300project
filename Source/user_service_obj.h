@@ -89,7 +89,7 @@ public:
 	void SvcRead();
 	int get_service(std::string& to_copy);
 	int get_num();
-	int print_alpha();
+	int quick_sort(Service*& array, int lo, int hi);
 protected:
 	void CopyData(Service&);
 	std::string svcName;
@@ -97,7 +97,7 @@ protected:
 	int service_num;
 	Account service_fee;
 private:
-	int quick_sort(Service *& array, int lo, int hi);
+
 };
 
 // Person class derived from ID

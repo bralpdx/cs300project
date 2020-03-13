@@ -827,6 +827,21 @@ int BST::CountTree(){
   }
 }
 
+int BST::print_alpha() {
+    ID* temp;
+    temp = dynamic_cast<Service*>(root);
+    if (temp) {
+        int num = CountTree();
+        Service array[num];
+        temp->quick_sort(array, 0, num-1);
+        for (int i = 0; i < num; ++i) {
+            array[i].display();
+        }
+        return num;
+    }
+    else return 0;
+}
+
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //            CountTree Function
 //
