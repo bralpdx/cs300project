@@ -40,8 +40,8 @@ ID *& ID::go_right() {
 int ID::compare(std::string to_compare) {
 	int result1 = 0;
 	int result2 = 0;
-	int size1 = this->hash_value.length;
-	int size2 = to_compare.length;
+	int size1 = this->hash_value.length();
+	int size2 = to_compare.length();
 	int multiplier = 1048576;
 
 	if ((size1 > 5) && (size2 > 5)) {
