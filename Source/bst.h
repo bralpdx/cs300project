@@ -39,6 +39,6 @@ private:
   bool RemoveFromBST(ID *& root, Provider & to_remove);
   bool RemoveFromBST(ID *& root, Member & to_remove);
 
-	void destroy(ID*& root);
+	//void destroy(ID*& root);
 	ID * root;
 };
