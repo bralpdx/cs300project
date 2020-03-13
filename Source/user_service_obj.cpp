@@ -1,8 +1,16 @@
+#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_DEPRECATE
 #include "user_service_obj.h"
 #include "hash-library-master/sha256.h"
 #include "param.h"
 
 #include <string>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <Windows.h>
+#include <stdio.h>
+#include <io.h>
+
 
 //////////////////////////////////
 //        ID Base Class         //
@@ -28,6 +36,57 @@ ID *& ID::go_left() {
 ID *& ID::go_right() {
   return right;
 }
+
+int ID::compare(std::string to_compare) {
+	int result1 = 0;
+	int result2 = 0;
+	int size1 = this->hash_value.length;
+	int size2 = to_compare.length;
+	int multiplier = 1048576;
+
+	if ((size1 > 5) && (size2 > 5)) {
+		for (int i = 0; i < 6; i++) {
+			if ((this->hash_value[i] > 47) && (this->hash_value[i] < 58)) {
+				result1 += multiplier * (hash_value[i] - 48);
+			}
+			else if ((this->hash_value[i] > 96) && (this->hash_value[i] < 103)) {
+				result1 += multiplier * (hash_value[i] - 86);
+			}
+
+			if ((to_compare[i] > 47) && (to_compare[i] < 58)) {
+				result2 += multiplier * (to_compare[i] - 48);
+			}
+			else if ((to_compare[i] > 96) && (to_compare[i] < 103)) {
+				result2 += multiplier * (to_compare[i] - 86);
+			}
+			multiplier = multiplier / 16;
+		}
+		return result1 - result2;
+	}
+	else if (size1 > size2) return 100000;
+	else if (size1 < size2) return -100000;
+	else {
+		multiplier = multiplier / ((6-size1) * 16);
+		for (int i = 0; i < size1; i++) {
+			if ((this->hash_value[i] > 47) && (this->hash_value[i] < 58)) {
+				result1 += multiplier * (hash_value[i] - 48);
+			}
+			else if ((this->hash_value[i] > 96) && (this->hash_value[i] < 103)) {
+				result1 += multiplier * (hash_value[i] - 86);
+			}
+
+			if ((to_compare[i] > 47) && (to_compare[i] < 58)) {
+				result2 += multiplier * (to_compare[i] - 48);
+			}
+			else if ((to_compare[i] > 96) && (to_compare[i] < 103)) {
+				result2 += multiplier * (to_compare[i] - 86);
+			}
+			multiplier = multiplier / 16;
+		}
+		return result1 - result2;
+	}
+}
+
 
 bool ID::is_leaf() {
   if ((!left) && (!right)) return true;
@@ -99,6 +158,10 @@ void Person::Read(){
 		std::cin.ignore(MAX_CHAR, '\n');
 		std::cout << "Enter ID (9-Digits): ";
 	}
+int Person::report() {
+
+}
+
 
 	hash_value = hash(id);
 }
@@ -138,6 +201,32 @@ int Person::remove_record(std::string to_remove, Record *& head) {
 	return success;
 }
 
+int Person::num_records() {
+	return num_records(head);
+}
+
+int Person::get_filenames(char** array) {
+	return get_filenames(head, array, 0);
+}
+
+int Person::num_records(Record * head) {
+	if (!head) return 0;
+	return num_records(head->go_next()) + 1;
+}
+
+int Person::get_filenames(Record* head, char** array, int i) {
+	int success = 0;
+	if (!head) return success;
+	std::string temp;
+	head->get_file_address(temp);
+	array[i] = new char[temp.length() + 1];
+	for (int j = 0; j < temp.length(); ++j) {
+		array[i][j] = temp[j];
+	}
+	array[i][temp.length()] = '\0';
+	success = get_filenames(head->go_next(), array, ++i) + 1;
+	return success;
+}
 
 void Person::destroy(Record*& head) {
 	if (!head) return;
@@ -188,8 +277,76 @@ Provider::Provider(Provider & to_copy) {
 void Provider::Read(){
 	Person::Read();
 }
+int Provider::report() {
+	using namespace std;
+	int num;
+	int check;
+	streamsize size = 100;
+	ofstream file_in;
+	time_t now = time(0);
+	string dt = ctime(&now);
+	string date;
+	string filename;
+	string text = ".txt";
+
+	date.append(dt, 4, 3);
+	date.append("-");
+	date.append(dt, 8, 2);
+	date.append("-");
+	date.append(dt, 20, 4);
+
+	filename.append(this->name);
+	filename.append(date);
+	filename.append(text);
+
+	file_in.open(filename);
+
+	if (!file_in) return -1;
+
+	file_in << this->name;
+	file_in << "\n";
+	file_in << this->provider_number;
+	file_in << "\n";
+	file_in << this->address;
+	file_in << "\n";
+	file_in << this->city;
+	file_in << "\n";
+	file_in << this->state;
+	file_in << "\n";
+	file_in << this->zip;
+	file_in << "\n";
+
+	num = num_records();
+	char** array = new char* [num];
+	check = get_filenames(array);
+	char text[100];
+	char* text2 = new char[100];
+	char* text3 = new char[1000];
+	char delim = '&';
+	/*const int SIZE = 100;
+	char s[SIZE];*/
 
 
+	for (int i = 0; i < check; ++i) {
+		ifstream file_out;
+		file_out.open(array[i]);
+		if (!file_out) return -1 - i;
+		file_out.get(text3, 1000, '#');
+		file_out.ignore(size, '#');
+		do {
+			//file_out.get(&s[0], SIZE, '&'); if doesn't work try this
+			file_out.get(text2, size, delim);
+			file_out.ignore(size, '&');
+			file_out.get();
+			file_in << text2;
+			file_in << "\n";
+		} while (!file_out.eof());
+		file_out.close();
+	}
+
+	file_in.close();
+
+	return check;
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //              Insert Function
 //
@@ -257,10 +414,72 @@ int Provider::report() {
 //////////////////////////////////
 
 Member::Member(): Person() {
-
+	member_number = 0;
 }
 Member::~Member() {
+	member_number = 0;
+}
 
+int Member::report() {
+	using namespace std;
+	int num;
+	int check;
+	streamsize size = 100;
+	ofstream file_in;
+	time_t now = time(0);
+	string dt = ctime(&now);
+	string date;
+	string filename;
+	string text = ".txt";
+
+	date.append(dt, 4, 3);
+	date.append("-");
+	date.append(dt, 8, 2);
+	date.append("-");
+	date.append(dt, 20, 4);
+
+	filename.append(this->name);
+	filename.append(date);
+	filename.append(text);
+
+	file_in.open(filename);
+
+	if (!file_in) return -1;
+
+	file_in << this->name;
+	file_in << "\n";
+	file_in << this->member_number;
+	file_in << "\n";
+	file_in << this->address;
+	file_in << "\n";
+	file_in << this->city;
+	file_in << "\n";
+	file_in << this->state;
+	file_in << "\n";
+	file_in << this->zip;
+	file_in << "\n";
+
+	num = num_records();
+	char** array = new char * [num];
+	check = get_filenames(array);
+	char text[100];
+	char* text2 = new char [100];
+	char delim = '&';
+
+	for (int i = 0; i < check; ++i) {
+		ifstream file_out;
+		file_out.open(array[i]);
+		if (!file_out) return -1 - i;
+		do {
+			file_out.get(text2, size, delim);
+			file_out.ignore(size, '&');
+			file_out.get();
+			if (strcmp(text2, "STOP")) break;
+			file_in << text2;
+			file_in << "\n";
+		} while (!file_out.eof());
+		file_out.close();
+	}
 }
 
 Member::Member(ID *&  to_copy) {
@@ -356,6 +575,7 @@ int Member::report() {
 	return 0;
 }
 
+	return check;
 bool Member::good_standing(){
 	return member_account.good_standing();
 }

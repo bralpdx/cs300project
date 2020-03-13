@@ -7,11 +7,13 @@
 #include <fstream>
 #include <string>
 #include <ctime>
+#include <sys/stat.h>
 
 //Abstract Base Class
 class Record{
 public:
 	Record();
+	Record(const Record & obj);
 	~Record();
 	Record *& go_next();
 	int get_file_address(std::string & copy);
@@ -54,9 +56,11 @@ private:
 class ID{
 public:
 	ID();
+	ID(const ID & obj);
 	virtual ~ID();
 	ID *& go_left();
 	ID *& go_right();
+	int compare(std::string to_compare);
 	bool is_leaf();
 	std::string get_hash();
 	virtual void Display();
@@ -75,6 +79,7 @@ protected:
 class Service : public ID {
 public:
 	Service();
+	Service(const Service & obj);
 	~Service();
     Service(Service & to_copy);
 	void SvcRead();
@@ -88,15 +93,22 @@ protected:
 class Person : public ID {
 public:
 	Person();
+	Person(const Person & obj);
 	~Person();
 	int add_record(Record *& to_add);
 	int remove_record(std::string to_remove);
 	virtual int report();
 	virtual void Read();
 protected:
+	int num_records();
+	int get_filenames(char ** array);
+private:
+	int num_records(Record * head);
+	int get_filenames(Record* head, char** array, int i);
 	int remove_record(std::string to_remove, Record*& head);
 	void destroy(Record*& head);
 	Record * head;
+protected:
 	std::string name;		//25 characters
 	std::string address;	//25 characters
 	std::string city;		//14 characters
@@ -108,6 +120,7 @@ protected:
 class Provider : public Person {
 public:
 	Provider();
+	Provider(const Provider& obj);
 	~Provider();
     Provider(ID *& to_copy);
   	Provider(Provider & to_copy);
@@ -117,6 +130,7 @@ public:
 	void Read();
 
 protected:
+	int provider_number;
     void Edit(Provider&);
 
 };
@@ -125,6 +139,7 @@ protected:
 class Member : public Person {
 public:
 	Member();
+	Member(const Member& obj);
 	~Member();
     Member(ID *& to_copy);
     Member(Member & to_copy);
@@ -139,4 +154,5 @@ protected:
 
 private:
 	Account member_account;
+	int member_number;			//9-digit
 };
