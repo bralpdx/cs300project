@@ -61,6 +61,36 @@ int main() {
 
 				//Bill member
 				if (option == 'b') {
+					//need this to be a function, trying to figure out where.
+					time_t now = time(0);
+					struct tm* timeinfo;
+					std::string dt = ctime(&now);
+					timeinfo = localtime(&now);
+					char time[9];
+
+					char today[11];
+
+					if (timeinfo->tm_mon < 9) today[0] = '0';
+					else today[0] = '1';
+
+					char mon = timeinfo->tm_mon + 49;
+
+					today[1] = mon;
+					today[2] = '-';
+					today[3] = dt[8];
+					today[4] = dt[9];
+					today[5] = '-';
+					today[6] = dt[20];
+					today[7] = dt[21];
+					today[8] = dt[22];
+					today[9] = dt[23];
+					today[10] = '\0';
+
+					for (int i = 0; i < 9; ++i) {
+						time[i] = dt[i + 11];
+					}
+					time[8] = '\0';
+			
 
 				}
 
@@ -107,7 +137,6 @@ int main() {
 				std::cout << "f) Edit Provider\n";
 				std::cout << "g) Add Service\n";
 				std::cout << "h) Remove Service\n";
-				std::cout << "i) Edit Service\n";
 				std::cout << "x) logout\n";
 
 				std::cin >> option;
@@ -156,11 +185,6 @@ int main() {
 
 				//Remove Service
 				if (option == 'h') {
-
-				}
-
-				//Edit Service
-				if (option == 'i') {
 
 				}
 
