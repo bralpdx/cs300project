@@ -62,7 +62,9 @@ Person::~Person() {
 	zip = 0;
 }
 
-int Person::report(){}
+int Person::report(){
+	return 0;
+}
 
 int Person::add_record(Record *& to_add) {
 	if (!head) {
@@ -206,8 +208,7 @@ void Provider::Edit(Provider& to_copy){
 }
 
 int Provider::report() {
-
-
+	return 0;
 }
 //////////////////////////////////
 //         Member Class         //
@@ -306,7 +307,7 @@ void Member::Edit(Member& to_copy){
 }
 
 int Member::report() {
-
+	return 0;
 }
 
 //////////////////////////////////
@@ -319,8 +320,7 @@ Service::Service(Service & to_copy){
   right = NULL;
   hash_value = to_copy.ID::get_hash();
   svcName = to_copy.svcName;
-  svcFee_dollars = to_copy.svcFee_dollars;
-  svcFee_cents = to_copy.svcFee_cents;
+  service_fee = to_copy.service_fee;
 }
 
 Service::Service(): ID() {

@@ -43,6 +43,6 @@ private:
 
   int VerifyFromBST(ID * root, std::string id, int type);
 
-	void destroy(ID*& root);
+	//void destroy(ID*& root);
 	ID * root;
 };

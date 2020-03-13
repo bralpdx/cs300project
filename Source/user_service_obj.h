@@ -88,7 +88,7 @@ public:
 	int add_record(Record *& to_add);
 	int remove_record(std::string to_remove);
 	virtual int report();
-private:
+protected:
 	int remove_record(std::string to_remove, Record*& head);
 	void destroy(Record*& head);
 	Record * head;
