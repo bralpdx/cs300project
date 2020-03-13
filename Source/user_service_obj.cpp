@@ -412,10 +412,10 @@ void Provider::Edit(Provider& to_copy){
   state = to_copy.state;
   zip = to_copy.zip;
 }
-
+/*
 int Provider::report() {
 	return 0;
-}
+}*/
 //////////////////////////////////
 //         Member Class         //
 //////////////////////////////////
@@ -657,9 +657,11 @@ void Member::Edit(Member& to_copy){
   hash_value = to_copy.ID::get_hash();
 }
 
+/*
 int Member::report() {
 	return 0;
 }
+*/
 
 bool Member::good_standing(){
 	return member_account.good_standing();
