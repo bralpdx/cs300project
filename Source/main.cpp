@@ -92,7 +92,6 @@ int main() {
 				std::cout << "f) Edit Provider\n";
 				std::cout << "g) Add Service\n";
 				std::cout << "h) Remove Service\n";
-				std::cout << "i) Edit Service\n";
 				std::cout << "x) logout\n";
 
 				std::cin >> option;
@@ -135,11 +134,6 @@ int main() {
 
 				//Remove Service
 				if (option == 'h') {
-
-				}
-
-				//Edit Service
-				if (option == 'i') {
 
 				}
 
