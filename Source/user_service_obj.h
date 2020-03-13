@@ -128,11 +128,9 @@ public:
   	void Display();
 	int report();
 	void Read();
-
+	void Edit(Provider&);
 protected:
 	int provider_number;
-    void Edit(Provider&);
-
 };
 
 // Member class derived from Person
