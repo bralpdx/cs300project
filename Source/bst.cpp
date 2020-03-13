@@ -1,6 +1,6 @@
 #include "bst.h"
 #include <fstream>
-
+#include <cstring>
 //////////////////////////////////
 //      BST Class				//
 //////////////////////////////////
@@ -70,6 +70,7 @@ bool BST::AddToBST(ID *& root, Provider & to_add){
   }
 }
 
+
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //              AddToBST Function
 //
@@ -99,6 +100,7 @@ bool BST::AddToBST(Member & to_add){
   }
 }
 
+
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //              AddToBST Function
 //
@@ -127,6 +129,7 @@ bool BST::AddToBST(ID *& root, Member & to_add){
   }
 }
 
+
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //              AddToBST Function
 //
@@ -153,6 +156,7 @@ bool BST::AddToBST(Service & to_add){
   }
 }
 
+
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //              AddToBST Function
 //
@@ -178,6 +182,7 @@ bool BST::AddToBST(ID *& root, Service & to_add){
     }
   }
 }
+
 
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //              EditBST Function
@@ -206,6 +211,7 @@ bool BST::EditBST(Provider & to_edit){
   }
 }
 
+
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //              EditBST Function
 //
@@ -225,8 +231,8 @@ bool BST::EditBST(ID *& root, Provider & to_edit){
     return false;
   }
   if(root->ID::get_hash() == to_edit.ID::get_hash()){
-    ID * temp;
-    temp = dynamic_cast<Provider*>(root);
+    //ID * temp;
+    //temp = dynamic_cast<Provider*>(root);
     root->Edit(to_edit);
     return true;
   }
@@ -239,6 +245,7 @@ bool BST::EditBST(ID *& root, Provider & to_edit){
     }
   }
 }
+
 
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //            EditBST Function
@@ -258,14 +265,15 @@ bool BST::EditBST(Member & to_edit){
     return false;
   }
   else{
-    ID * temp;
-    temp = dynamic_cast<Member*>(this->root);
-    if(temp){
+    //ID * temp;
+    //temp = dynamic_cast<Member*>(this->root);
+    //if(temp){
       return EditBST(this->root, to_edit);
-    }
+    //}
     return false;
   }
 }
+
 
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //            EditBST Function
@@ -298,7 +306,8 @@ bool BST::EditBST(ID *& root, Member & to_edit){
   }
 }
 
-/* = = = = = = = = = = = = = = = = = = = = = = */
+
+/* = = = = = = = = = = = = = = = = = = = = = = */                       
 //            RemoveFromBST Function
 //
 //INPUT: Provider object by reference.
@@ -324,7 +333,8 @@ bool BST::RemoveFromBST(Provider & to_remove){
   }
 }
 
-/* = = = = = = = = = = = = = = = = = = = = = = */
+
+/* = = = = = = = = = = = = = = = = = = = = = = */                                                               
 //            RemoveFromBST Function
 //
 //INPUT: ID pointer by reference (root) and a
@@ -342,6 +352,40 @@ bool BST::RemoveFromBST(ID *& root, Provider & to_remove){
     return false;
   }
   if(root->ID::get_hash() == to_remove.ID::get_hash()){
+    if(root->is_leaf() == true){// no children exist
+      delete root;
+      root = NULL;
+      return true;
+    }
+    if(root->go_left() != NULL && root->go_right() != NULL){ // both children exist
+      // child on the right becomes
+      // the new current root
+      // must assign old root's left child to 
+      ID * TempIOS;
+      if(FindInOrderSuccessor(root->go_right(), TempIOS) == false){
+        std::cerr << "Something went very during Removal. Exiting Removal!!";
+        return false;
+      }
+      else{
+        root->Edit(((Provider&)*TempIOS));
+        delete TempIOS;
+        TempIOS = NULL;
+        return true;
+      }
+    }
+
+    if((root->go_left() != NULL) && (root->go_right() == NULL)){ // left child exists only
+      ID * TempRoot = root;
+      root = root->go_left();
+      delete TempRoot;
+      return true;
+    }
+    if((root->go_left() == NULL) &&  (root->go_right() != NULL)){ // right child exists only
+      ID * TempRoot = root;
+      root = root->go_right();
+      delete TempRoot;
+      return true;
+    }
   }
   else{
     if(root->ID::get_hash() > to_remove.ID::get_hash()){
@@ -351,7 +395,8 @@ bool BST::RemoveFromBST(ID *& root, Provider & to_remove){
   }
 }
 
-/* = = = = = = = = = = = = = = = = = = = = = = */
+
+/* = = = = = = = = = = = = = = = = = = = = = = */                                               
 //          RemoveFromBST Function
 //
 //INPUT: Member object by reference.
@@ -376,7 +421,8 @@ bool BST::RemoveFromBST(Member & to_remove){
   }
 }
 
-/* = = = = = = = = = = = = = = = = = = = = = = */
+
+/* = = = = = = = = = = = = = = = = = = = = = = */                                                   
 //            RemoveFromBST Function
 //
 //INPUT: ID pointer by reference (root) and
@@ -387,12 +433,45 @@ bool BST::RemoveFromBST(Member & to_remove){
 //DESC: Private Recursive function called in the above function.
 //
 //
-bool BST::RemoveFromBST(ID *& root, Member &  to_remove){
+bool BST::RemoveFromBST(ID *& root, Member & to_remove){
   if(root == NULL){
     return false;
   }
   if(root->ID::get_hash() == to_remove.ID::get_hash()){
-    
+    if(root->is_leaf() == true){// no children exist
+      delete root;
+      root = NULL;
+      return true;
+    }
+    if(root->go_left() != NULL && root->go_right() != NULL){ // both children exist
+      // child on the right becomes
+      // the new current root
+      // must assign old root's left child to 
+      ID * TempIOS;
+      if(FindInOrderSuccessor(root->go_right(), TempIOS) == false){
+        std::cerr << "Something went very during Removal. Exiting Removal!!";
+        return false;
+      }
+      else{
+        root->Edit(((Member&)*TempIOS));
+        delete TempIOS;
+        TempIOS = NULL;
+        return true;
+      }
+    }
+
+    if((root->go_left() != NULL) && (root->go_right() == NULL)){ // left child exists only
+      ID * TempRoot = root;
+      root = root->go_left();
+      delete TempRoot;
+      return true;
+    }
+    if((root->go_left() == NULL) &&  (root->go_right() != NULL)){ // right child exists only
+      ID * TempRoot = root;
+      root = root->go_right();
+      delete TempRoot;
+      return true;
+    }
   }
   else{
     if(root->ID::get_hash() > to_remove.ID::get_hash()){
@@ -403,12 +482,242 @@ bool BST::RemoveFromBST(ID *& root, Member &  to_remove){
 }
 
 
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//            FindInOrderSuccessor Function
+//
+//INPUT: ID pointer by reference (root)
+//       A second ID pointer by reference, the In Order Successor.
+//
+//OUTPUT: Returns true/false for success/failure.
+//
+//DESC: This is a private function.
+//      Called in the removal functions.
+//      This function finds the In Order successor.
+//
+bool BST::FindInOrderSuccessor(ID *& root, ID *& to_grab){
+  if(root == NULL){
+    return false;
+  }
+  if(root->go_left() != NULL){
+    return FindInOrderSuccessor(root->go_left(), to_grab);
+  }
+  if(root->go_left() == NULL && root->go_right() == NULL){
+    to_grab = root;
+    root = NULL;
+    return true;
+  }
+  if(root->go_left() == NULL && root->go_right() != NULL){
+    to_grab = root;
+    root = root->go_right();
+    return true;
+  }
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = */                                         
+//              CopyFromBST Function
+//
+//INPUT: a string contaning the ID number to find.
+//       And an empty Provider object to copy the data into.
+//
+//OUTPUT: Returns True/False for Success/Failure.
+//
+//DESC:
+//
+//
+bool BST::CopyFromBST(std::string& to_find, Provider & copy_to){
+  if(this->root == NULL){
+    return false;
+  }
+  ID * temp;
+  temp = dynamic_cast<Provider*>(this->root);
+  if(temp){
+    return CopyFromBST(this->root, to_find, copy_to);
+  }
+  return false;
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//              CopyFromBST Function
+//
+//INPUT: ID pointer by value to traverse the tree (root),
+//       A string containing the ID to find.
+//       And an empty provider object to copy the data into.
+//
+//OUTPUT: Returns True/False for Success/Failure.
+//
+//DESC:
+//
+//
+bool BST::CopyFromBST(ID * root, std::string& to_find, Provider & copy_to){
+  if(root == NULL){
+    return false;
+  }
+  if(root->ID::get_hash() == to_find){// they match; copy data
+    root->CopyData(copy_to);
+    return true;
+  }
+  else{
+    if(root->ID::get_hash() > to_find){
+      return CopyFromBST(root->go_left(), to_find, copy_to);
+    }
+    return CopyFromBST(root->go_right(), to_find, copy_to);
+  }
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//            CopyFromBST Function
+//
+//INPUT: a string containing the ID number to find.
+//       An empty member object to copy the data into.
+//
+//OUTPUT: Returns True/False for Success/Failure.
+//
+//DESC:
+//
+//
+bool BST::CopyFromBST(std::string& to_find, Member & copy_to){
+  if(this->root == NULL){
+    return false;
+  }
+  ID * temp;
+  temp = dynamic_cast<Member*>(this->root);
+  if(temp){
+    return CopyFromBST(this->root, to_find, copy_to);
+  }
+  return false;
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//            CopyFromBST Function
+//
+//INPUT: ID pointer by value to traverse the tree (root),
+//       A string containing the ID to find.
+//       And an empty Member object to copy the data into.
+//
+//OUTPUT: Returns True/False for Success/Failure.
+//
+//DESC:
+//
+//
+bool BST::CopyFromBST(ID * root, std::string& to_find, Member & copy_to){
+  if(root == NULL){
+    return false;
+  }
+  if(root->ID::get_hash() == to_find){
+    root->CopyData(copy_to);
+    return true;
+  }
+  else{
+    if(root->ID::get_hash() > to_find){
+      return CopyFromBST(root->go_left(), to_find, copy_to);
+    }
+    return CopyFromBST(root->go_right(), to_find, copy_to);
+  }
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = */                                         
+//              CopyFromBST Function
+//
+//INPUT: a string contaning the ID number to find.
+//       And an empty Service object to copy the data into.
+//
+//OUTPUT: Returns True/False for Success/Failure.
+//
+//DESC:
+//
+//
+bool BST::CopyFromBST(std::string& to_find, Service & copy_to){
+  if(this->root == NULL){
+    return false;
+  }
+  ID * temp;
+  temp = dynamic_cast<Service*>(this->root);
+  if(temp){
+    return CopyFromBST(this->root, to_find, copy_to);
+  }
+  return false;
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//              CopyFromBST Function
+//
+//INPUT: ID pointer by value to traverse the tree (root),
+//       A string containing the ID to find.
+//       And an empty Service object to copy the data into.
+//
+//OUTPUT: Returns True/False for Success/Failure.
+//
+//DESC:
+//
+//
+bool BST::CopyFromBST(ID * root, std::string& to_find, Service & copy_to){
+  if(root == NULL){
+    return false;
+  }
+  if(root->ID::get_hash() == to_find){// they match; copy data
+    root->CopyData(copy_to);
+    return true;
+  }
+  else{
+    if(root->ID::get_hash() > to_find){
+      return CopyFromBST(root->go_left(), to_find, copy_to);
+    }
+    return CopyFromBST(root->go_right(), to_find, copy_to);
+  }
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//            Search Function
+//
+//INPUT: an ID pointer to search for
+//
+//OUTPUT: T/F for Success/failure
+//
+//DESC: Hasn't been used, might be useful.
+//      This is the public wrapper
+//
+bool BST::Search(ID & to_search){
+  if(root == NULL){
+    return false;
+  }
+  else{
+    return Search(root, to_search);
+  }
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//              Search function
+//
+//INPUT: ID pointer by value (root)
+//       ID by reference to search for.
+//
+//OUPUT: T?F for success/failure.
+//
+//DESC: This is the private function.
+//      Has not been used yet, made just in case.
+//
+//
+bool BST::Search(ID * root, ID & to_search){
+  if(root == NULL){
+    return false;
+  }
+  if(root->ID::get_hash() == to_search.get_hash()){
+    return true;
+  }
+  else{
+    if(root->ID::get_hash() > to_search.get_hash()){
+      return Search(root->go_left(), to_search);
+    }
+    return Search(root->go_right(), to_search);
+  }
+}
 
 /* ========================================================================== */
 //      TEST FUNCTIONS BELOW EITHER IGNORE OR WE COULD ADD THEM
 void BST::Display(){
   return Display(root);
 }
+
 void BST::Display(ID * root){
   if(root == NULL){
     return;
@@ -423,28 +732,51 @@ void BST::Display(ID * root){
     if(temp){
       temp->Display();
     }
+    temp = dynamic_cast<Service*>(root);
+    if(temp){
+      temp->Display();
+    } 
     Display(root->go_left());
     Display(root->go_right());
   }
 }
 
-int BST::CountRight(){
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//          CountTree Function
+//
+//INPUT: Nothing.
+//
+//OUTPUT: Returns an int, the number of items
+//        in the tree.
+//
+//DESC: Public Function. Counts the total
+//      number of data inside of the tree.
+int BST::CountTree(){
   if(root == NULL){
     return 0;
   }
   else{
-    return CountRight(this->root->go_right());
+    return CountTree(this->root);
   }
 }
 
-int BST::CountRight(ID * root){
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//            CountTree Function
+//
+//INPUT: ID pointer by value, the root.
+//
+//OUTPUT: Returns an int for every item that exists.
+//
+//DESC: Recursively traverses the entire tree. 
+//      Counts the data that exists inside the tree.
+//
+int BST::CountTree(ID * root){
   if(root == NULL){
     return 0;
   }
   else{
-    return 1 + CountRight(root->go_right());
+    return 1 + CountTree(root->go_right()) + CountTree(root->go_left());
   }
-	root = NULL;
 }
 
 BST::BST(const char * file, int flag) {

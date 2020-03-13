@@ -35,11 +35,14 @@ std::string ID::get_hash() {
   return hash_value;
 }
 
+
+
 void ID::Display(){}
 void ID::Edit(Provider&){}
 void ID::Edit(Member&){}
-
-
+void ID::CopyData(Provider&){}
+void ID::CopyData(Member&){}
+void ID::CopyData(Service&){}
 //////////////////////////////////
 //         Person Class         //
 //////////////////////////////////
@@ -122,7 +125,6 @@ Provider::~Provider() {
 Provider::Provider(ID *& to_copy) {
 
 }
-
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //            Provider Copy Constructor
 //
@@ -203,6 +205,25 @@ void Provider::Edit(Provider& to_copy){
   city = to_copy.city;
   state = to_copy.state;
   zip = to_copy.zip;
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//
+//
+//INPUT:
+//
+//OUTPUT:
+//
+//DESC:
+//
+//
+void Provider::CopyData(Provider& copy_to){
+  copy_to.hash_value = hash_value;
+  copy_to.name = name;
+  copy_to.address = address;
+  copy_to.city = city;
+  copy_to.state = state;
+  copy_to.zip = zip;
 }
 
 int Provider::report() {
@@ -305,6 +326,25 @@ void Member::Edit(Member& to_copy){
   hash_value = to_copy.ID::get_hash();
 }
 
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//
+//
+//INPUT:
+//
+//OUTPUT:
+//
+//DESC:
+//
+//
+void Member::CopyData(Member& copy_to){
+  copy_to.name = name;
+  copy_to.address = address;
+  copy_to.city = city;
+  copy_to.state = state;
+  copy_to.zip = zip;
+  copy_to.hash_value =  hash_value;
+}
+
 int Member::report() {
 
 }
@@ -313,14 +353,52 @@ int Member::report() {
 //         Service Class        //
 //////////////////////////////////
 
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//              Display Function
+//
+//INPUT: Input is nothing.
+//
+//OUTPUT: Returns nothing.
+//
+//DESC: Displays all of the current service object's
+//      data.
+//
+void Service::Display(){
+  std::cout << "\nHash Value is: " << hash_value;
+  std::cout << "\nService Name is: " << svcName;
+  std::cout << "\nNeed to display service fee stuff!!!!\n\n";
+}
 
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//
+//
+//INPUT:
+//
+//OUTPUT:
+//
+//DESC:
+//
+void Service::CopyData(Service& copy_to){
+  copy_to.hash_value = hash_value;
+  copy_to.svcName = svcName;
+  copy_to.service_fee = service_fee;
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//            Service Copy Constructor
+//
+//INPUT: A service object by reference.
+//
+//OUTPUT: Returns nothing, technically.
+//
+//DESC: Copy constructor for service object
+//
 Service::Service(Service & to_copy){
   left = NULL;
   right = NULL;
   hash_value = to_copy.ID::get_hash();
   svcName = to_copy.svcName;
-  svcFee_dollars = to_copy.svcFee_dollars;
-  svcFee_cents = to_copy.svcFee_cents;
+  service_fee = to_copy.service_fee;
 }
 
 Service::Service(): ID() {
@@ -330,6 +408,8 @@ Service::Service(): ID() {
 Service::~Service() {
 	svcName = "";
 }
+
+
 
 //////////////////////////////////
 //         Record Class         //

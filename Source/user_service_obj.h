@@ -44,7 +44,7 @@ public:
 	bool operator > (const Account&)const;
 	bool operator <= (const Account&)const;
 	bool operator >= (const Account&)const;
-private:
+protected:
 	int dollar;
 	int cent;
 };
@@ -61,7 +61,9 @@ public:
   virtual void Display();
   virtual void Edit(class Provider&);
   virtual void Edit(class Member&);
-
+  virtual void CopyData(class Provider&);
+  virtual void CopyData(class Member&);
+  virtual void CopyData(class Service&);
 protected:
 	ID *left;
 	ID *right;
@@ -75,7 +77,9 @@ public:
 	Service();
 	~Service();
   Service(Service & to_copy);
+  void Display();
 protected:
+  void CopyData(Service&);
 	std::string svcName;
 	Account service_fee;
 };
@@ -88,7 +92,7 @@ public:
 	int add_record(Record *& to_add);
 	int remove_record(std::string to_remove);
 	virtual int report();
-private:
+protected:
 	int remove_record(std::string to_remove, Record*& head);
 	void destroy(Record*& head);
 	Record * head;
@@ -108,9 +112,10 @@ public:
   Provider(Provider & to_copy);
   void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value);
   void Display();
-	int report();
+	int report(); 
 protected:
   void Edit(Provider&);
+  void CopyData(Provider&);
 
 };
 
@@ -127,6 +132,7 @@ public:
 
 protected:
   void Edit(Member&);
+  void CopyData(Member&);
 
 private:
 	Account member_account;
