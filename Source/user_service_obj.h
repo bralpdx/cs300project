@@ -36,6 +36,7 @@ public:
 	void subtract(int dol, int cen);
 	bool good_standing();
 	void svcFee();
+	void get_balance(int& dol, int& cen);
 	Account& operator = (const Account&);
 	Account& operator += (const Account&);
 	Account& operator -= (const Account&);
@@ -83,9 +84,12 @@ public:
 	~Service();
     Service(Service & to_copy);
 	void SvcRead();
+	int get_service(std::string& to_copy);
+	int get_num(int & to_copy);
 protected:
 	std::string svcName;
 	std::string svcProvider;
+	int service_num;
 	Account service_fee;
 };
 
@@ -97,6 +101,7 @@ public:
 	~Person();
 	int add_record(Record *& to_add);
 	int remove_record(std::string to_remove);
+	int get_name(std::string & to_copy);
 	virtual int report();
 	virtual void Read();
 protected:
@@ -146,7 +151,7 @@ public:
     int report();
     bool good_standing();
 	void Read();
-	int Write_report(std::string filename);
+	int Write_report(std::string filename, Provider& obj1, Service & obj2);
 protected:
     void Edit(Member&);
 
