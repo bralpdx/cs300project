@@ -58,6 +58,7 @@ public:
 	virtual ~ID();
 	ID *& go_left();
 	ID *& go_right();
+	int compare(std::string to_compare);
 	bool is_leaf();
 protected:
 	ID *left;
