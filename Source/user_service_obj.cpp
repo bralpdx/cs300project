@@ -319,8 +319,7 @@ Service::Service(Service & to_copy){
   right = NULL;
   hash_value = to_copy.ID::get_hash();
   svcName = to_copy.svcName;
-  svcFee_dollars = to_copy.svcFee_dollars;
-  svcFee_cents = to_copy.svcFee_cents;
+  service_fee = to_copy.service_fee;
 }
 
 Service::Service(): ID() {
