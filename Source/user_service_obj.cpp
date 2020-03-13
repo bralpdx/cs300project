@@ -5,6 +5,8 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <Windows.h>
+#include <stdio.h>
+#include <io.h>
 
 
 //////////////////////////////////
@@ -149,7 +151,33 @@ Member::~Member() {
 }
 
 int Member::report() {
-	Dword buffsize = GetCurrentDirectoryA(0, NULL);
+	using namespace std;
+
+	ofstream file_in;
+	time_t now = time(0);
+	string dt = ctime(&now);
+	string date;
+	string filename;
+	string text = ".txt";
+
+	date.append(dt, 4, 3);
+	date.append("-");
+	date.append(dt, 8, 2);
+	date.append("-");
+	date.append(dt, 20, 4);
+
+	filename.append(this->name);
+	filename.append(date);
+	filename.append(text);
+
+	file_in.open(filename);
+
+	file_in << this->name;
+	file_in << "\n";
+	file_in << 
+
+	/*Dword buffsize = GetCurrentDirectoryA(0, NULL);
+	
 	int check;
 	time_t now = time(0);
 	std::string dt = ctime(&now);
@@ -172,7 +200,7 @@ int Member::report() {
 	filename.append(text);
 
 	check = CreateFile(filename, (GENERIC_READ | GENERIC_WRITE), (FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE), TRUNCATE_EXISTING);
-
+	*/
 }
 
 //////////////////////////////////
