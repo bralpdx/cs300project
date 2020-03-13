@@ -67,6 +67,7 @@ int main() {
 					std::cout << "What member would you like to bill?\n";
 
 					std::cin.get(input_member_num, 20, '\n');
+					std::cin.clear();
 					std::cin.ignore(20, '\n');
 
 					
