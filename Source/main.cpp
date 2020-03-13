@@ -4,10 +4,10 @@
 #include <iostream>
 
 int main() {
-	pre_hash_id(); // See utilities.h for desc
-	BST service_bst("svc_codes.txt", 3);
-	BST provider_bst("user_info.txt", 1);
-	BST member_bst("", 2);
+	//pre_hash_id(); // See utilities.h for desc
+	//BST service_bst("svc_codes.txt", 3);
+	//BST provider_bst("user_info.txt", 1);
+	//BST member_bst("", 2);
 
 	char again;
 	char option;
