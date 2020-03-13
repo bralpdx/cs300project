@@ -873,14 +873,14 @@ int Service::quick_sort(Service *& array, int lo, int hi) {
 	std::string key;
 	Service key_data;
 	//hold on to copy key data								key_data = array[lo]
-	array[lo]->get_service(key);
+	array[lo].get_service(key);
 
 	int j = hi;
 	int i = lo + 1;
 	while (i <= j) {
 		std::string temp;
 		array[i].get_service(temp);
-		if (key.compare(temp)> 0)) i++; //advance the left finger
+		if (key.compare(temp)> 0) i++; //advance the left finger
 		else if (key.compare(temp) <=0) j--; // advance the right finger
 		else { //swap data
 			Service swap;
