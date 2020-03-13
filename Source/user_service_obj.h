@@ -116,4 +116,3 @@ public:
 private:
 	Account member_account;
 };
-
