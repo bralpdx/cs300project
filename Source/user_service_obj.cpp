@@ -46,18 +46,20 @@ int ID::compare(std::string to_compare) {
 
 	if ((size1 > 5) && (size2 > 5)) {
 		for (int i = 0; i < 6; i++) {
-			if ((this->hash_value[i] > 47) && (this->hash_value[i] < 58)) {
-				result1 += multiplier * (hash_value[i] - 48);
+			char a = hash_value[i];
+			char b = to_compare[i];
+			if ((a > 47) && (a < 58)) {
+				result1 += multiplier * (a - 48);
 			}
-			else if ((this->hash_value[i] > 96) && (this->hash_value[i] < 103)) {
-				result1 += multiplier * (hash_value[i] - 86);
+			else if ((a > 96) && (a < 103)) {
+				result1 += multiplier * (a - 86);
 			}
 
-			if ((to_compare[i] > 47) && (to_compare[i] < 58)) {
-				result2 += multiplier * (to_compare[i] - 48);
+			if ((b > 47) && (b < 58)) {
+				result2 += multiplier * (b - 48);
 			}
-			else if ((to_compare[i] > 96) && (to_compare[i] < 103)) {
-				result2 += multiplier * (to_compare[i] - 86);
+			else if ((b > 96) && (b < 103)) {
+				result2 += multiplier * (b - 86);
 			}
 			multiplier = multiplier / 16;
 		}
@@ -68,18 +70,20 @@ int ID::compare(std::string to_compare) {
 	else {
 		multiplier = multiplier / ((6-size1) * 16);
 		for (int i = 0; i < size1; i++) {
-			if ((this->hash_value[i] > 47) && (this->hash_value[i] < 58)) {
-				result1 += multiplier * (hash_value[i] - 48);
+			char a = hash_value[i];
+			char b = to_compare[i];
+			if ((a > 47) && (a < 58)) {
+				result1 += multiplier * (a - 48);
 			}
-			else if ((this->hash_value[i] > 96) && (this->hash_value[i] < 103)) {
-				result1 += multiplier * (hash_value[i] - 86);
+			else if ((a > 96) && (a < 103)) {
+				result1 += multiplier * (a - 86);
 			}
 
-			if ((to_compare[i] > 47) && (to_compare[i] < 58)) {
-				result2 += multiplier * (to_compare[i] - 48);
+			if ((b > 47) && (b < 58)) {
+				result2 += multiplier * (b - 48);
 			}
-			else if ((to_compare[i] > 96) && (to_compare[i] < 103)) {
-				result2 += multiplier * (to_compare[i] - 86);
+			else if ((b > 96) && (b < 103)) {
+				result2 += multiplier * (b - 86);
 			}
 			multiplier = multiplier / 16;
 		}
