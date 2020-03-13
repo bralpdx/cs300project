@@ -33,6 +33,9 @@ public:
 private:
 
   int CountTree(ID* root); // counts all data on the right 
+
+  int quick_sort(Service*& array, int lo, int hi);
+
   void Display(ID * root); // recursive display all
 	void destroy(ID*& root); // called in the destructor; destroys all
   bool Search(ID * root, ID & to_search);

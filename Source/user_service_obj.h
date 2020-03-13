@@ -89,9 +89,9 @@ public:
 	void SvcRead();
 	int get_service(std::string& to_copy);
 	int get_num();
-	int quick_sort(Service*& array, int lo, int hi);
-protected:
 	void CopyData(Service&);
+	//int quick_sort(Service*& array, int lo, int hi);
+protected:
 	std::string svcName;
 	std::string svcProvider;
 	int service_num;
