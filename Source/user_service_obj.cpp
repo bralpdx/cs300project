@@ -97,11 +97,15 @@ std::string ID::get_hash() {
   return hash_value;
 }
 
+
+
 void ID::Display(){}
 void ID::Edit(Provider&){}
 void ID::Edit(Member&){}
+void ID::CopyData(Provider&){}
+void ID::CopyData(Member&){}
+void ID::CopyData(Service&){}
 bool ID::good_standing() { return true; }
-
 
 //////////////////////////////////
 //         Person Class         //
@@ -252,7 +256,6 @@ Provider::~Provider() {
 Provider::Provider(ID *& to_copy) {
 
 }
-
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //            Provider Copy Constructor
 //
@@ -412,6 +415,26 @@ void Provider::Edit(Provider& to_copy){
   state = to_copy.state;
   zip = to_copy.zip;
 }
+
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//
+//
+//INPUT:
+//
+//OUTPUT:
+//
+//DESC:
+//
+//
+void Provider::CopyData(Provider& copy_to){
+  copy_to.hash_value = hash_value;
+  copy_to.name = name;
+  copy_to.address = address;
+  copy_to.city = city;
+  copy_to.state = state;
+  copy_to.zip = zip;
+}
+
 /*
 int Provider::report() {
 	return 0;
@@ -657,6 +680,25 @@ void Member::Edit(Member& to_copy){
   hash_value = to_copy.ID::get_hash();
 }
 
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//
+//
+//INPUT:
+//
+//OUTPUT:
+//
+//DESC:
+//
+//
+void Member::CopyData(Member& copy_to){
+  copy_to.name = name;
+  copy_to.address = address;
+  copy_to.city = city;
+  copy_to.state = state;
+  copy_to.zip = zip;
+  copy_to.hash_value =  hash_value;
+}
+
 /*
 int Member::report() {
 	return 0;
@@ -671,13 +713,59 @@ bool Member::good_standing(){
 //         Service Class        //
 //////////////////////////////////
 
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//              Display Function
+//
+//INPUT: Input is nothing.
+//
+//OUTPUT: Returns nothing.
+//
+//DESC: Displays all of the current service object's
+//      data.
+//
+void Service::Display(){
+  std::cout << "\nHash Value is: " << hash_value;
+  std::cout << "\nService Name is: " << svcName;
+  std::cout << "\nNeed to display service fee stuff!!!!\n\n";
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//
+//
+//INPUT:
+//
+//OUTPUT:
+//
+//DESC:
+//
+void Service::CopyData(Service& copy_to){
+  copy_to.hash_value = hash_value;
+  copy_to.svcName = svcName;
+  copy_to.service_fee = service_fee;
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = */
+//            Service Copy Constructor
+//
+//INPUT: A service object by reference.
+//
+//OUTPUT: Returns nothing, technically.
+//
+//DESC: Copy constructor for service object
+//
+
 Service::Service(Service & to_copy){
   left = NULL;
   right = NULL;
   hash_value = to_copy.ID::get_hash();
   svcName = to_copy.svcName;
   service_fee = to_copy.service_fee;
+
+/*
+  // was in my merge, unsure if necessary or if something was changed
+  // keeping it in here just in case for quick fix
   svcProvider = to_copy.svcProvider;
+*/
 }
 
 Service::Service(): ID() {
@@ -771,6 +859,45 @@ int Service::get_service(std::string& to_copy) {
 int Service::get_num() {
 	return service_num;
 }
+
+
+int Service::print_alpha() {
+	//Service array[]
+	return 0;
+}
+
+
+int Service::quick_sort(Service *& array, int lo, int hi) {
+	if (hi <= lo) return 0;
+	int count = 0;
+	std::string key;
+	Service key_data;
+	//hold on to copy key data								key_data = array[lo]
+	array[lo]->get_service(key);
+
+	int j = hi;
+	int i = lo + 1;
+	while (i <= j) {
+		std::string temp;
+		array[i]->get_service(temp);
+		if (key.compare(temp)> 0)) i++; //advance the left finger
+		else if (key.compare(temp) <=0) j--; // advance the right finger
+		else { //swap data
+			Service swap;
+			//function copy data from array[i] into swap:	swap = array[i]
+			//same func copy array[j] into array[i]:		array[i] = array[j]
+			//same func copy swap into array[j]				array[j] = array[i]
+		}
+	}
+	//place the key
+	//function to copy data from array[j] into array[lo]	array[lo] = array[j]
+	//function to copy data from key into array[j]			array[j] = key_data	
+
+	count = quick_sort(array, lo, j - 1) + quick_sort(array, j + 1, hi) + 1;
+	return count;
+}
+
+
 
 //////////////////////////////////
 //         Record Class         //

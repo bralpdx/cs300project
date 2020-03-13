@@ -48,7 +48,7 @@ public:
 	bool operator > (const Account&)const;
 	bool operator <= (const Account&)const;
 	bool operator >= (const Account&)const;
-private:
+protected:
 	int dollar;
 	int cent;
 };
@@ -63,11 +63,19 @@ public:
 	ID *& go_right();
 	int compare(std::string to_compare);
 	bool is_leaf();
+
+  std::string get_hash();
+  virtual void Display();
+  virtual void Edit(class Provider&);
+  virtual void Edit(class Member&);
+  virtual void CopyData(class Provider&);
+  virtual void CopyData(class Member&);
+  virtual void CopyData(class Service&);
+
 	std::string get_hash();
-	virtual void Display();
-	virtual void Edit(class Provider&);
-	virtual void Edit(class Member&);
+
 	virtual bool good_standing();
+
 
 protected:
 	ID *left;
@@ -82,17 +90,21 @@ public:
 	Service();
 	Service(const Service & obj);
 	~Service();
-    Service(Service & to_copy);
+  Service(Service & to_copy);
+  void Display();
+
 	void SvcRead();
 	int get_service(std::string& to_copy);
-	//int get_num(int & to_copy);
 	int get_num();
-
+	int print_alpha();
 protected:
+  void CopyData(Service&);
 	std::string svcName;
 	std::string svcProvider;
 	int service_num;
 	Account service_fee;
+private:
+	int quick_sort(Service *& array, int lo, int hi);
 };
 
 // Person class derived from ID
@@ -105,6 +117,7 @@ public:
 	int remove_record(std::string to_remove);
 	int get_name(std::string & to_copy);
 	virtual int report();
+
 	virtual void Read();
 protected:
 	int num_records();
@@ -129,15 +142,22 @@ public:
 	Provider();
 	Provider(const Provider& obj);
 	~Provider();
-    Provider(ID *& to_copy);
-  	Provider(Provider & to_copy);
-  	void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value);
-  	void Display();
+
+  Provider(ID *& to_copy);
+  Provider(Provider & to_copy);
+  void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value);
+  void Display();
+	int report(); 
+protected:
+  void Edit(Provider&);
+  void CopyData(Provider&);
+
 	int report();
 	void Read();
 	void Edit(Provider&);
 protected:
 	int provider_number;
+
 };
 
 // Member class derived from Person
@@ -155,7 +175,9 @@ public:
 	void Read();
 	int Write_report(std::string filename, Provider& obj1, Service & obj2);
 protected:
-    void Edit(Member&);
+  void Edit(Member&);
+  void CopyData(Member&);
+
 
 private:
 	Account member_account;
