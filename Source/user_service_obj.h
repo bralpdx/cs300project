@@ -85,7 +85,9 @@ public:
     Service(Service & to_copy);
 	void SvcRead();
 	int get_service(std::string& to_copy);
-	int get_num(int & to_copy);
+	//int get_num(int & to_copy);
+	int get_num();
+
 protected:
 	std::string svcName;
 	std::string svcProvider;

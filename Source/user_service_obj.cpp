@@ -100,7 +100,7 @@ std::string ID::get_hash() {
 void ID::Display(){}
 void ID::Edit(Provider&){}
 void ID::Edit(Member&){}
-bool ID::good_standing(){}
+bool ID::good_standing() { return true; }
 
 
 //////////////////////////////////
@@ -322,12 +322,12 @@ int Provider::report() {
 	num = num_records();
 	char** array = new char* [num];
 	check = get_filenames(array);
-	char text[100];
+	//char text[100];
 	char* text2 = new char[100];
 	char* text3 = new char[1000];
 	char delim = '&';
-	/*const int SIZE = 100;
-	char s[SIZE];*/
+	const int SIZE = 100;
+	char s[SIZE];
 
 
 	for (int i = 0; i < check; ++i) {
@@ -337,8 +337,8 @@ int Provider::report() {
 		file_out.get(text3, 1000, '#');
 		file_out.ignore(size, '#');
 		do {
-			//file_out.get(&s[0], SIZE, '&'); if doesn't work try this
-			file_out.get(text2, size, delim);
+			file_out.get(&s[0], SIZE, '&');// if doesn't work try this
+			//file_out.get(text2, size, delim);
 			file_out.ignore(size, '&');
 			file_out.get();
 			file_in << text2;
@@ -469,7 +469,7 @@ int Member::report() {
 	num = num_records();
 	char** array = new char * [num];
 	check = get_filenames(array);
-	char text[100];
+	//char text[100];
 	char* text2 = new char [100];
 	char delim = '&';
 
@@ -560,7 +560,7 @@ int Member::Write_report(std::string filename, Provider & obj1, Service & obj2) 
 	obj2.get_service(service_name);
 	int dol, cen;
 	int serv_num = obj2.get_num();
-	member_account(dol, cen);
+	member_account.get_balance(dol, cen); // Trying to fix an error
 
 	file_in.open(filename);
 	if (!file_in) return -1;
@@ -571,7 +571,7 @@ int Member::Write_report(std::string filename, Provider & obj1, Service & obj2) 
 	file_in << provider_name;
 	file_in << '&';
 	file_in << service_name;
-	file_in << '&STOP&#\n';
+	file_in << "&STOP&#\n"; // Trying to fix an error
 	file_in << '&';
 	file_in << today; //should be the date service recieved
 	file_in << '&';
@@ -674,7 +674,7 @@ bool Member::good_standing(){
 Service::Service(Service & to_copy){
   left = NULL;
   right = NULL;
-  //hash_value = to_copy.ID::get_hash();
+  hash_value = to_copy.ID::get_hash();
   svcName = to_copy.svcName;
   service_fee = to_copy.service_fee;
   svcProvider = to_copy.svcProvider;
@@ -692,6 +692,7 @@ Service::~Service() {
 
 void Service::SvcRead(){
 	int select = 0;
+	std::string id;
 
 	std::cout << "Select a Service Provider\n";
 	std::cout << "-----------------\n";
@@ -709,19 +710,47 @@ void Service::SvcRead(){
 
 	if(select == 1){
 		svcProvider = "Dietitian";
-		// *****Add New ID with prepend
+		hash_value = "d";
 
+		std::cout << "Enter Service ID (6-Digits): ";
+		while (!(std::cin >> id) || id.size() != SVC_ID_SIZE) {
+			std::cout << "Error: Incorrect value entered. Use only numerical digits.\n";
+			std::cin.clear();
+			std::cin.ignore(MAX_CHAR, '\n');
+			std::cout << "Enter ID: ";
+		}
+
+		hash_value.append(id);
 	}
 
 	if(select == 2){
 		svcProvider = "Internist";
-		// *****Add New ID with prepend
+		hash_value = "i";
 
+		std::cout << "Enter Service ID (6-Digits): ";
+		while (!(std::cin >> id) || id.size() != SVC_ID_SIZE) {
+			std::cout << "Error: Incorrect value entered. Use only numerical digits.\n";
+			std::cin.clear();
+			std::cin.ignore(MAX_CHAR, '\n');
+			std::cout << "Enter ID: ";
+		}
+
+		hash_value.append(id);
 	}
 
 	if(select == 3){
 		svcProvider = "Exercise Specialist";
-		// *****Add New ID with prepend
+		hash_value = "e";
+
+		std::cout << "Enter Service ID (6-Digits): ";
+		while (!(std::cin >> id) || id.size() != SVC_ID_SIZE) {
+			std::cout << "Error: Incorrect value entered. Use only numerical digits.\n";
+			std::cin.clear();
+			std::cin.ignore(MAX_CHAR, '\n');
+			std::cout << "Enter ID: ";
+		}
+
+		hash_value.append(id);
 
 	}
 
@@ -861,7 +890,7 @@ void Account::svcFee(){
 
 void Account::get_balance(int& dol, int& cen) {
 	dol = dollar;
-	cen = cents;
+	cen = cent;
 	return;
 }
 
