@@ -24,7 +24,7 @@ public:
   bool CopyFromBST(std::string & to_find, Member & copy_to);
   bool CopyFromBST(std::string & to_find, Service & copy_to);
 
-
+  int print_alpha();
   int CountTree();
   int VerifyFromBST(std::string id, int type);
   void Display(); // displays everything
@@ -33,6 +33,9 @@ public:
 private:
 
   int CountTree(ID* root); // counts all data on the right 
+
+  int quick_sort(Service*& array, int lo, int hi);
+
   void Display(ID * root); // recursive display all
 	void destroy(ID*& root); // called in the destructor; destroys all
   bool Search(ID * root, ID & to_search);

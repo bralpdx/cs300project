@@ -827,6 +827,21 @@ int BST::CountTree(){
   }
 }
 
+int BST::print_alpha() {
+    ID* temp;
+    temp = dynamic_cast<Service*>(root);
+    if (temp) {
+        int num = CountTree();
+        Service * array = new Service[num];
+        quick_sort(array, 0, num-1);
+        for (int i = 0; i < num; ++i) {
+            array[i].Display();
+        }
+        return num;
+    }
+    else return 0;
+}
+
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //            CountTree Function
 //
@@ -844,6 +859,44 @@ int BST::CountTree(ID * root){
   else{
     return 1 + CountTree(root->go_right()) + CountTree(root->go_left());
   }
+}
+
+int BST::quick_sort(Service*& array, int lo, int hi) {
+    if (hi <= lo) return 0;
+    int count = 0;
+    std::string key;
+    Service key_data;
+    array[lo].CopyData(key_data);
+    //hold on to copy key data								key_data = array[lo]
+    array[lo].get_service(key);
+
+    int j = hi;
+    int i = lo + 1;
+    while (i <= j) {
+        std::string temp;
+        array[i].get_service(temp);
+        if (key.compare(temp) > 0) i++; //advance the left finger
+        else if (key.compare(temp) <= 0) j--; // advance the right finger
+        else { //swap data
+            Service swap;
+            //function copy data from array[i] into swap:	swap = array[i]
+            //same func copy array[j] into array[i]:		array[i] = array[j]
+            //same func copy swap into array[j]				array[j] = array[i]
+            array[i].CopyData(swap);
+            array[j].CopyData(array[i]);
+            array[i].CopyData(array[j]);
+
+        }
+    }
+    //place the key
+    //function to copy data from array[j] into array[lo]	array[lo] = array[j]
+    //function to copy data from key into array[j]			array[j] = key_data	
+    array[j].CopyData(array[lo]);
+    key_data.CopyData(array[j]);
+
+
+    count = quick_sort(array, lo, j - 1) + quick_sort(array, j + 1, hi) + 1;
+    return count;
 }
 
 BST::BST(const char * file, int flag) {
