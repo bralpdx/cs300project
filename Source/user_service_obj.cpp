@@ -158,10 +158,6 @@ void Person::Read(){
 		std::cin.ignore(MAX_CHAR, '\n');
 		std::cout << "Enter ID (9-Digits): ";
 	}
-int Person::report() {
-
-}
-
 
 	hash_value = hash(id);
 }
@@ -268,10 +264,11 @@ Provider::Provider(Provider & to_copy) {
   zip = to_copy.zip;
   hash_value = to_copy.ID::get_hash();
 
-  head = to_copy.head;
+  //need a copy lll function
+  //head = to_copy.head;
+  
   left = NULL;
   right = NULL;
-
 }
 
 void Provider::Read(){
@@ -347,6 +344,8 @@ int Provider::report() {
 	file_in.close();
 
 	return check;
+}
+
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //              Insert Function
 //
@@ -357,8 +356,10 @@ int Provider::report() {
 //DESC: Primarily used for testing, used to input
 //      data into a Provider object.
 //
-void Provider::Insert(std::string cpyname, std::string cpyaddress, std::string cpycity, std::string cpystate, int cpyzip, std::string cpyhash_value){
-  head = NULL;
+void Provider::Insert(std::string cpyname, std::string cpyaddress, std::string cpycity, std::string cpystate, int cpyzip, std::string cpyhash_value) {
+	//cant access head, and shouldn't need to.
+	//head = NULL;
+
   left = NULL;
   right = NULL;
   hash_value = cpyhash_value;
@@ -480,10 +481,12 @@ int Member::report() {
 		} while (!file_out.eof());
 		file_out.close();
 	}
+	return check;
 }
 
+/* Do we need this?
 Member::Member(ID *&  to_copy) {
-}
+}*/
 
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //            Member copy Constructor
@@ -503,7 +506,9 @@ Member::Member(Member & to_copy) {
   zip = to_copy.zip;
   hash_value = to_copy.ID::get_hash();
 
-  head = to_copy.head;
+  //Need a copy function for a LLL
+  //head = to_copy.head;
+
   left = NULL;
   right = NULL;
 }
@@ -523,7 +528,9 @@ void Member::Read(){
 //      into the Member object that called it.
 //
 void Member::Insert(std::string cpyname, std::string cpyaddress, std::string cpycity, std::string cpystate, int cpyzip, std::string cpyhash_value){
-  head = NULL;
+  
+	//shouldn't need to change head
+	//head = NULL;
   left = NULL;
   right = NULL;
   hash_value = cpyhash_value;
@@ -575,7 +582,6 @@ int Member::report() {
 	return 0;
 }
 
-	return check;
 bool Member::good_standing(){
 	return member_account.good_standing();
 }
