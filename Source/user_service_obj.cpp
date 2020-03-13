@@ -173,7 +173,6 @@ int Member::report() {
 
 	check = CreateFile(filename, (GENERIC_READ | GENERIC_WRITE), (FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE), TRUNCATE_EXISTING);
 
-
 }
 
 //////////////////////////////////
