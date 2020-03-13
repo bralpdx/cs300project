@@ -224,12 +224,13 @@ int Person::get_filenames(Record* head, char** array, int i) {
 	int success = 0;
 	if (!head) return success;
 	std::string temp;
+	int size = temp.length();
 	head->get_file_address(temp);
-	array[i] = new char[temp.length() + 1];
-	for (int j = 0; j < temp.length(); ++j) {
+	array[i] = new char[size + 1];
+	for (int j = 0; j < size; ++j) {
 		array[i][j] = temp[j];
 	}
-	array[i][temp.length()] = '\0';
+	array[i][size] = '\0';
 	success = get_filenames(head->go_next(), array, ++i) + 1;
 	return success;
 }
