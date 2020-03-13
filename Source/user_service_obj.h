@@ -7,11 +7,13 @@
 #include <fstream>
 #include <string>
 #include <ctime>
+#include <sys/stat.h>
 
 //Abstract Base Class
 class Record{
 public:
 	Record();
+	Record(const Record & obj);
 	~Record();
 	Record *& go_next();
 	int get_file_address(std::string & copy);
@@ -33,6 +35,8 @@ public:
 	void add(int dol, int cen);
 	void subtract(int dol, int cen);
 	bool good_standing();
+	void svcFee();
+	void get_balance(int& dol, int& cen);
 	Account& operator = (const Account&);
 	Account& operator += (const Account&);
 	Account& operator -= (const Account&);
@@ -53,10 +57,13 @@ protected:
 class ID{
 public:
 	ID();
+	ID(const ID & obj);
 	virtual ~ID();
 	ID *& go_left();
 	ID *& go_right();
+	int compare(std::string to_compare);
 	bool is_leaf();
+
   std::string get_hash();
   virtual void Display();
   virtual void Edit(class Provider&);
@@ -64,6 +71,12 @@ public:
   virtual void CopyData(class Provider&);
   virtual void CopyData(class Member&);
   virtual void CopyData(class Service&);
+
+	std::string get_hash();
+
+	virtual bool good_standing();
+
+
 protected:
 	ID *left;
 	ID *right;
@@ -75,27 +88,46 @@ protected:
 class Service : public ID {
 public:
 	Service();
+	Service(const Service & obj);
 	~Service();
   Service(Service & to_copy);
   void Display();
+
+	void SvcRead();
+	int get_service(std::string& to_copy);
+	int get_num();
 protected:
   void CopyData(Service&);
 	std::string svcName;
+	std::string svcProvider;
+	int service_num;
 	Account service_fee;
+private:
+	int quick_sort(Service *& array, int lo, int hi);
 };
 
 // Person class derived from ID
 class Person : public ID {
 public:
 	Person();
+	Person(const Person & obj);
 	~Person();
 	int add_record(Record *& to_add);
 	int remove_record(std::string to_remove);
+	int get_name(std::string & to_copy);
 	virtual int report();
+
+	virtual void Read();
 protected:
+	int num_records();
+	int get_filenames(char ** array);
+private:
+	int num_records(Record * head);
+	int get_filenames(Record* head, char** array, int i);
 	int remove_record(std::string to_remove, Record*& head);
 	void destroy(Record*& head);
 	Record * head;
+protected:
 	std::string name;		//25 characters
 	std::string address;	//25 characters
 	std::string city;		//14 characters
@@ -107,7 +139,9 @@ protected:
 class Provider : public Person {
 public:
 	Provider();
+	Provider(const Provider& obj);
 	~Provider();
+
   Provider(ID *& to_copy);
   Provider(Provider & to_copy);
   void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value);
@@ -117,23 +151,34 @@ protected:
   void Edit(Provider&);
   void CopyData(Provider&);
 
+	int report();
+	void Read();
+	void Edit(Provider&);
+protected:
+	int provider_number;
+
 };
 
 // Member class derived from Person
 class Member : public Person {
 public:
 	Member();
+	Member(const Member& obj);
 	~Member();
-  Member(ID *& to_copy);
-  Member(Member & to_copy);
-  void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value); 
-  void Display();
-  int report();
-
+    Member(ID *& to_copy);
+    Member(Member & to_copy);
+    void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value); 
+    void Display();
+    int report();
+    bool good_standing();
+	void Read();
+	int Write_report(std::string filename, Provider& obj1, Service & obj2);
 protected:
   void Edit(Member&);
   void CopyData(Member&);
 
+
 private:
 	Account member_account;
+	int member_number;			//9-digit
 };

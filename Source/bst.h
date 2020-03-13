@@ -24,7 +24,9 @@ public:
   bool CopyFromBST(std::string & to_find, Member & copy_to);
   bool CopyFromBST(std::string & to_find, Service & copy_to);
 
+
   int CountTree();
+  int VerifyFromBST(std::string id, int type);
   void Display(); // displays everything
   bool Search(ID & to_search); // search for a specific hash value in the tree
 
@@ -45,11 +47,15 @@ private:
   bool RemoveFromBST(ID *& root, Provider & to_remove);
   bool RemoveFromBST(ID *& root, Member & to_remove);
 
+
   bool CopyFromBST(ID * root, std::string & to_find, Provider & copy_to);
   bool CopyFromBST(ID * root, std::string & to_find, Member & copy_to);
   bool CopyFromBST(ID * root, std::string & to_find, Service & copy_to);
 
   bool FindInOrderSuccessor(ID *& root, ID *& to_get); // called in the removal function.
+
+
+  int VerifyFromBST(ID * root, std::string id, int type);
 
 	ID * root;
 };
