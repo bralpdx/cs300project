@@ -46,13 +46,17 @@ int sign_in_prompt() {
 
 	// Provider tree
 	if (select == 1) {
+		/*
 		if(toRetrieve.VerifyFromBST(hashedID, select))
 			return 1;
 		else
 			return RETURN_FAILURE;
+		*/
+		return 1;
 	}
 	// Member tree
 	else if (select == 2) {
+		/*
 		status = toRetrieve.VerifyFromBST(hashedID, select);
 
 		if(status == 1){
@@ -67,6 +71,8 @@ int sign_in_prompt() {
 		
 		if(status == -1)
 			return RETURN_FAILURE;
+		*/
+		return RETURN_FAILURE;
 	}
 	else if (select == 3) {
 		// Manager tree

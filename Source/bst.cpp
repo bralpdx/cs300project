@@ -419,16 +419,7 @@ int BST::VerifyFromBST(std::string id, int type){
     return -1;
   }
   else{
-    ID * temp;
-    // Provider
-    if(type == 1)
-      temp = dynamic_cast<Provider*>(this->root);
-
-    // Member
-    if(type == 2)
-      temp = dynamic_cast<Member*>(this->root);
-
-    if(temp){
+    if(root){
       return VerifyFromBST(this->root, id, type);
     }
     return -1;
@@ -453,7 +444,7 @@ int BST::VerifyFromBST(std::string id, int type){
 //      returns a bool.
 //      
 //
-int BST::VerifyFromBST(ID & root, std::string id, int type){
+int BST::VerifyFromBST(ID * root, std::string id, int type){
   //stopping condition
   if(!root)
       return -1;

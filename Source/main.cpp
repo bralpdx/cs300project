@@ -49,8 +49,8 @@ int main() {
 
 				//Validate member
 				if (option == 'a') {
-					if(sign_in_prompt(member_bst) < 0)
-						std::cout << "Member ID Invalid\n";
+					//if(sign_in_prompt(member_bst) < 0)
+					//	std::cout << "Member ID Invalid\n";
 				}
 
 
