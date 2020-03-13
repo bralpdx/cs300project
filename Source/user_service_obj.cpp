@@ -40,8 +40,8 @@ ID *& ID::go_right() {
 int ID::compare(std::string to_compare) {
 	int result1 = 0;
 	int result2 = 0;
-	int size1 = this->hash_value.length;
-	int size2 = to_compare.length;
+	int size1 = this->hash_value.length();
+	int size2 = to_compare.length();
 	int multiplier = 1048576;
 
 	if ((size1 > 5) && (size2 > 5)) {
@@ -323,11 +323,11 @@ int Provider::report() {
 	char** array = new char* [num];
 	check = get_filenames(array);
 	//char text[100];
-	//char* text2 = new char[100];
+	char* text2 = new char[100];
 	char* text3 = new char[1000];
 	char delim = '&';
 	const int SIZE = 100;
-	char s[SIZE];*/
+	char s[SIZE];
 
 
 	for (int i = 0; i < check; ++i) {
@@ -469,7 +469,7 @@ int Member::report() {
 	num = num_records();
 	char** array = new char * [num];
 	check = get_filenames(array);
-	char text[100];
+	//char text[100];
 	char* text2 = new char [100];
 	char delim = '&';
 
@@ -560,7 +560,7 @@ int Member::Write_report(std::string filename, Provider & obj1, Service & obj2) 
 	obj2.get_service(service_name);
 	int dol, cen;
 	int serv_num = obj2.get_num();
-	member_account(dol, cen);
+	Account member_account(dol, cen); // Trying to fix an error
 
 	file_in.open(filename);
 	if (!file_in) return -1;
@@ -571,7 +571,7 @@ int Member::Write_report(std::string filename, Provider & obj1, Service & obj2) 
 	file_in << provider_name;
 	file_in << '&';
 	file_in << service_name;
-	file_in << '&STOP&#\n';
+	file_in << "&STOP&#\n"; // Trying to fix an error
 	file_in << '&';
 	file_in << today; //should be the date service recieved
 	file_in << '&';
@@ -861,7 +861,7 @@ void Account::svcFee(){
 
 void Account::get_balance(int& dol, int& cen) {
 	dol = dollar;
-	cen = cents;
+	cen = cent;
 	return;
 }
 
