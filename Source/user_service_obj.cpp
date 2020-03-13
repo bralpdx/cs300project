@@ -674,7 +674,7 @@ bool Member::good_standing(){
 Service::Service(Service & to_copy){
   left = NULL;
   right = NULL;
-  //hash_value = to_copy.ID::get_hash();
+  hash_value = to_copy.ID::get_hash();
   svcName = to_copy.svcName;
   service_fee = to_copy.service_fee;
   svcProvider = to_copy.svcProvider;
@@ -692,6 +692,7 @@ Service::~Service() {
 
 void Service::SvcRead(){
 	int select = 0;
+	std::string id;
 
 	std::cout << "Select a Service Provider\n";
 	std::cout << "-----------------\n";
@@ -709,19 +710,47 @@ void Service::SvcRead(){
 
 	if(select == 1){
 		svcProvider = "Dietitian";
-		// *****Add New ID with prepend
+		hash_value = "d";
 
+		std::cout << "Enter Service ID (6-Digits): ";
+		while (!(std::cin >> id) || id.size() != SVC_ID_SIZE) {
+			std::cout << "Error: Incorrect value entered. Use only numerical digits.\n";
+			std::cin.clear();
+			std::cin.ignore(MAX_CHAR, '\n');
+			std::cout << "Enter ID: ";
+		}
+
+		hash_value.append(id);
 	}
 
 	if(select == 2){
 		svcProvider = "Internist";
-		// *****Add New ID with prepend
+		hash_value = "i";
 
+		std::cout << "Enter Service ID (6-Digits): ";
+		while (!(std::cin >> id) || id.size() != SVC_ID_SIZE) {
+			std::cout << "Error: Incorrect value entered. Use only numerical digits.\n";
+			std::cin.clear();
+			std::cin.ignore(MAX_CHAR, '\n');
+			std::cout << "Enter ID: ";
+		}
+
+		hash_value.append(id);
 	}
 
 	if(select == 3){
 		svcProvider = "Exercise Specialist";
-		// *****Add New ID with prepend
+		hash_value = "e";
+
+		std::cout << "Enter Service ID (6-Digits): ";
+		while (!(std::cin >> id) || id.size() != SVC_ID_SIZE) {
+			std::cout << "Error: Incorrect value entered. Use only numerical digits.\n";
+			std::cin.clear();
+			std::cin.ignore(MAX_CHAR, '\n');
+			std::cout << "Enter ID: ";
+		}
+
+		hash_value.append(id);
 
 	}
 
