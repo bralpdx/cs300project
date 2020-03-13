@@ -100,7 +100,7 @@ std::string ID::get_hash() {
 void ID::Display(){}
 void ID::Edit(Provider&){}
 void ID::Edit(Member&){}
-bool ID::good_standing(){}
+bool ID::good_standing() { return true; }
 
 
 //////////////////////////////////
@@ -560,7 +560,7 @@ int Member::Write_report(std::string filename, Provider & obj1, Service & obj2) 
 	obj2.get_service(service_name);
 	int dol, cen;
 	int serv_num = obj2.get_num();
-	Account member_account(dol, cen); // Trying to fix an error
+	member_account.get_balance(dol, cen); // Trying to fix an error
 
 	file_in.open(filename);
 	if (!file_in) return -1;
