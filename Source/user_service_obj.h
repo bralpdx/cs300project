@@ -87,7 +87,11 @@ public:
 	int add_record(Record *& to_add);
 	int remove_record(std::string to_remove);
 	virtual int report();
+	int num_records();
+	int get_filenames(char ** array);
 private:
+	int num_records(Record * head);
+	int get_filenames(Record* head, char** array, int i);
 	int remove_record(std::string to_remove, Record*& head);
 	void destroy(Record*& head);
 	Record * head;
@@ -118,4 +122,5 @@ public:
 	int report();
 private:
 	Account member_account;
+	int member_number			//9-digit
 };

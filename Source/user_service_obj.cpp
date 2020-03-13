@@ -149,6 +149,32 @@ int Person::remove_record(std::string to_remove, Record *& head) {
 	return success;
 }
 
+int Person::num_records() {
+	return num_records(head);
+}
+
+int Person::get_filenames(char** array) {
+	return get_filenames(head, array, 0);
+}
+
+int Person::num_records(Record * head) {
+	if (!head) return 0;
+	return num_records(head->go_next()) + 1;
+}
+
+int Person::get_filenames(Record* head, char** array, int i) {
+	int success = 0;
+	if (!head) return success;
+	std::string temp;
+	head->get_file_address(temp);
+	array[i] = new char[temp.length() + 1];
+	for (int j = 0; j < temp.length(); ++j) {
+		array[i][j] = temp[j];
+	}
+	array[i][temp.length()] = '\0';
+	success = get_filenames(head->go_next(), array, ++i) + 1;
+	return success;
+}
 
 void Person::destroy(Record*& head) {
 	if (!head) return;
@@ -195,15 +221,17 @@ int Provider::report() {
 //////////////////////////////////
 
 Member::Member(): Person() {
-
+	member_number = 0;
 }
 Member::~Member() {
-
+	member_number = 0;
 }
 
 int Member::report() {
 	using namespace std;
-
+	int num;
+	int check;
+	streamsize size = 100;
 	ofstream file_in;
 	time_t now = time(0);
 	string dt = ctime(&now);
@@ -223,35 +251,47 @@ int Member::report() {
 
 	file_in.open(filename);
 
+	if (!file_in) return -1;
+
 	file_in << this->name;
 	file_in << "\n";
-	file_in << 
+	file_in << this->member_number;
+	file_in << "\n";
+	file_in << this->address;
+	file_in << "\n";
+	file_in << this->city;
+	file_in << "\n";
+	file_in << this->state;
+	file_in << "\n";
+	file_in << this->zip;
+	file_in << "\n";
 
-	/*Dword buffsize = GetCurrentDirectoryA(0, NULL);
-	
-	int check;
-	time_t now = time(0);
-	std::string dt = ctime(&now);
-	std::string date;
-	std::string filename;
-	std::string text = ".txt";
+	num = num_records();
+	char** array = new char * [num];
+	check = get_filenames(array);
+	char text[100];
+	char* text2 = new char [100];
+	char delim = '&';
 
-	date.append(dt, 4, 3);
-	date.append("-");
-	date.append(dt, 8, 2);
-	date.append("-");
-	date.append(dt, 20, 4);
+	for (int i = 0; i < check; ++i) {
+		ifstream file_out;
+		file_out.open(array[i]);
+		if (!file_out) return -1 - i;
+		do {
+			file_out.get(text2, size, delim);
+			file_out.ignore(size, '&');
+			file_out.get(text2, size, delim);
+			file_out.ignore(size, '&');
+			file_out.get();
+			file_in << text2;
+			file_in << "\n";
+		} while (!file_out.eof());
+		file_out.close();
+	}
 
-	check = CreateDirectoryA(date, NULL);
+	file_in.close();
 
-	check = GetCurrentDirectoryA(buffsize, filename);
-
-	filename.append(this->name);
-	filename.append(date);
-	filename.append(text);
-
-	check = CreateFile(filename, (GENERIC_READ | GENERIC_WRITE), (FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE), TRUNCATE_EXISTING);
-	*/
+	return check;
 }
 
 //////////////////////////////////
