@@ -5,10 +5,15 @@
 
 
 int main() {
+	/*
 	pre_hash_id(); // See utilities.h for desc
 	BST service_bst("svc_codes.txt", 3);
 	BST provider_bst("user_info.txt", 1);
 	BST member_bst("", 2);
+	*/
+	Member member_add;
+	Provider provider_add;
+	Service service_add;
 
 	char again;
 	char option;
@@ -110,6 +115,8 @@ int main() {
 
 				//Add Member
 				if (option == 'a') {
+					member_add.Read();
+					//member_bst.AddToBST(member_add);
 
 				}
 
@@ -125,6 +132,8 @@ int main() {
 
 				//Add Provider
 				if (option == 'd') {
+					provider_add.Read();
+					//provider_bst.AddToBST(provider_add);
 
 				}
 
@@ -140,6 +149,8 @@ int main() {
 
 				//Add Service
 				if (option == 'g') {
+					service_add.SvcRead();
+					//service_bst.AddToBST(service_add);
 
 				}
 

@@ -33,6 +33,7 @@ public:
 	void add(int dol, int cen);
 	void subtract(int dol, int cen);
 	bool good_standing();
+	void svcFee();
 	Account& operator = (const Account&);
 	Account& operator += (const Account&);
 	Account& operator -= (const Account&);
@@ -57,11 +58,11 @@ public:
 	ID *& go_left();
 	ID *& go_right();
 	bool is_leaf();
-  std::string get_hash();
-  virtual void Display();
-  virtual void Edit(class Provider&);
-  virtual void Edit(class Member&);
-  virtual bool good_standing();
+	std::string get_hash();
+	virtual void Display();
+	virtual void Edit(class Provider&);
+	virtual void Edit(class Member&);
+	virtual bool good_standing();
 
 protected:
 	ID *left;
@@ -75,9 +76,11 @@ class Service : public ID {
 public:
 	Service();
 	~Service();
-  Service(Service & to_copy);
+    Service(Service & to_copy);
+	void SvcRead();
 protected:
 	std::string svcName;
+	std::string svcProvider;
 	Account service_fee;
 };
 
@@ -89,6 +92,7 @@ public:
 	int add_record(Record *& to_add);
 	int remove_record(std::string to_remove);
 	virtual int report();
+	virtual void Read();
 protected:
 	int remove_record(std::string to_remove, Record*& head);
 	void destroy(Record*& head);
@@ -105,13 +109,15 @@ class Provider : public Person {
 public:
 	Provider();
 	~Provider();
-  Provider(ID *& to_copy);
-  Provider(Provider & to_copy);
-  void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value);
-  void Display();
+    Provider(ID *& to_copy);
+  	Provider(Provider & to_copy);
+  	void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value);
+  	void Display();
 	int report();
+	void Read();
+
 protected:
-  void Edit(Provider&);
+    void Edit(Provider&);
 
 };
 
@@ -120,15 +126,16 @@ class Member : public Person {
 public:
 	Member();
 	~Member();
-  Member(ID *& to_copy);
-  Member(Member & to_copy);
-  void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value); 
-  void Display();
-  int report();
-  bool good_standing();
+    Member(ID *& to_copy);
+    Member(Member & to_copy);
+    void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value); 
+    void Display();
+    int report();
+    bool good_standing();
+	void Read();
 
 protected:
-  void Edit(Member&);
+    void Edit(Member&);
 
 private:
 	Account member_account;

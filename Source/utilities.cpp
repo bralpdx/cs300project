@@ -22,7 +22,7 @@ int sign_in_prompt() {
 	std::cout << "[4] Operator\n";
 	std::cout << "[5] Display Read in Data\n";
 	std::cout << "Enter: ";
-	while (!(std::cin >> select) || select <= 0 || select > 4) {
+	while (!(std::cin >> select) || select <= 0 || select > 5) {
 		std::cout << "Invalid input.\n";
 		std::cout << "Enter: ";
 		std::cin.clear();
