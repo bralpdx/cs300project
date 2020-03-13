@@ -11,16 +11,18 @@ int sign_in_prompt() {
 	std::string id = "";
 	std::string hashedID = "";
 	int select = 0;
+	int status = 0;
 	SHA256 hash;
 
 	std::cout << "Select login type\n";
 	std::cout << "-----------------\n";
 	std::cout << "[1] Provider\n";
-	std::cout << "[2] Manager\n";
-	std::cout << "[3] Operator\n";
-	std::cout << "[4] Display Read in Data\n";
+	std::cout << "[2] Member\n";
+	std::cout << "[3] Manager\n";
+	std::cout << "[4] Operator\n";
+	std::cout << "[5] Display Read in Data\n";
 	std::cout << "Enter: ";
-	while (!(std::cin >> select) || select <= 0 || select > 4) {
+	while (!(std::cin >> select) || select <= 0 || select > 5) {
 		std::cout << "Invalid input.\n";
 		std::cout << "Enter: ";
 		std::cin.clear();
@@ -41,20 +43,48 @@ int sign_in_prompt() {
 
 	// Will search tree for hashedID match
 	hashedID = hash(id);
-	// call tree
+
+	// Provider tree
 	if (select == 1) {
-		// Provider tree
+		/*
+		if(toRetrieve.VerifyFromBST(hashedID, select))
+			return 1;
+		else
+			return RETURN_FAILURE;
+		*/
 		return 1;
 	}
+	// Member tree
 	else if (select == 2) {
-		// Manager
-		return 2;
+		/*
+		status = toRetrieve.VerifyFromBST(hashedID, select);
+
+		if(status == 1){
+			std::cout << "Member Status: Validated\n";
+			return RETURN_SUCCESS;
+		}
+
+		if(status == 0){
+			std::cout << "Member Status: Member Suspended\n";
+			return RETURN_SUCCESS;
+		}
+		
+		if(status == -1)
+			return RETURN_FAILURE;
+		*/
+		return RETURN_FAILURE;
 	}
 	else if (select == 3) {
-		// Operator
-		return 3;
+		// Manager tree
+		//if(toRetrieve.RetrieveFromBST(hashedID))
+			return 2;
 	}
 	else if (select == 4) {
+		// Operator
+		// if(toRetrieve.RetrieveFromBST(hashedID))
+		return 3;
+	}
+	else if (select == 5) {
 		// Display read in data
 		return 4;
 	}

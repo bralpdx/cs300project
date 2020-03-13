@@ -5,10 +5,15 @@
 
 
 int main() {
+	/*
 	pre_hash_id(); // See utilities.h for desc
 	BST service_bst("svc_codes.txt", 3);
 	BST provider_bst("user_info.txt", 1);
 	BST member_bst("", 2);
+	*/
+	Member member_add;
+	Provider provider_add;
+	Service service_add;
 
 	char again;
 	char option;
@@ -18,6 +23,17 @@ int main() {
 	std::cout << "What terminal would you like to access?\n\n";
 
 	do {
+		/*
+		std::cout << "a) Provider Terminal\n";
+		std::cout << "b) Manager Terminal\n";
+		std::cout << "c) Operator Terminal\n";
+		std::cout << "d) Display Read in Data\n";
+		
+		std::cin >> option;
+		option = tolower(option);
+		*/
+
+		//Enter ID number
 		terminal_rc = sign_in_prompt();
 
 		//Provider Terminal
@@ -38,8 +54,10 @@ int main() {
 
 				//Validate member
 				if (option == 'a') {
-
+					//if(sign_in_prompt(member_bst) < 0)
+					//	std::cout << "Member ID Invalid\n";
 				}
+
 
 				//Bill member
 				if (option == 'b') {
@@ -97,6 +115,8 @@ int main() {
 
 				//Add Member
 				if (option == 'a') {
+					member_add.Read();
+					//member_bst.AddToBST(member_add);
 
 				}
 
@@ -112,6 +132,8 @@ int main() {
 
 				//Add Provider
 				if (option == 'd') {
+					provider_add.Read();
+					//provider_bst.AddToBST(provider_add);
 
 				}
 
@@ -127,6 +149,8 @@ int main() {
 
 				//Add Service
 				if (option == 'g') {
+					service_add.SvcRead();
+					//service_bst.AddToBST(service_add);
 
 				}
 
@@ -152,7 +176,16 @@ int main() {
 		std::cout << "Access another terminal? (y/n) \n";
 		std::cin >> again;
 		again = tolower(again);
-	} while (again == 'y');
+	} while (again == 'y' || terminal_rc == RETURN_FAILURE);
 
+
+
+/*
+	if(sign_in_prompt() == RETURN_FAILURE)
+		std::cout << "ERROR SIGNING IN.\n";
+
+	std::cin.get();
+	return RETURN_SUCCESS;
+	*/
 	return 0;
 }

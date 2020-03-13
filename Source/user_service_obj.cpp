@@ -1,4 +1,7 @@
 #include "user_service_obj.h"
+#include "hash-library-master/sha256.h"
+#include "param.h"
+
 #include <string>
 
 //////////////////////////////////
@@ -38,6 +41,7 @@ std::string ID::get_hash() {
 void ID::Display(){}
 void ID::Edit(Provider&){}
 void ID::Edit(Member&){}
+bool ID::good_standing(){}
 
 
 //////////////////////////////////
@@ -64,6 +68,39 @@ Person::~Person() {
 
 int Person::report(){
 	return 0;
+}
+
+void Person::Read(){
+	std::string id = "";
+	SHA256 hash;
+
+	std::cout << "Name: ";
+	std::cin >>name;
+;
+	std::cout << "Address: ";
+	std::cin >>address;
+ ;
+	std::cout << "City: ";
+	std::cin >>city;
+;
+	std::cout << "State: ";
+	std::cin >>state;
+;
+	std::cout << "Zip Code: ";
+	std::cin >>zip;
+
+	std::cin.clear();
+	std::cin.ignore(MAX_CHAR, '\n');
+;
+	std::cout << "Enter ID (9-Digits): ";
+	while (!(std::cin >>id ) || id.size() != ID_SIZE) {
+		std::cout << "Error: Incorrect value entered. Use only numerical digits.\n";
+		std::cin.clear();
+		std::cin.ignore(MAX_CHAR, '\n');
+		std::cout << "Enter ID (9-Digits): ";
+	}
+
+	hash_value = hash(id);
 }
 
 int Person::add_record(Record *& to_add) {
@@ -147,6 +184,11 @@ Provider::Provider(Provider & to_copy) {
   right = NULL;
 
 }
+
+void Provider::Read(){
+	Person::Read();
+}
+
 
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //              Insert Function
@@ -247,6 +289,10 @@ Member::Member(Member & to_copy) {
   right = NULL;
 }
 
+void Member::Read(){
+	Person::Read();
+}
+
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //          Insert Function
 //
@@ -310,25 +356,73 @@ int Member::report() {
 	return 0;
 }
 
+bool Member::good_standing(){
+	return member_account.good_standing();
+}
+
 //////////////////////////////////
 //         Service Class        //
 //////////////////////////////////
 
-
 Service::Service(Service & to_copy){
   left = NULL;
   right = NULL;
-  hash_value = to_copy.ID::get_hash();
+  //hash_value = to_copy.ID::get_hash();
   svcName = to_copy.svcName;
   service_fee = to_copy.service_fee;
+  svcProvider = to_copy.svcProvider;
 }
 
 Service::Service(): ID() {
 	svcName = "";
+	svcProvider = "";
 }
 
 Service::~Service() {
 	svcName = "";
+	svcProvider = "";
+}
+
+void Service::SvcRead(){
+	int select = 0;
+
+	std::cout << "Select a Service Provider\n";
+	std::cout << "-----------------\n";
+	std::cout << "[1] Dietitian\n";
+	std::cout << "[2] Internist\n";
+	std::cout << "[3] Exercise Specialist\n";
+	std::cout << "Select a Service Provider: ";
+
+	while (!(std::cin >> select) || select <= 0 || select > 3) {
+		std::cout << "Invalid input.\n";
+		std::cout << "Enter: ";
+		std::cin.clear();
+		std::cin.ignore(MAX_CHAR, '\n');
+	}
+
+	if(select == 1){
+		svcProvider = "Dietitian";
+		// *****Add New ID with prepend
+
+	}
+
+	if(select == 2){
+		svcProvider = "Internist";
+		// *****Add New ID with prepend
+
+	}
+
+	if(select == 3){
+		svcProvider = "Exercise Specialist";
+		// *****Add New ID with prepend
+
+	}
+
+	std::cout << "Service Name: ";
+ 	std::cin >> svcName;
+
+	service_fee.svcFee();
+
 }
 
 //////////////////////////////////
@@ -422,6 +516,29 @@ void Account::subtract(int dol, int cen) {
 bool Account::good_standing() {
 	if ((dollar > 0) || ((dollar == 0) && (cent >= 0))) return true;
 	else return false;
+}
+
+// Reads in service fee
+// Generates substrings and then converts substrings to ints
+void Account::svcFee(){
+	std::string temp = "";
+	std::string sDollar = "";
+	std::string sCent = "";
+	std::size_t found;
+
+	std::cout << "Service Fee: $";
+	std::cin >> temp;
+
+    found = (temp.find('.'));
+
+	sDollar = temp.substr(0, found);
+	sCent = temp.substr(found+1, 2);
+
+	dollar = std::stoi(sDollar);
+	cent = std::stoi(sCent);
+
+	std::cin.clear();
+	std::cin.ignore(MAX_CHAR, '\n');
 }
 
 Account& Account::operator = (const Account& a) {

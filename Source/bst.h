@@ -20,6 +20,8 @@ public:
   bool RemoveFromBST(Provider & to_remove);
   bool RemoveFromBST(Member & to_remove);
 
+  int VerifyFromBST(std::string id, int type);
+
   void Display(); // displays everything
   int CountRight();
 
@@ -38,6 +40,8 @@ private:
   
   bool RemoveFromBST(ID *& root, Provider & to_remove);
   bool RemoveFromBST(ID *& root, Member & to_remove);
+
+  int VerifyFromBST(ID * root, std::string id, int type);
 
 	//void destroy(ID*& root);
 	ID * root;
