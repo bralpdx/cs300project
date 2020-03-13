@@ -419,6 +419,7 @@ int BST::VerifyFromBST(std::string id, int type){
     return -1;
   }
   else{
+
     if(root){
       return VerifyFromBST(this->root, id, type);
     }
@@ -449,19 +450,19 @@ int BST::VerifyFromBST(ID * root, std::string id, int type){
   if(!root)
       return -1;
 
-  if(root->ID::hash_value == id){
+  if(root->ID::get_hash() == id){
     if(type == 1)
       return 1;
 
     if(type == 2) {
-      if(root->member_account.good_standing())
+      if(root->good_standing())
         return 1;
       else
         return 0;
     }
   }
   else{
-    if(root->ID::hash_value > id) 
+    if(root->ID::get_hash() > id) 
       return VerifyFromBST(root->go_left(), id, type);
     else
       return VerifyFromBST(root->go_right(), id, type);

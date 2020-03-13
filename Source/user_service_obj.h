@@ -61,6 +61,7 @@ public:
   virtual void Display();
   virtual void Edit(class Provider&);
   virtual void Edit(class Member&);
+  virtual bool good_standing();
 
 protected:
 	ID *left;
@@ -124,6 +125,7 @@ public:
   void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value); 
   void Display();
   int report();
+  bool good_standing();
 
 protected:
   void Edit(Member&);

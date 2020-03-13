@@ -38,6 +38,7 @@ std::string ID::get_hash() {
 void ID::Display(){}
 void ID::Edit(Provider&){}
 void ID::Edit(Member&){}
+bool ID::good_standing(){}
 
 
 //////////////////////////////////
@@ -308,6 +309,10 @@ void Member::Edit(Member& to_copy){
 
 int Member::report() {
 	return 0;
+}
+
+bool Member::good_standing(){
+	return member_account.good_standing();
 }
 
 //////////////////////////////////
