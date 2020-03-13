@@ -879,7 +879,7 @@ int Service::quick_sort(Service *& array, int lo, int hi) {
 	int i = lo + 1;
 	while (i <= j) {
 		std::string temp;
-		array[i]->get_service(temp);
+		array[i].get_service(temp);
 		if (key.compare(temp)> 0)) i++; //advance the left finger
 		else if (key.compare(temp) <=0) j--; // advance the right finger
 		else { //swap data
