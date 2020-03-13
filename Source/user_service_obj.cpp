@@ -327,7 +327,7 @@ int Provider::report() {
 	char* text3 = new char[1000];
 	char delim = '&';
 	const int SIZE = 100;
-	char s[SIZE];*/
+	char s[SIZE];
 
 
 	for (int i = 0; i < check; ++i) {
