@@ -16,10 +16,11 @@ int sign_in_prompt() {
 	std::cout << "Select login type\n";
 	std::cout << "-----------------\n";
 	std::cout << "[1] Provider\n";
-	std::cout << "[2] Member\n";
-	std::cout << "[3] Manager\n";
+	std::cout << "[2] Manager\n";
+	std::cout << "[3] Operator\n";
+	std::cout << "[4] Display Read in Data\n";
 	std::cout << "Enter: ";
-	while (!(std::cin >> select) || select <= 0 || select > 3) {
+	while (!(std::cin >> select) || select <= 0 || select > 4) {
 		std::cout << "Invalid input.\n";
 		std::cout << "Enter: ";
 		std::cin.clear();
@@ -43,18 +44,22 @@ int sign_in_prompt() {
 	// call tree
 	if (select == 1) {
 		// Provider tree
+		return 1;
 	}
 	else if (select == 2) {
-		// Member tree
+		// Manager
+		return 2;
 	}
 	else if (select == 3) {
-		// Manager
+		// Operator
+		return 3;
+	}
+	else if (select == 4) {
+		// Display read in data
+		return 4;
 	}
 	else
 		return RETURN_FAILURE;
-
-	system("pause");
-	return RETURN_SUCCESS;
 }
 
 // Opens pre-hashed file, and passes it to be hashed.

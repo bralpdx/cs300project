@@ -13,19 +13,24 @@ int main() {
 	char again;
 	char option;
 
+	int terminal_rc;
+
 	std::cout << "What terminal would you like to access?\n\n";
 
 	do {
+		/*
 		std::cout << "a) Provider Terminal\n";
 		std::cout << "b) Manager Terminal\n";
 		std::cout << "c) Operator Terminal\n";
 		std::cout << "d) Display Read in Data\n";
-
+		
 		std::cin >> option;
 		option = tolower(option);
-		
+		*/
+		terminal_rc = sign_in_prompt();
+
 		//Provider Terminal
-		if (option == 'a') {
+		if (terminal_rc == 1) {
 			do {
 				std::cout << "=======================\n";
 				std::cout << "== Welcome to ChocAn ==\n";
@@ -59,7 +64,7 @@ int main() {
 		}
 
 		//Manager Terminal
-		if (option == 'b') {
+		if (terminal_rc == 2) {
 			do {
 
 				std::cout << "a) Member Report\n";
@@ -83,7 +88,7 @@ int main() {
 		}
 
 		//Operator Terminal
-		if (option == 'c') {
+		if (terminal_rc == 3) {
 			do {
 				std::cout << "a) Add Member\n";
 				std::cout << "b) Remove Member\n";
@@ -148,9 +153,10 @@ int main() {
 		}
 
 		//dispay read in data from text file
-		if (option == 'd') {
+		if (terminal_rc == 4) {
 
 		}
+
 
 		std::cout << "Access another terminal? (y/n) \n";
 		std::cin >> again;
