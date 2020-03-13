@@ -146,7 +146,7 @@ public:
     int report();
     bool good_standing();
 	void Read();
-
+	int Write_report(std::string filename);
 protected:
     void Edit(Member&);
 
