@@ -835,6 +835,19 @@ int BST::CountTree(){
   }
 }
 
+void BST::copy_tress(ID* source, ID*& destination) {
+    if (!root) return;
+    ID* temp;
+    temp = dynamic_cast<Service*>(source);
+    if (temp) temp = new Service;
+    temp = dynamic_cast<Member*>(source);
+    if (temp) temp = new  Member;
+    temp = dynamic_cast<Provider*>(source);
+    if (temp) temp = new Provider;
+
+    //yada yada
+}
+
 int BST::copy_tree(ID * source, Service *& array, int i) {
     int success = 0;
     if (!root) return success;
