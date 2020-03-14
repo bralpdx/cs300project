@@ -139,7 +139,8 @@ Person::Person(): ID() {
 }
 
 Person::Person(const Person& p): ID(p) {
-	//function to copy head
+	head = NULL;
+	copy_records(p.head, head);
 	name = p.name;
 	address = p.address;
 	city = p.city;
@@ -260,6 +261,13 @@ int Person::get_filenames(Record* head, char** array, int i) {
 	array[i][size] = '\0';
 	success = get_filenames(head->go_next(), array, ++i) + 1;
 	return success;
+}
+
+void Person::copy_records(Record* source, Record*& destination) {
+	if (!source) return;
+	Record* temp = new Record(source->get_file_address());
+	destination->add(temp);
+	copy_records(source->go_next(), destination);
 }
 
 void Person::destroy(Record*& head) {
@@ -854,6 +862,7 @@ int Service::get_num(std::string to_copy) {
 //////////////////////////////////
 //         Record Class         //
 //////////////////////////////////
+
 Record::Record() {
   next = NULL;
 }
@@ -901,8 +910,6 @@ int Record::remove(std::string address) {
 //////////////////////////////////
 //         Account Class        //
 //////////////////////////////////
-
-
 
 Account::Account() {
 	dollar = 0;

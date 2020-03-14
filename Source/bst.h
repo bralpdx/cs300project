@@ -7,6 +7,7 @@
 class BST{
 public:
 	BST();
+    BST(const BST& b);
 	BST(std::string file, int flag);
 	~BST();
   

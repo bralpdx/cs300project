@@ -118,6 +118,7 @@ private:
 	int num_records(Record * head);
 	int get_filenames(Record* head, char** array, int i);
 	int remove_record(std::string to_remove, Record*& head);
+	void copy_records(Record* source, Record*& destination);
 	void destroy(Record*& head);
 	Record * head;
 protected:

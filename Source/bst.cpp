@@ -1,13 +1,21 @@
 #include "bst.h"
 #include <fstream>
 #include <cstring>
+
 //////////////////////////////////
 //      BST Class				//
 //////////////////////////////////
+
+
 BST::BST() {
   root = NULL;
 }
 
+
+BST::BST(const BST & b) {
+    root = NULL;
+    //function to copy
+}
 
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //              AddToBST Function
