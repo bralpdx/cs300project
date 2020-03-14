@@ -5,7 +5,6 @@
 #include "user_service_obj.h"
 #include "hash-library-master/sha256.h"
 #include "param.h"
-
 #include <string>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -705,12 +704,6 @@ void Member::CopyData(Member& copy_to){
   copy_to.zip = zip;
   copy_to.hash_value =  hash_value;
 }
-
-/*
-int Member::report() {
-	return 0;
-}
-*/
 
 bool Member::good_standing(){
 	return member_account.good_standing();
