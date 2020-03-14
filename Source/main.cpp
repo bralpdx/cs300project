@@ -83,7 +83,7 @@ int main() {
 					std::cin.ignore(20, '\n');
 									 
 				}
-			}
+			
 
 				//display Services
 				if (option == 'c') {
