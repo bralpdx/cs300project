@@ -19,16 +19,17 @@ int main() {
 	GetCurrentDirectory(MAX_PATH, NPath);
 
 	std::cout << "my directory is " << NPath << "\n";
-	std::string filename = NPath;
+	std::string Sfilename = NPath;
+	std::string Pfilename = NPath;
 	std::string service_file = "\\svc-codes.txt";
-	filename.append(service_file);
-	std::cout << "my string is " << filename << "\n";
 
-	BST service_bst(filename, 3);
+	Sfilename.append(service_file);
+
+	BST service_bst(Sfilename, 3);
 	Member member_add;
 	Provider provider_add;
 	Service service_add;
-	service_bst.Display();
+	//service_bst.Display();
 	char again;
 	char option;
 
@@ -82,15 +83,13 @@ int main() {
 					std::cin.get(input_member_num, 20, '\n');
 					std::cin.clear();
 					std::cin.ignore(20, '\n');
-
-					
-			
-
+									 
 				}
+			}
 
 				//display Services
 				if (option == 'c') {
-
+					service_bst.print_alpha();
 				}
 
 			} while (option != 'x');

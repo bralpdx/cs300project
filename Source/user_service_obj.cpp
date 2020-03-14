@@ -1032,8 +1032,8 @@ void Account::get_balance(int& dol, int& cen) {
 Account& Account::operator = (const Account& a) {
 	if (this == &a) return *this;
 	//std::cout << "your in the account operator function!\n\n";
-	this->dollar = dollar;
-	this->cent = cent;
+	this->dollar = a.dollar;
+	this->cent = a.cent;
 	return *this;
 }
 Account& Account::operator += (const Account& a) {

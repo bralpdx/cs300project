@@ -827,12 +827,28 @@ int BST::CountTree(){
   }
 }
 
+int BST::copy_tree(ID * source, Service *& array, int i) {
+    int success = 0;
+    if (!root) return success;
+    ID* temp;
+    temp = dynamic_cast<Service*>(source);
+    if (temp) {
+        source->CopyData(array[i]);
+        success = copy_tree(source->go_right(), array, ++i) + 1;
+        source->CopyData(array[i]);
+        success = copy_tree(source->go_left(), array, ++i) + 1;
+        source->CopyData(array[i]);
+    }
+    return success;
+}
+
 int BST::print_alpha() {
     ID* temp;
     temp = dynamic_cast<Service*>(root);
     if (temp) {
         int num = CountTree();
         Service * array = new Service[num];
+        copy_tree(root, array, 0);
         quick_sort(array, 0, num-1);
         for (int i = 0; i < num; ++i) {
             array[i].Display();
@@ -874,26 +890,22 @@ int BST::quick_sort(Service*& array, int lo, int hi) {
     int i = lo + 1;
     while (i <= j) {
         std::string temp;
+        std::string temp2;
         array[i].get_service(temp);
+        array[j].get_service(temp2);
         if (key.compare(temp) > 0) i++; //advance the left finger
-        else if (key.compare(temp) <= 0) j--; // advance the right finger
+        else if (key.compare(temp2) <= 0) j--; // advance the right finger
         else { //swap data
             Service swap;
-            //function copy data from array[i] into swap:	swap = array[i]
-            //same func copy array[j] into array[i]:		array[i] = array[j]
-            //same func copy swap into array[j]				array[j] = array[i]
             array[i].CopyData(swap);
             array[j].CopyData(array[i]);
-            array[i].CopyData(array[j]);
+            swap.CopyData(array[j]);
 
         }
     }
     //place the key
-    //function to copy data from array[j] into array[lo]	array[lo] = array[j]
-    //function to copy data from key into array[j]			array[j] = key_data	
     array[j].CopyData(array[lo]);
     key_data.CopyData(array[j]);
-
 
     count = quick_sort(array, lo, j - 1) + quick_sort(array, j + 1, hi) + 1;
     return count;
@@ -911,13 +923,35 @@ BST::BST(std::string file, int flag) {
 
 	//File is a Provider file
 	if (flag == 1) {
-	
+        std::string temp_hash;
+        std::string dol;
+        std::string cen;
+        std::string temp_name;
+        std::string temp_street;
+        std::string temp_city;
+        std::string temp_state;
+        std::string temp_zip;
+
+        getline(inFile, temp_hash, ',');
+        while (getline(inFile, temp_hash, ',')) {
+            getline(inFile, temp_name, ',');
+            getline(inFile, temp_street, ',');
+            getline(inFile, temp_city, ',');
+            getline(inFile, temp_state, ',');
+            getline(inFile, temp_zip, ',');
+
+            //Provider new_obj(temp_hash, temp_name, temp_type, dol, cen);
+            getline(inFile, temp_hash, ',');
+            //if (!AddToBST(root, new_obj)) std::cout << "Not added to BST\n";
+        }
+
+        inFile.close();
 
 	}
 
 	//File is a Member file
 	if (flag == 2) {
-	
+
 	}
 
 	//File is a Service file
@@ -929,16 +963,11 @@ BST::BST(std::string file, int flag) {
         std::string temp_job;
         std::string temp_type;
 
-
-        //std::cout << "good before getine\n\n";
         getline(inFile, temp_hash, ',');
         while (getline(inFile, temp_hash, ',')) {
 
-           // std::cout << "hash: " << temp_hash << std::endl;
             getline(inFile, dol, ',');
-           // std::cout << "dol: " << dol << std::endl;
             getline(inFile, cen, ',');
-           // std::cout << cen << std::endl;
             getline(inFile, temp_job, ',');
             getline(inFile, temp_type, ',');
             Service new_obj(temp_hash, temp_job, temp_type, dol, cen);
