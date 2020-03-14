@@ -265,8 +265,11 @@ int Person::get_filenames(Record* head, char** array, int i) {
 
 void Person::copy_records(Record* source, Record*& destination) {
 	if (!source) return;
-	Record* temp = new Record(source->get_file_address());
-	destination->add(temp);
+	std::string grab;
+	source->get_file_address(grab);
+	Record* temp = new Record(grab);
+	temp->set_next(destination);
+	destination = temp;
 	copy_records(source->go_next(), destination);
 }
 
