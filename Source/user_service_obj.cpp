@@ -339,8 +339,6 @@ int Provider::report() {
 	num = num_records();
 	char** array = new char* [num];
 	check = get_filenames(array);
-	//char text[100];
-	char* text2 = new char[100];
 	char* text3 = new char[1000];
 	char delim = '&';
 	const int SIZE = 100;
@@ -354,11 +352,10 @@ int Provider::report() {
 		file_out.get(text3, 1000, '#');
 		file_out.ignore(size, '#');
 		do {
-			file_out.get(&s[0], SIZE, '&');// if doesn't work try this
-			//file_out.get(text2, size, delim);
+			file_out.get(&s[0], SIZE, '&');
 			file_out.ignore(size, '&');
 			file_out.get();
-			file_in << text2;
+			file_in << s;
 			file_in << "\n";
 		} while (!file_out.eof());
 		file_out.close();
