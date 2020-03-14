@@ -551,7 +551,7 @@ void Member::Read(){
 	Person::Read();
 }
 
-int Member::Write_report(std::string filename, Provider & obj1, Service & obj2) {
+int Member::Write_record(std::string filename, Provider & obj1, Service & obj2) {
 	std::ofstream file_in;
 	time_t now = time(0);
 	struct tm* timeinfo;
@@ -587,7 +587,8 @@ int Member::Write_report(std::string filename, Provider & obj1, Service & obj2) 
 	obj1.get_name(provider_name);
 	obj2.get_service(service_name);
 	int dol, cen;
-	int serv_num = obj2.get_num();
+	std::string serv_num;
+	obj2.get_num(serv_num);
 	member_account.get_balance(dol, cen); // Trying to fix an error
 
 	file_in.open(filename);
@@ -611,7 +612,9 @@ int Member::Write_report(std::string filename, Provider & obj1, Service & obj2) 
 	file_in << '&';
 	file_in << this->member_number;
 	file_in << '&';
-	file_in << serv_num;
+	for (int i = 1; i < 7; ++i) {
+		file_in << serv_num[i];
+	}
 	file_in << '&';
 	file_in << dol;
 	file_in << '&';
@@ -729,9 +732,16 @@ bool Member::good_standing(){
 //      data.
 //
 void Service::Display(){
-  std::cout << "\nHash Value is: " << hash_value;
-  std::cout << "\nService Name is: " << svcName;
-  std::cout << "\nNeed to display service fee stuff!!!!\n\n";
+	int dol, cen;
+	service_fee.get_balance(dol, cen);
+	std::cout << "\nService Number is: ";
+	
+	for (int i = 1; i < 7; ++i) {
+		std::cout << hash_value[i];
+	}
+	std::cout << "\nService Name is: " << svcName;
+	std::cout << "\nProvider Profession: " << svcProvider;
+	std::cout << "\nService fee: $" << dol << "." << cen << "\n";
 }
 
 /* = = = = = = = = = = = = = = = = = = = = = = */
@@ -747,6 +757,7 @@ void Service::CopyData(Service& copy_to){
   copy_to.hash_value = hash_value;
   copy_to.svcName = svcName;
   copy_to.service_fee = service_fee;
+  copy_to.svcProvider = svcProvider;
 }
 
 /* = = = = = = = = = = = = = = = = = = = = = = */
@@ -765,12 +776,7 @@ Service::Service(Service & to_copy){
   hash_value = to_copy.ID::get_hash();
   svcName = to_copy.svcName;
   service_fee = to_copy.service_fee;
-
-/*
-  // was in my merge, unsure if necessary or if something was changed
-  // keeping it in here just in case for quick fix
   svcProvider = to_copy.svcProvider;
-*/
 }
 
 Service::Service(): ID() {
@@ -861,8 +867,10 @@ int Service::get_service(std::string& to_copy) {
 	return 1;
 }
 
-int Service::get_num() {
-	return service_num;
+int Service::get_num(std::string to_copy) {
+	if (!hash_value.compare("")) return 0;
+	to_copy = hash_value;
+	return 1;
 }
 
 

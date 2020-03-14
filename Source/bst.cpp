@@ -924,8 +924,16 @@ BST::BST(const char * file, int flag) {
 
 	//File is a Service file
 	if (flag == 3) {
-		do {
-			/*
+		do {/*
+            Service* new_obj;
+            int size = 100;
+            char* temp_name = new char[size];
+            char* temp_provider = new char[size];
+            int temp_num;
+
+            file_in.get(temp_name, size, ',');
+            file_in.ignore(size, ',');
+			
 
 			Didn't meen to work on this in main, 
 			will carry on in my branch
