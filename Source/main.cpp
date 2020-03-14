@@ -195,14 +195,5 @@ int main() {
 		again = tolower(again);
 	} while (again == 'y' || terminal_rc == RETURN_FAILURE);
 
-
-
-/*
-	if(sign_in_prompt() == RETURN_FAILURE)
-		std::cout << "ERROR SIGNING IN.\n";
-
-	std::cin.get();
-	return RETURN_SUCCESS;
-	*/
 	return 0;
 }
