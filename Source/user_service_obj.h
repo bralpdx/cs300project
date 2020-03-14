@@ -13,7 +13,7 @@
 class Record{
 public:
 	Record();
-	Record(const Record & obj);
+	Record(const Record & r);
 	~Record();
 	Record *& go_next();
 	int get_file_address(std::string & copy);
@@ -30,7 +30,7 @@ class Account {
 public:
 	Account();
 	Account(int dol, int cen);
-	Account(const Account& obj);
+	Account(const Account& a);
 	~Account();
 	void add(int dol, int cen);
 	void subtract(int dol, int cen);
@@ -58,7 +58,7 @@ class ID{
 public:
 	ID();
 	ID(std::string h);
-	ID(const ID & obj);
+	ID(const ID & i);
 	virtual ~ID();
 	ID *& go_left();
 	ID *& go_right();
@@ -85,9 +85,8 @@ public:
 	Service();
 	Service(std::string h, std::string n, std::string p, int d, int c);
 	Service(std::string h, std::string n, std::string p, std::string d, std::string c);
-	Service(const Service & obj);
+	Service(const Service & s);
 	~Service();
-	Service(Service & to_copy);
 	void Display();
 	void SvcRead();
 	int get_service(std::string& to_copy);
@@ -105,13 +104,12 @@ private:
 class Person : public ID {
 public:
 	Person();
-	Person(const Person & obj);
+	Person(const Person & p);
 	~Person();
 	int add_record(Record *& to_add);
 	int remove_record(std::string to_remove);
 	int get_name(std::string & to_copy);
 	virtual int report();
-
 	virtual void Read();
 protected:
 	int num_records();
@@ -134,10 +132,8 @@ protected:
 class Provider : public Person {
 public:
 	Provider();
-	Provider(const Provider& obj);
+	Provider(const Provider& p);
 	~Provider();
-	Provider(ID *& to_copy);
-	Provider(Provider & to_copy);
 	void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value);
 	void Display();
 	int report(); 
@@ -152,10 +148,8 @@ protected:
 class Member : public Person {
 public:
 	Member();
-	Member(const Member& obj);
+	Member(const Member& m);
 	~Member();
-    Member(ID *& to_copy);
-    Member(Member & to_copy);
     void Insert(std::string name, std::string address, std::string city, std::string state, int zip, std::string hash_value); 
     void Display();
     int report();

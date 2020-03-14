@@ -30,6 +30,12 @@ ID::ID(std::string h) {
 	hash_value = h;
 }
 
+ID::ID(const ID& i) {
+	left = NULL;
+	right = NULL;
+	hash_value = i.hash_value;
+}
+
 ID::~ID() {
   left = NULL;
   right = NULL;
@@ -130,6 +136,15 @@ Person::Person(): ID() {
 	city = "";
 	state = "";
 	zip = 0;
+}
+
+Person::Person(const Person& p): ID(p) {
+	//function to copy head
+	name = p.name;
+	address = p.address;
+	city = p.city;
+	state = p.state;
+	zip = p.zip;
 }
 
 Person::~Person() {
@@ -260,42 +275,20 @@ void Person::destroy(Record*& head) {
 //////////////////////////////////
 
 Provider::Provider(): Person() {
-
+	provider_number = 0;
 }
 Provider::~Provider() {
-
+	provider_number = 0;
 }
 
-Provider::Provider(ID *& to_copy) {
-
-}
-/* = = = = = = = = = = = = = = = = = = = = = = */
-//            Provider Copy Constructor
-//
-//INPUT: Provider object by reference.
-//
-//OUTPUT: Technically nothing.
-//
-//DESC: Copies the input provider object.
-//
-Provider::Provider(Provider & to_copy) {
-  name = to_copy.name;
-  address = to_copy.address;
-  city = to_copy.city;
-  state = to_copy.state;
-  zip = to_copy.zip;
-  hash_value = to_copy.ID::get_hash();
-
-  //need a copy lll function
-  //head = to_copy.head;
-  
-  left = NULL;
-  right = NULL;
+Provider::Provider(const Provider & p): Person(p) {
+	provider_number = p.provider_number;
 }
 
 void Provider::Read(){
 	Person::Read();
 }
+
 int Provider::report() {
 	using namespace std;
 	int num;
@@ -449,6 +442,12 @@ void Provider::CopyData(Provider& copy_to){
 Member::Member(): Person() {
 	member_number = 0;
 }
+
+Member::Member(const Member & m) : Person(m) {
+	member_number = m.member_number;
+	member_account = m.member_account;
+}
+
 Member::~Member() {
 	member_number = 0;
 }
@@ -516,35 +515,6 @@ int Member::report() {
 	return check;
 }
 
-/* Do we need this?
-Member::Member(ID *&  to_copy) {
-}*/
-
-/* = = = = = = = = = = = = = = = = = = = = = = */
-//            Member copy Constructor
-//
-//INPUT: Member object by reference.
-//
-//OUTPUT: Returns nothing.
-//
-//DESC: Copies the data from the Member object
-//      that is passed in for the new Member object.
-//
-Member::Member(Member & to_copy) {
-  name = to_copy.name;
-  address = to_copy.address;
-  city = to_copy.city;
-  state = to_copy.state;
-  zip = to_copy.zip;
-  hash_value = to_copy.ID::get_hash();
-
-  //Need a copy function for a LLL
-  //head = to_copy.head;
-
-  left = NULL;
-  right = NULL;
-}
-
 void Member::Read(){
 	Person::Read();
 }
@@ -598,7 +568,7 @@ int Member::Write_record(std::string filename, Provider & obj1, Service & obj2) 
 	file_in << provider_name;
 	file_in << '&';
 	file_in << service_name;
-	file_in << "&STOP&#\n"; // Trying to fix an error
+	file_in << "&STOP&#\n"; 
 	file_in << '&';
 	file_in << today; //should be the date service recieved
 	file_in << '&';
@@ -780,13 +750,10 @@ void Service::CopyData(Service& copy_to){
 //DESC: Copy constructor for service object
 //
 
-Service::Service(Service & to_copy){
-  left = NULL;
-  right = NULL;
-  hash_value = to_copy.ID::get_hash();
-  svcName = to_copy.svcName;
-  service_fee += to_copy.service_fee;
-  svcProvider = to_copy.svcProvider;
+Service::Service(const Service & s): ID(s){
+  svcName = s.svcName;
+  service_fee = s.service_fee;
+  svcProvider = s.svcProvider;
 }
 
 Service::Service(): ID() {
@@ -891,6 +858,10 @@ Record::Record() {
   next = NULL;
 }
 
+Record::Record(const Record & r) {
+	//need a copy for the LLL
+}
+
 Record::~Record() {
   next = NULL;
 }
@@ -943,10 +914,11 @@ Account::Account(int dol, int cen) {
 	cent = cen;
 }
 
-Account::Account(const Account& obj) {
-	dollar = obj.dollar;
-	cent = obj.cent;
+Account::Account(const Account& a) {
+	dollar = a.dollar;
+	cent = a.cent;
 }
+
 Account::~Account() {
 	dollar = 0;
 	cent = 0;
