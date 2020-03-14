@@ -29,7 +29,6 @@ int main() {
 	Member member_add;
 	Provider provider_add;
 	Service service_add;
-	service_bst.print_alpha();
 	//service_bst.Display();
 	char again;
 	char option;
@@ -83,11 +82,9 @@ int main() {
 
 					std::cin.get(input_member_num, 20, '\n');
 					std::cin.ignore(20, '\n');
-
-					
-			
-
+									 
 				}
+			}
 
 				//display Services
 				if (option == 'c') {
