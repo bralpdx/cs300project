@@ -32,7 +32,7 @@ public:
   bool Search(ID & to_search); // search for a specific hash value in the tree
 
 private:
-  void copy_tress(ID* source, ID*& destination);
+  void copy_tree(ID* source, ID*& destination);
   int copy_tree(ID * source, Service *& array, int i);
   int CountTree(ID* root); // counts all data on the right 
 

@@ -14,8 +14,8 @@ BST::BST() {
 
 BST::BST(const BST & b) {
     root = NULL;
-    //function to copy
-}
+    copy_tree(b.root, root);
+ }
 
 /* = = = = = = = = = = = = = = = = = = = = = = */
 //              AddToBST Function
@@ -835,17 +835,33 @@ int BST::CountTree(){
   }
 }
 
-void BST::copy_tress(ID* source, ID*& destination) {
+void BST::copy_tree(ID* source, ID*& destination) {
     if (!root) return;
     ID* temp;
     temp = dynamic_cast<Service*>(source);
-    if (temp) temp = new Service;
-    temp = dynamic_cast<Member*>(source);
-    if (temp) temp = new  Member;
-    temp = dynamic_cast<Provider*>(source);
-    if (temp) temp = new Provider;
+    if (temp) {
+        temp = new Service;
 
-    //yada yada
+    }
+    else {
+        temp = dynamic_cast<Member*>(source);
+        if (temp) {
+            temp = new  Member;
+        }
+        else {
+            temp = dynamic_cast<Provider*>(source);
+            if (temp) {
+                temp = new Provider;
+            }
+            else {
+                temp = new ID;
+            }
+        }
+
+    }
+
+    copy_tree(ID->go_left(), destination);
+    copy_tree(ID->go_right(), destination);
 }
 
 int BST::copy_tree(ID * source, Service *& array, int i) {
