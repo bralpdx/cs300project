@@ -1,4 +1,6 @@
+#ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
+#endif
 #define _CRT_SECURE_NO_DEPRECATE
 #include "user_service_obj.h"
 #include "hash-library-master/sha256.h"
