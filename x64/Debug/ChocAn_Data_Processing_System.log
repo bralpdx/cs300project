@@ -1,5 +1,2 @@
-﻿  user_service_obj.cpp
-C:\Users\Bral\source\repos\bralpdx\cs300project\Source\user_service_obj.cpp(45,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Bral\source\repos\bralpdx\cs300project\Source\user_service_obj.cpp(46,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Bral\source\repos\bralpdx\cs300project\Source\user_service_obj.cpp(233,26): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+﻿  LINK : C:\Users\Bral\Source\Repos\bralpdx\cs300project\x64\Debug\ChocAn_Data_Processing_System.exe not found or not built by the last incremental link; performing full link
   ChocAn_Data_Processing_System.vcxproj -> C:\Users\Bral\Source\Repos\bralpdx\cs300project\x64\Debug\ChocAn_Data_Processing_System.exe
