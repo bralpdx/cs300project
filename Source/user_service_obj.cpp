@@ -753,13 +753,10 @@ Service::Service(std::string h, std::string n, std::string p, std::string d, std
 	int dol = std::stoi(d);
 	int cen = std::stoi(c);
 
-	std::cout << "in the constructor before, dol & cen: " << dol << " " << cen << std::endl;
-
 	Account temp(dol, cen);
 	service_fee += temp;
 	int dolla, centa;
 	service_fee.get_balance(dolla, centa);
-	std::cout << "in the constructor after, dol & cen: " << dolla << " " << centa << std::endl;
 	svcName = n;
 	svcProvider = p;
 }
@@ -1031,7 +1028,6 @@ void Account::get_balance(int& dol, int& cen) {
 
 Account& Account::operator = (const Account& a) {
 	if (this == &a) return *this;
-	//std::cout << "your in the account operator function!\n\n";
 	this->dollar = a.dollar;
 	this->cent = a.cent;
 	return *this;

@@ -883,7 +883,7 @@ int BST::quick_sort(Service*& array, int lo, int hi) {
     std::string key;
     Service key_data;
     array[lo].CopyData(key_data);
-    //hold on to copy key data								key_data = array[lo]
+    //hold on to copy key data	key_data = array[lo]
     array[lo].get_service(key);
 
     int j = hi;
@@ -922,8 +922,8 @@ BST::BST(std::string file, int flag) {
     }
 
 	//File is a Provider file
-	if (flag == 1) {
-        std::string temp_hash;
+	//if (flag == 1) {
+      /*  std::string temp_hash;
         std::string dol;
         std::string cen;
         std::string temp_name;
@@ -942,17 +942,17 @@ BST::BST(std::string file, int flag) {
 
             //Provider new_obj(temp_hash, temp_name, temp_type, dol, cen);
             getline(inFile, temp_hash, ',');
-            //if (!AddToBST(root, new_obj)) std::cout << "Not added to BST\n";
-        }
+            //if (!AddToBST(root, new_obj)) std::cout << "Not added to BST\n";*/
+     /*   }
 
-        inFile.close();
+       // inFile.close();
 
 	}
 
 	//File is a Member file
 	if (flag == 2) {
 
-	}
+	}*/
 
 	//File is a Service file
 	if (flag == 3) {
