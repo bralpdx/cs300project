@@ -2,7 +2,9 @@
 #include "utilities.h"
 #include "bst.h"
 #include <iostream>
+#include <Windows.h>
 
+//const int MAX_PATH = 100000;
 
 int main() {
 	
@@ -12,10 +14,21 @@ int main() {
 	BST provider_bst("user_info.txt", 1);
 	BST member_bst("", 2);
 	*/
+
+	TCHAR NPath[MAX_PATH];
+	GetCurrentDirectory(MAX_PATH, NPath);
+
+	std::cout << "my directory is " << NPath << "\n";
+	std::string filename = NPath;
+	std::string service_file = "\\svc-codes.txt";
+	filename.append(service_file);
+	std::cout << "my string is " << filename << "\n";
+
+	BST service_bst(filename, 3);
 	Member member_add;
 	Provider provider_add;
 	Service service_add;
-
+	service_bst.Display();
 	char again;
 	char option;
 
@@ -174,7 +187,7 @@ int main() {
 
 		//dispay read in data from text file
 		if (terminal_rc == 4) {
-
+			//service_bst.Display();
 		}
 
 

@@ -57,6 +57,7 @@ protected:
 class ID{
 public:
 	ID();
+	ID(std::string h);
 	ID(const ID & obj);
 	virtual ~ID();
 	ID *& go_left();
@@ -82,19 +83,19 @@ protected:
 class Service : public ID {
 public:
 	Service();
+	Service(std::string h, std::string n, std::string p, int d, int c);
+	Service(std::string h, std::string n, std::string p, std::string d, std::string c);
 	Service(const Service & obj);
 	~Service();
 	Service(Service & to_copy);
 	void Display();
 	void SvcRead();
 	int get_service(std::string& to_copy);
-	int get_num();
 	void CopyData(Service&);
-	//int quick_sort(Service*& array, int lo, int hi);
+	int get_num(std::string to_copy);
 protected:
 	std::string svcName;
 	std::string svcProvider;
-	int service_num;
 	Account service_fee;
 private:
 
@@ -160,7 +161,7 @@ public:
     int report();
     bool good_standing();
 	void Read();
-	int Write_report(std::string filename, Provider& obj1, Service & obj2);
+	int Write_record(std::string filename, Provider& obj1, Service & obj2);
 protected:
   void Edit(Member&);
   void CopyData(Member&);

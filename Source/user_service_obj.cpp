@@ -24,6 +24,13 @@ ID::ID() {
   hash_value = "";
 }
 
+ID::ID(std::string h) {
+
+	left = NULL;
+	right = NULL;
+	hash_value = h;
+}
+
 ID::~ID() {
   left = NULL;
   right = NULL;
@@ -553,7 +560,7 @@ void Member::Read(){
 	Person::Read();
 }
 
-int Member::Write_report(std::string filename, Provider & obj1, Service & obj2) {
+int Member::Write_record(std::string filename, Provider & obj1, Service & obj2) {
 	std::ofstream file_in;
 	time_t now = time(0);
 	struct tm* timeinfo;
@@ -589,7 +596,8 @@ int Member::Write_report(std::string filename, Provider & obj1, Service & obj2) 
 	obj1.get_name(provider_name);
 	obj2.get_service(service_name);
 	int dol, cen;
-	int serv_num = obj2.get_num();
+	std::string serv_num;
+	obj2.get_num(serv_num);
 	member_account.get_balance(dol, cen); // Trying to fix an error
 
 	file_in.open(filename);
@@ -613,7 +621,9 @@ int Member::Write_report(std::string filename, Provider & obj1, Service & obj2) 
 	file_in << '&';
 	file_in << this->member_number;
 	file_in << '&';
-	file_in << serv_num;
+	for (int i = 1; i < 7; ++i) {
+		file_in << serv_num[i];
+	}
 	file_in << '&';
 	file_in << dol;
 	file_in << '&';
@@ -730,10 +740,41 @@ bool Member::good_standing(){
 //DESC: Displays all of the current service object's
 //      data.
 //
+
+
+Service::Service(std::string h, std::string n, std::string p, int d, int c): ID(h) {
+	Account temp(d, c);
+	service_fee = temp;
+	svcName = n;
+	svcProvider = p;
+}
+
+Service::Service(std::string h, std::string n, std::string p, std::string d, std::string c) : ID(h) {
+	int dol = std::stoi(d);
+	int cen = std::stoi(c);
+
+	std::cout << "in the constructor before, dol & cen: " << dol << " " << cen << std::endl;
+
+	Account temp(dol, cen);
+	service_fee += temp;
+	int dolla, centa;
+	service_fee.get_balance(dolla, centa);
+	std::cout << "in the constructor after, dol & cen: " << dolla << " " << centa << std::endl;
+	svcName = n;
+	svcProvider = p;
+}
+
 void Service::Display(){
-  std::cout << "\nHash Value is: " << hash_value;
-  std::cout << "\nService Name is: " << svcName;
-  std::cout << "\nNeed to display service fee stuff!!!!\n\n";
+	int dol, cen;
+	service_fee.get_balance(dol, cen);
+	std::cout << "\nService Number is: ";
+	
+	for (int i = 1; ((i < hash_value.length()) && (i < 7)); ++i) {
+		std::cout << hash_value[i];
+	}
+	std::cout << "\nService Name is: " << svcName;
+	std::cout << "\nProvider Profession: " << svcProvider;
+	std::cout << "\nService fee: $" << dol << "." << cen << "\n";
 }
 
 /* = = = = = = = = = = = = = = = = = = = = = = */
@@ -749,6 +790,7 @@ void Service::CopyData(Service& copy_to){
   copy_to.hash_value = hash_value;
   copy_to.svcName = svcName;
   copy_to.service_fee = service_fee;
+  copy_to.svcProvider = svcProvider;
 }
 
 /* = = = = = = = = = = = = = = = = = = = = = = */
@@ -766,13 +808,8 @@ Service::Service(Service & to_copy){
   right = NULL;
   hash_value = to_copy.ID::get_hash();
   svcName = to_copy.svcName;
-  service_fee = to_copy.service_fee;
-
-/*
-  // was in my merge, unsure if necessary or if something was changed
-  // keeping it in here just in case for quick fix
+  service_fee += to_copy.service_fee;
   svcProvider = to_copy.svcProvider;
-*/
 }
 
 Service::Service(): ID() {
@@ -863,49 +900,11 @@ int Service::get_service(std::string& to_copy) {
 	return 1;
 }
 
-int Service::get_num() {
-	return service_num;
+int Service::get_num(std::string to_copy) {
+	if (!hash_value.compare("")) return 0;
+	to_copy = hash_value;
+	return 1;
 }
-
-/*
-int Service::quick_sort(Service *& array, int lo, int hi) {
-	if (hi <= lo) return 0;
-	int count = 0;
-	std::string key;
-	Service key_data;
-	array[lo].CopyData(key_data);
-	//hold on to copy key data								key_data = array[lo]
-	array[lo].get_service(key);
-
-	int j = hi;
-	int i = lo + 1;
-	while (i <= j) {
-		std::string temp;
-		array[i].get_service(temp);
-		if (key.compare(temp)> 0) i++; //advance the left finger
-		else if (key.compare(temp) <=0) j--; // advance the right finger
-		else { //swap data
-			Service swap;
-			//function copy data from array[i] into swap:	swap = array[i]
-			//same func copy array[j] into array[i]:		array[i] = array[j]
-			//same func copy swap into array[j]				array[j] = array[i]
-			array[i].CopyData(swap);
-			array[j].CopyData(array[i]);
-			array[i].CopyData(array[j]);
-
-		}
-	}
-	//place the key
-	//function to copy data from array[j] into array[lo]	array[lo] = array[j]
-	//function to copy data from key into array[j]			array[j] = key_data	
-	array[j].CopyData(array[lo]);
-	key_data.CopyData(array[j]);
-
-
-	count = quick_sort(array, lo, j - 1) + quick_sort(array, j + 1, hi) + 1;
-	return count;
-}*/
-
 
 
 //////////////////////////////////
@@ -1032,6 +1031,7 @@ void Account::get_balance(int& dol, int& cen) {
 
 Account& Account::operator = (const Account& a) {
 	if (this == &a) return *this;
+	//std::cout << "your in the account operator function!\n\n";
 	this->dollar = dollar;
 	this->cent = cent;
 	return *this;
