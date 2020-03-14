@@ -13,6 +13,7 @@
 class Record{
 public:
 	Record();
+	Record(std::string file);
 	Record(const Record & r);
 	~Record();
 	Record *& go_next();

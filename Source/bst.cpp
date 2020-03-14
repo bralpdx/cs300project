@@ -860,8 +860,8 @@ void BST::copy_tree(ID* source, ID*& destination) {
 
     }
 
-    copy_tree(ID->go_left(), destination);
-    copy_tree(ID->go_right(), destination);
+    copy_tree(source->go_left(), destination);
+    copy_tree(source->go_right(), destination);
 }
 
 int BST::copy_tree(ID * source, Service *& array, int i) {

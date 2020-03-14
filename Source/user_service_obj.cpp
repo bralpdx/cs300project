@@ -864,11 +864,18 @@ int Service::get_num(std::string to_copy) {
 //////////////////////////////////
 
 Record::Record() {
-  next = NULL;
+	file_address = "";
+	next = NULL;
+}
+
+Record::Record(std::string file) {
+	file_address = file;
+	next = NULL;
 }
 
 Record::Record(const Record & r) {
-	//need a copy for the LLL
+	file_address = r.file_address;
+	next = NULL;
 }
 
 Record::~Record() {
