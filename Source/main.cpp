@@ -4,8 +4,6 @@
 #include <iostream>
 #include <Windows.h>
 
-//const int MAX_PATH = 100000;
-
 int main() {
 	
 	pre_hash_id(); // See utilities.h for desc. creates user_info.txt
