@@ -193,7 +193,7 @@ int main() {
 
 		//dispay read in data from text file
 		if (terminal_rc == 4) {
-			service_bst.Display();
+			//service_bst.Display();
 		}
 
 

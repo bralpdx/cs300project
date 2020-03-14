@@ -747,12 +747,26 @@ Service::Service(std::string h, std::string n, std::string p, int d, int c): ID(
 	svcProvider = p;
 }
 
+Service::Service(std::string h, std::string n, std::string p, std::string d, std::string c) : ID(h) {
+	int dol = std::stoi(d);
+	int cen = std::stoi(c);
+
+	std::cout << "in the constructor before, dol & cen: " << dol << " " << cen << std::endl;
+
+	Account temp(dol, cen);
+	service_fee += temp;
+	service_fee.get_balance(dol, cen);
+	std::cout << "in the constructor after, dol & cen: " << dol << " " << cen << std::endl;
+	svcName = n;
+	svcProvider = p;
+}
+
 void Service::Display(){
 	int dol, cen;
 	service_fee.get_balance(dol, cen);
 	std::cout << "\nService Number is: ";
 	
-	for (int i = 1; i < 7; ++i) {
+	for (int i = 1; ((i < hash_value.length()) && (i < 7)); ++i) {
 		std::cout << hash_value[i];
 	}
 	std::cout << "\nService Name is: " << svcName;
@@ -1014,6 +1028,7 @@ void Account::get_balance(int& dol, int& cen) {
 
 Account& Account::operator = (const Account& a) {
 	if (this == &a) return *this;
+	//std::cout << "your in the account operator function!\n\n";
 	this->dollar = dollar;
 	this->cent = cent;
 	return *this;

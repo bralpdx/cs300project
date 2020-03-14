@@ -84,6 +84,7 @@ class Service : public ID {
 public:
 	Service();
 	Service(std::string h, std::string n, std::string p, int d, int c);
+	Service(std::string h, std::string n, std::string p, std::string d, std::string c);
 	Service(const Service & obj);
 	~Service();
 	Service(Service & to_copy);

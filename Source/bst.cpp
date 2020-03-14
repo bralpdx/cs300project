@@ -902,64 +902,52 @@ int BST::quick_sort(Service*& array, int lo, int hi) {
 BST::BST(std::string file, int flag) {
 	root = NULL;
 
-    std::cout << file << std::endl;
-
-
-	std::ifstream file_in;
-	file_in.open(file);
-
-	//File didn't open
-	if (!file_in) flag = 50;
+	std::ifstream inFile;
+    inFile.open(file);
+    if (!inFile) {
+        flag = 50;
+        std::cout << "FILE NOT OPEN: " <<  file <<std::endl;
+    }
 
 	//File is a Provider file
 	if (flag == 1) {
-		do {
+	
 
-		} while (!file_in.eof());
 	}
 
 	//File is a Member file
 	if (flag == 2) {
-		do {
-
-		} while (!file_in.eof());
+	
 	}
 
 	//File is a Service file
 	if (flag == 3) {
-		do {
-            //Service* new_obj;
-            int size = 100;
-            char* temp_job = new char[size];
-            char* temp_type = new char[size];
-            char* temp_hash = new char[size];
-            int dol, cen;
 
-            file_in.getline(temp_hash, size, ',');
-            file_in.ignore(size, ',');
-			
-            file_in >> dol;
-            file_in.ignore(size, ',');
-            file_in >> cen;
-
-            file_in.get(temp_job, size, ',');
-            file_in.ignore(size, ',');
-
-            file_in.get(temp_type, size, ',');
-            file_in.ignore(size, ',');
-            
-            std::cout << temp_job << std::endl;
+        std::string temp_hash;
+        std::string dol;
+        std::string cen;
+        std::string temp_job;
+        std::string temp_type;
 
 
-            //new_obj = new Service(temp_hash, temp_job, temp_type, dol, cen);
+        //std::cout << "good before getine\n\n";
+        getline(inFile, temp_hash, ',');
+        while (getline(inFile, temp_hash, ',')) {
+
+           // std::cout << "hash: " << temp_hash << std::endl;
+            getline(inFile, dol, ',');
+           // std::cout << "dol: " << dol << std::endl;
+            getline(inFile, cen, ',');
+           // std::cout << cen << std::endl;
+            getline(inFile, temp_job, ',');
+            getline(inFile, temp_type, ',');
             Service new_obj(temp_hash, temp_job, temp_type, dol, cen);
-            if (!AddToBST(root, new_obj)) break;
+            getline(inFile, temp_hash, ',');
+            if (!AddToBST(root, new_obj)) std::cout << "Not added to BST\n";
+        }  
 
-			file_in.get();
-		} while (!file_in.eof());
+        inFile.close();
 	}
-
-    file_in.close();
 }
 
 BST::~BST() {
