@@ -380,9 +380,6 @@ int Provider::report() {
 //      data into a Provider object.
 //
 void Provider::Insert(std::string cpyname, std::string cpyaddress, std::string cpycity, std::string cpystate, int cpyzip, std::string cpyhash_value) {
-	//cant access head, and shouldn't need to.
-	//head = NULL;
-
   left = NULL;
   right = NULL;
   hash_value = cpyhash_value;
