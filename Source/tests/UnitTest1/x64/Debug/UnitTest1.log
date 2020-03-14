@@ -4,7 +4,6 @@ C:\Users\Bral\Source\Repos\bralpdx\cs300project\Source\user_service_obj.cpp(46,3
 C:\Users\Bral\Source\Repos\bralpdx\cs300project\Source\user_service_obj.cpp(233,26): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\Bral\Source\Repos\bralpdx\cs300project\Source\bst.cpp(396): warning C4715: 'BST::RemoveFromBST': not all control paths return a value
 C:\Users\Bral\Source\Repos\bralpdx\cs300project\Source\bst.cpp(482): warning C4715: 'BST::RemoveFromBST': not all control paths return a value
-C:\Users\Bral\Source\Repos\bralpdx\cs300project\Source\bst.cpp(549): warning C4715: 'BST::VerifyFromBST': not all control paths return a value
 C:\Users\Bral\Source\Repos\bralpdx\cs300project\Source\bst.cpp(581): warning C4715: 'BST::FindInOrderSuccessor': not all control paths return a value
-     Creating library C:\Users\Bral\Source\Repos\bralpdx\cs300project\x64\Debug\UnitTest1.lib and object C:\Users\Bral\Source\Repos\bralpdx\cs300project\x64\Debug\UnitTest1.exp
+C:\Users\Bral\Source\Repos\bralpdx\cs300project\Source\bst.cpp(549): warning C4715: 'BST::VerifyFromBST': not all control paths return a value
   UnitTest1.vcxproj -> C:\Users\Bral\Source\Repos\bralpdx\cs300project\x64\Debug\UnitTest1.dll

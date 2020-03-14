@@ -138,6 +138,15 @@ namespace UnitTest1
 
 			Assert::IsTrue((bst.RemoveFromBST(obj1)));
 		}
+		TEST_METHOD(Provider_EditTree)
+		{
+			BST bst("../../user_info.txt", 1);
+			Provider obj1;
+
+			bst.AddToBST(obj1);
+
+			Assert::IsTrue((bst.EditBST(obj1)));
+		}
 		TEST_METHOD(Member_addTo)
 		{
 			BST bst("../../user_info.txt", 1);
@@ -153,7 +162,17 @@ namespace UnitTest1
 
 			bst.AddToBST(obj1);
 
-			Assert::IsTrue((bst.RemoveFromBST(obj1)));
+			Assert::
+				IsTrue((bst.RemoveFromBST(obj1)));
+		}
+		TEST_METHOD(Member_EditTree)
+		{
+			BST bst("../../user_info.txt", 1);
+			Member obj1;
+
+			bst.AddToBST(obj1);
+
+			Assert::IsTrue((bst.EditBST(obj1)));
 		}
 
 		TEST_METHOD(searchTree)
@@ -170,6 +189,21 @@ namespace UnitTest1
 			bst.AddToBST(obj2);
 
 			Assert::IsTrue((bst.Search(obj1)));
+		}
+		TEST_METHOD(countTree)
+		{
+			BST bst("../../user_info.txt", 1);
+			Member obj1;
+			Provider obj2;
+
+			obj1.Insert("Jon", "1111 NW main st.", "Portland", "OR", 97201, "111122233");
+			obj2.Insert("Mike", "1111 NW main st.", "Portland", "OR", 97201, "111122244");
+
+
+			bst.AddToBST(obj1);
+			bst.AddToBST(obj2);
+
+			Assert::IsTrue((bst.CountTree() > 0));
 		}
 	};
 
@@ -191,6 +225,47 @@ namespace UnitTest1
 			obj->Insert("Jon", "1111 NW main st.", "Portland", "OR", 97201, "111122233");
 
 			Assert::IsNotNull(obj);
+		}
+	};
+
+	TEST_CLASS(UtilityTests)
+	{
+		TEST_METHOD(TestFileOpen)
+		{
+			std::ifstream filein;
+			bool flag = true;
+
+			filein.open("../../Source/access-codes.txt");
+
+			if (!filein)
+				flag = false;
+
+			Assert::IsTrue(flag);
+		}
+		TEST_METHOD(testPreHash)
+		{
+			std::ifstream filein;
+			filein.open("../../Source/access-codes.txt");
+
+			bool flag = false;
+
+			if (filein)
+				flag = true;
+
+			Assert::IsTrue(flag);
+		}
+		TEST_METHOD(testHash)
+		{
+			std::ifstream filein;
+			filein.open("../../Source/access-codes.txt");
+
+			int val = hash_file(filein);
+			bool flag = false;
+
+			if (val >= 0)
+				flag = true;
+
+			Assert::IsTrue(flag);
 		}
 	};
 }

@@ -1,0 +1,12 @@
+d000001,0.0,Consultation,dietitian
+d000002,89.99,Counseling,dietitian
+d000003,199.99,Meal Planning,dietitian
+d000004,99.95,Cooking Lesson,dietitian
+i000001,0.0,Consultation,internist
+i000002,75.0,Check Up,internist
+i000003,899.99,Lab Work,internist
+i000004,39.99,Vaccination,internist
+e000001,0.0,Consultation,excercise specialist
+e000002,375.50,Workout plan,excercise specialist
+e000003,100.0,Aerobics session,excercise specialist
+e000004,99.99,Fitness Evaluation,excercise specialist
