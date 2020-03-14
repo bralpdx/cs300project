@@ -897,9 +897,6 @@ int BST::quick_sort(Service*& array, int lo, int hi) {
         else if (key.compare(temp2) <= 0) j--; // advance the right finger
         else { //swap data
             Service swap;
-            //function copy data from array[i] into swap:	swap = array[i]
-            //same func copy array[j] into array[i]:		array[i] = array[j]
-            //same func copy swap into array[j]				array[j] = array[i]
             array[i].CopyData(swap);
             array[j].CopyData(array[i]);
             swap.CopyData(array[j]);
@@ -907,11 +904,8 @@ int BST::quick_sort(Service*& array, int lo, int hi) {
         }
     }
     //place the key
-    //function to copy data from array[j] into array[lo]	array[lo] = array[j]
-    //function to copy data from key into array[j]			array[j] = key_data	
     array[j].CopyData(array[lo]);
     key_data.CopyData(array[j]);
-
 
     count = quick_sort(array, lo, j - 1) + quick_sort(array, j + 1, hi) + 1;
     return count;
