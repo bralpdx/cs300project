@@ -827,12 +827,28 @@ int BST::CountTree(){
   }
 }
 
+int BST::copy_tree(ID * source, Service *& array, int i) {
+    int success = 0;
+    if (!root) return success;
+    ID* temp;
+    temp = dynamic_cast<Service*>(source);
+    if (temp) {
+        source->CopyData(array[i]);
+        success = copy_tree(source->go_right(), array, ++i) + 1;
+        source->CopyData(array[i]);
+        success = copy_tree(source->go_left(), array, ++i) + 1;
+        source->CopyData(array[i]);
+    }
+    return success;
+}
+
 int BST::print_alpha() {
     ID* temp;
     temp = dynamic_cast<Service*>(root);
     if (temp) {
         int num = CountTree();
         Service * array = new Service[num];
+        copy_tree(root, array, 0);
         quick_sort(array, 0, num-1);
         for (int i = 0; i < num; ++i) {
             array[i].Display();
@@ -874,9 +890,11 @@ int BST::quick_sort(Service*& array, int lo, int hi) {
     int i = lo + 1;
     while (i <= j) {
         std::string temp;
+        std::string temp2;
         array[i].get_service(temp);
+        array[j].get_service(temp2);
         if (key.compare(temp) > 0) i++; //advance the left finger
-        else if (key.compare(temp) <= 0) j--; // advance the right finger
+        else if (key.compare(temp2) <= 0) j--; // advance the right finger
         else { //swap data
             Service swap;
             //function copy data from array[i] into swap:	swap = array[i]
@@ -884,7 +902,7 @@ int BST::quick_sort(Service*& array, int lo, int hi) {
             //same func copy swap into array[j]				array[j] = array[i]
             array[i].CopyData(swap);
             array[j].CopyData(array[i]);
-            array[i].CopyData(array[j]);
+            swap.CopyData(array[j]);
 
         }
     }
@@ -928,9 +946,9 @@ BST::BST(std::string file, int flag) {
             getline(inFile, temp_state, ',');
             getline(inFile, temp_zip, ',');
 
-            Provider new_obj(temp_hash, temp_name, temp_type, dol, cen);
+            //Provider new_obj(temp_hash, temp_name, temp_type, dol, cen);
             getline(inFile, temp_hash, ',');
-            if (!AddToBST(root, new_obj)) std::cout << "Not added to BST\n";
+            //if (!AddToBST(root, new_obj)) std::cout << "Not added to BST\n";
         }
 
         inFile.close();
