@@ -449,10 +449,6 @@ void Provider::CopyData(Provider& copy_to){
   copy_to.zip = zip;
 }
 
-/*
-int Provider::report() {
-	return 0;
-}*/
 //////////////////////////////////
 //         Member Class         //
 //////////////////////////////////
