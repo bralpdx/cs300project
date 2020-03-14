@@ -20,17 +20,10 @@ int main() {
 
 	std::cout << "my directory is " << NPath << "\n";
 	std::string filename = NPath;
-	//std::string service_file = "\\hash-library-master\\svc_codes.txt";
 	std::string service_file = "\\svc-codes.txt";
 	filename.append(service_file);
 	std::cout << "my string is " << filename << "\n";
 
-
-	/*
-	Dword buffer = GetCurrentDirectoryA(0, NULL);
-	std::string dir;
-	etCurrentDirectoryA(buffer, dir);
-	std::cout << dir;*/
 	BST service_bst(filename, 3);
 	Member member_add;
 	Provider provider_add;

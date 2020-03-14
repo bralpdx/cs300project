@@ -755,8 +755,9 @@ Service::Service(std::string h, std::string n, std::string p, std::string d, std
 
 	Account temp(dol, cen);
 	service_fee += temp;
-	service_fee.get_balance(dol, cen);
-	std::cout << "in the constructor after, dol & cen: " << dol << " " << cen << std::endl;
+	int dolla, centa;
+	service_fee.get_balance(dolla, centa);
+	std::cout << "in the constructor after, dol & cen: " << dolla << " " << centa << std::endl;
 	svcName = n;
 	svcProvider = p;
 }
@@ -805,7 +806,7 @@ Service::Service(Service & to_copy){
   right = NULL;
   hash_value = to_copy.ID::get_hash();
   svcName = to_copy.svcName;
-  service_fee = to_copy.service_fee;
+  service_fee += to_copy.service_fee;
   svcProvider = to_copy.svcProvider;
 }
 
