@@ -57,6 +57,7 @@ protected:
 class ID{
 public:
 	ID();
+	ID(std::string h);
 	ID(const ID & obj);
 	virtual ~ID();
 	ID *& go_left();
@@ -82,6 +83,7 @@ protected:
 class Service : public ID {
 public:
 	Service();
+	Service(std::string h, std::string n, std::string p, int d, int c);
 	Service(const Service & obj);
 	~Service();
 	Service(Service & to_copy);

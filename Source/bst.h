@@ -7,7 +7,7 @@
 class BST{
 public:
 	BST();
-	BST(const char * file, int flag);
+	BST(std::string file, int flag);
 	~BST();
   
   bool AddToBST(Provider & to_add); // add a Provider to the tree; root must be provider obj

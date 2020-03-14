@@ -899,8 +899,11 @@ int BST::quick_sort(Service*& array, int lo, int hi) {
     return count;
 }
 
-BST::BST(const char * file, int flag) {
+BST::BST(std::string file, int flag) {
 	root = NULL;
+
+    std::cout << file << std::endl;
+
 
 	std::ifstream file_in;
 	file_in.open(file);
@@ -924,25 +927,39 @@ BST::BST(const char * file, int flag) {
 
 	//File is a Service file
 	if (flag == 3) {
-		do {/*
-            Service* new_obj;
+		do {
+            //Service* new_obj;
             int size = 100;
-            char* temp_name = new char[size];
-            char* temp_provider = new char[size];
-            int temp_num;
+            char* temp_job = new char[size];
+            char* temp_type = new char[size];
+            char* temp_hash = new char[size];
+            int dol, cen;
 
-            file_in.get(temp_name, size, ',');
+            file_in.getline(temp_hash, size, ',');
             file_in.ignore(size, ',');
 			
+            file_in >> dol;
+            file_in.ignore(size, ',');
+            file_in >> cen;
 
-			Didn't meen to work on this in main, 
-			will carry on in my branch
+            file_in.get(temp_job, size, ',');
+            file_in.ignore(size, ',');
 
-			std::string temp;
-			file_in.get(temp, 100, ',');
-			file_in.ignore(100, ',');*/
+            file_in.get(temp_type, size, ',');
+            file_in.ignore(size, ',');
+            
+            std::cout << temp_job << std::endl;
+
+
+            //new_obj = new Service(temp_hash, temp_job, temp_type, dol, cen);
+            Service new_obj(temp_hash, temp_job, temp_type, dol, cen);
+            if (!AddToBST(root, new_obj)) break;
+
+			file_in.get();
 		} while (!file_in.eof());
 	}
+
+    file_in.close();
 }
 
 BST::~BST() {

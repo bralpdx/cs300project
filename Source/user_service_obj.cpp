@@ -22,6 +22,13 @@ ID::ID() {
   hash_value = "";
 }
 
+ID::ID(std::string h) {
+
+	left = NULL;
+	right = NULL;
+	hash_value = h;
+}
+
 ID::~ID() {
   left = NULL;
   right = NULL;
@@ -731,6 +738,15 @@ bool Member::good_standing(){
 //DESC: Displays all of the current service object's
 //      data.
 //
+
+
+Service::Service(std::string h, std::string n, std::string p, int d, int c): ID(h) {
+	Account temp(d, c);
+	service_fee = temp;
+	svcName = n;
+	svcProvider = p;
+}
+
 void Service::Display(){
 	int dol, cen;
 	service_fee.get_balance(dol, cen);
