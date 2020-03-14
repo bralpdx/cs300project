@@ -911,13 +911,35 @@ BST::BST(std::string file, int flag) {
 
 	//File is a Provider file
 	if (flag == 1) {
-	
+        std::string temp_hash;
+        std::string dol;
+        std::string cen;
+        std::string temp_name;
+        std::string temp_street;
+        std::string temp_city;
+        std::string temp_state;
+        std::string temp_zip;
+
+        getline(inFile, temp_hash, ',');
+        while (getline(inFile, temp_hash, ',')) {
+            getline(inFile, temp_name, ',');
+            getline(inFile, temp_street, ',');
+            getline(inFile, temp_city, ',');
+            getline(inFile, temp_state, ',');
+            getline(inFile, temp_zip, ',');
+
+            Provider new_obj(temp_hash, temp_name, temp_type, dol, cen);
+            getline(inFile, temp_hash, ',');
+            if (!AddToBST(root, new_obj)) std::cout << "Not added to BST\n";
+        }
+
+        inFile.close();
 
 	}
 
 	//File is a Member file
 	if (flag == 2) {
-	
+
 	}
 
 	//File is a Service file
@@ -929,16 +951,11 @@ BST::BST(std::string file, int flag) {
         std::string temp_job;
         std::string temp_type;
 
-
-        //std::cout << "good before getine\n\n";
         getline(inFile, temp_hash, ',');
         while (getline(inFile, temp_hash, ',')) {
 
-           // std::cout << "hash: " << temp_hash << std::endl;
             getline(inFile, dol, ',');
-           // std::cout << "dol: " << dol << std::endl;
             getline(inFile, cen, ',');
-           // std::cout << cen << std::endl;
             getline(inFile, temp_job, ',');
             getline(inFile, temp_type, ',');
             Service new_obj(temp_hash, temp_job, temp_type, dol, cen);
