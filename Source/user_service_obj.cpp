@@ -752,11 +752,8 @@ Service::Service(std::string h, std::string n, std::string p, int d, int c): ID(
 Service::Service(std::string h, std::string n, std::string p, std::string d, std::string c) : ID(h) {
 	int dol = std::stoi(d);
 	int cen = std::stoi(c);
-
 	Account temp(dol, cen);
-	service_fee += temp;
-	int dolla, centa;
-	service_fee.get_balance(dolla, centa);
+	service_fee = temp;
 	svcName = n;
 	svcProvider = p;
 }
